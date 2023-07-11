@@ -1,0 +1,36 @@
+<div id="<%= dom_id art %>">
+  <p>
+    <strong>User:</strong>
+    <%= art.user_id %>
+  </p>
+
+  <p>
+    <strong>Title:</strong>
+    <%= art.title %>
+  </p>
+
+  <p>
+    <strong>Year:</strong>
+    <%= art.year %>
+  </p>
+
+  <p>
+    <strong>Description:</strong>
+    <%= art.description %>
+  </p>
+
+  <p>
+    <strong>Category:</strong>
+    <%= art.category %>
+  </p>
+
+  <% if art && art.image.present? %>
+    <div class="w-100 h-20 rounded-2" style='height: 75vh; background-image: url("<%= cl_image_path art.image.key %>"); background-size: cover; background-repeat: no-repeat; background-position: center center;'></div>
+  <% else %>
+    <!-- puedes poner alguna imagen por defecto en caso de que no haya imagen -->
+    <strong>no hay foto</strong>
+
+  <% end %>
+
+
+</div>

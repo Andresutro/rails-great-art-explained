@@ -1,5 +1,6 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<p style="color: green"><%= notice %></p>
+
+<h1>My Arts</h1>
 
 <div id="arts">
   <% @arts.each do |art| %>
@@ -9,3 +10,5 @@
     </p>
   <% end %>
 </div>
+
+<%= link_to "New art", new_art_path %>

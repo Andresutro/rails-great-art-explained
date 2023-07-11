@@ -1,0 +1,16 @@
+<div id="<%= dom_id explanation %>">
+  <div class='d-flex'>
+    <p>
+      <strong>Description:</strong>
+      <%= explanation.description %>
+    </p>
+
+    <div>
+    <% if explanation && explanation.image.present? %>
+      <div class="w-100 h-20 rounded-2" style='height: 75vh; background-image: url("<%= cl_image_path explanation.image.key %>"); background-size: cover; background-repeat: no-repeat; background-position: center center;'></div>
+    <% else %>
+      <strong>no hay foto</strong>
+    <% end %>
+    </div>
+  </div>
+</div>
