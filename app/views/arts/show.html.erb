@@ -11,25 +11,43 @@
     <%= button_to "Destroy this art", @art, method: :delete %>
   <% end %>
 </div>
-
-    <%= simple_form_for [@art, @explanation] do |f| %>
-      <%= f.input :description, placeholder: "Add a description here...", label: false, class: "form-control pt-4" %>
-      <%= f.input :image, as: :file, required: true, label: false, placeholder: "Image", id: "upload_widget", class: "cloudinary-button" %>
-      <%= f.submit "Submit", class: "btn btn-primary text-white py-3 px-5 mt-4 rounded-10", style: 'border-radius: 15px;' %>
+    <% if current_user == @art.user %>
+      <%= simple_form_for [@art, @explanation] do |f| %>
+        <%= f.input :description, placeholder: "Add a description here...", label: false, class: "form-control pt-4" %>
+        <%= f.input :image, as: :file, required: true, label: false, placeholder: "Image", id: "upload_widget", class: "cloudinary-button" %>
+        <%= f.submit "Submit", class: "btn btn-primary text-white py-3 px-5 mt-4 rounded-10", style: 'border-radius: 15px;' %>
+      <% end %>
     <% end %>
-
 
   <% @art.explanations.each do |explanation| %>
     <div class="d-flex">
       <div>
         <p><%= explanation.description %></p>
-        
-        <%= link_to 'destroy', art_explanation_path(@art, explanation),  data: {turbo_method: :delete}, class: 'btn btn-outline-secondary btn-sm' %>
+        <% if policy(@art).destroy? %>
+          <%= link_to 'destroy', art_explanation_path(@art, explanation),  data: {turbo_method: :delete}, class: 'btn btn-outline-secondary btn-sm' %>
+        <% end %>
+      </div>
+    <div id="imageContainer" style="position: relative;">
+      <%= cl_image_tag(explanation.image.key, id: "image", class: "img-fluid", alt: "Imagen de arte", style: "max-width: 100%;") %>
+      <div id="pointer" style="position: absolute; width: 20px; height: 20px; background: red; display: none;"></div>
+    </div>
 
-      </div>
-      <div>
-        <%= cl_image_tag(explanation.image.key, class: "img-fluid") %>
-      </div>
 
     </div>
   <% end %>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+  var imageContainer = document.getElementById('imageContainer');
+  var pointer = document.getElementById('pointer');
+
+  imageContainer.addEventListener('click', function(event) {
+    var x = event.offsetX;
+    var y = event.offsetY;
+
+    pointer.style.top = (y - 10) + 'px'; // Ajustamos 10 (la mitad del tamaño del puntero) para centrar el puntero.
+    pointer.style.left = (x - 10) + 'px';
+    pointer.style.display = 'block';
+  });
+});
+</script>
