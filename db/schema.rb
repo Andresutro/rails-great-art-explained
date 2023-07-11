@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_11_172900) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_11_202631) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -71,6 +71,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_11_172900) do
     t.index ["art_id"], name: "index_explanations_on_art_id"
   end
 
+  create_table "like_appreciations", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "appreciation_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["appreciation_id"], name: "index_like_appreciations_on_appreciation_id"
+    t.index ["user_id", "appreciation_id"], name: "index_like_appreciations_on_user_id_and_appreciation_id", unique: true
+    t.index ["user_id"], name: "index_like_appreciations_on_user_id"
+  end
+
   create_table "reviews", force: :cascade do |t|
     t.text "content"
     t.bigint "user_id", null: false
@@ -99,6 +109,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_11_172900) do
   add_foreign_key "appreciations", "users"
   add_foreign_key "arts", "users"
   add_foreign_key "explanations", "arts"
+  add_foreign_key "like_appreciations", "appreciations"
+  add_foreign_key "like_appreciations", "users"
   add_foreign_key "reviews", "arts"
   add_foreign_key "reviews", "users"
 end
