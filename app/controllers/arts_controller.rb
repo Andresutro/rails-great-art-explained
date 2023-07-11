@@ -10,6 +10,7 @@ class ArtsController < ApplicationController
   # GET /arts/1 or /arts/1.json
   def show
     @explanation =  Explanation.new
+    @appreciation = Appreciation.new
   end
 
   # GET /arts/new

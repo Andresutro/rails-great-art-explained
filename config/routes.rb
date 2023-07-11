@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :arts do
     resources :explanations, only: [:create, :update,:destroy]
+    resources :appreciations, only: [:create, :update,:destroy]
   end
 
   devise_for :users
