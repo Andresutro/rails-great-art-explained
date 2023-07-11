@@ -52,17 +52,76 @@
     </div>
   </div>
 
-  <% if @art.appreciations.count == 0  %>
-    <small><em class="text-muted">Be the first one to appreciate this list</em></small>
-  <% else %>
-    <% @art.appreciations.each do |appreciation| %>
-      <div>
-        <small><%= appreciation.user.email %> <em class="text-muted"><%= distance_of_time_in_words_to_now(appreciation.created_at) %> ago</em></small>
-        <p><%= appreciation.content %></p>
-      </div>
-      <hr>
-    <% end %>
+  <%# <% if @art.appreciations.count == 0  %>
+    <%# <small><em class="text-muted">Be the first one to appreciate this list</em></small> %>
+  <%# <% else %>
+    <%# <% @art.appreciations.each do |appreciation| %>
+      <%# <div> %>
+        <%# <small><%= appreciation.user.email <em class="text-muted"><%= distance_of_time_in_words_to_now(appreciation.created_at) ago</em></small> %>
+        <%# <p><%= appreciation.content</p> %>
+        <%# # <% appreciation.like_appreciations.count Likes %>
+        <%# <% like_appreciation = current_user.like_appreciations.find_by(appreciation: appreciation) 
+        <%# <% if like_appreciation.nil? %>
+
+        <%# <form action='/like_appreciations' method='post'> %>
+          <%# <input type="hidden"  name='authenticity_token' value="<%= form_authenticity_token %>
+          <%# <input type="hidden"  name='like_appreciation[appreciation_id]' value="<%= appreciation.id %>
+          <%# <input type="submit" value="Like"> %>
+        <%# </form> %>
+        <%# <% else %>
+        <%# unlike %>
+        <%# <form action='<%= like_appreciation_path(like_appreciation)' method='post'>  %>
+          <%# <input type="hidden"  name='authenticity_token' value="<%= form_authenticity_token">  %>
+          <%# <input type="hidden"  name='_method' value="DELETE"> %>
+          <%# <input type="submit" value="Unlike"> %>
+        <%# </form> %>
+
+
+        <%# <% end %>
+      <%# </div> %>
+      <%# <hr> %>
+    <%# <% end %>
+  <%# <% end %>
+
+<% if @art.appreciations.any? %>
+  <% @art.appreciations.each do |appreciation| %>
+    <div>
+      <small>
+        <%= appreciation.user.email %>
+        <em class="text-muted"><%= time_ago_in_words(appreciation.created_at) %> ago</em>
+      </small>
+      <p><%= appreciation.content %></p>
+      <%= pluralize(appreciation.like_appreciations.count, 'Like') %>
+      <% like_appreciation = current_user.like_appreciations.find_by(appreciation: appreciation) %>
+      <% if like_appreciation.nil? %>
+        <%= form_with url: like_appreciations_path, method: :post do %>
+          <%= hidden_field_tag 'like_appreciation[appreciation_id]', appreciation.id %>
+          <%= submit_tag 'Like', class: 'btn btn-primary' %>
+        <% end %>
+      <% else %>
+        <%= form_with url: like_appreciation_path(like_appreciation), method: :delete do %>
+          <%= submit_tag 'Unlike', class: 'btn btn-danger' %>
+        <% end %>
+      <% end %>
+    </div>
+    <hr>
   <% end %>
+<% else %>
+  <small><em class="text-muted">Be the first one to appreciate this list</em></small>
+<% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   <% if current_user != @art.user %>
     <div>

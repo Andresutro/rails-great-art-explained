@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     resources :appreciations, only: [:create, :update,:destroy]
   end
 
+  resources :like_appreciations, only: [:create, :destroy]
   devise_for :users
 
   root to: "pages#home"
