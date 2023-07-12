@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   resources :arts do
     resources :explanations, only: [:create, :update,:destroy, :edit]
-    resources :appreciations, only: [:create, :update,:destroy, :edit] #arreglar destroy sin nested
+    resources :appreciations, only: [:create, :update, :edit,:destroy] #arreglar destroy sin nested
   end
+
 
 
   resources :like_appreciations, only: [:create, :destroy]

@@ -15,8 +15,9 @@ class AppreciationsController < ApplicationController
   end
 
   def destroy
-    @appreciation =  Appreciation.find(params[:id])
     @appreciation.destroy
+    redirect_to @art, notice: 'appreaciation was successfully destroyed.'
+
   end
 
   def edit

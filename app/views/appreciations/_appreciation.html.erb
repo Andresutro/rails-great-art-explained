@@ -10,3 +10,4 @@
   <p><%= appreciation.content %></p>
 
 <% end %>
+  <%= link_to 'Destroy', art_appreciation_path(@art, appreciation),  data: {turbo_method: :delete}, class: 'btn btn-outline-secondary btn-sm' %>
