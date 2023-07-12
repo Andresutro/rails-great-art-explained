@@ -9,13 +9,13 @@
     <%# <% frame_id = dom_id(@explanation,'name_turbo_frame') %>
     <%# <%= turbo_frame_tag frame_id do %>
       <%= f.input :description, placeholder: "Add a description here...", label: false, class: "form-control pt-4" %>
-    <%# <% end %> 
+    <%# <% end %>
 
     <%= f.input :image, as: :file, required: true, label: false, placeholder: "Image", id: "upload_widget", class: "cloudinary-button" %>
   </div>
 
   <div class="form-actions">
-    <%= f.submit "Submit", class: "btn btn-primary text-white py-3 px-5 mt-4 rounded-10", style: 'border-radius: 15px;' %>
+    <%= f.submit "Submit", data: {turbo_action: "advance", turbo_frame: "_top"} , class: "btn btn-primary text-white py-3 px-5 mt-4 rounded-10", style: 'border-radius: 15px;' %>
   </div>
 <% end %>
 

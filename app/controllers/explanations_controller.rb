@@ -32,7 +32,7 @@ class ExplanationsController < ApplicationController
 
   def update
     if @explanation.update(explanation_params)
-      redirect_to @comment.post, notice: 'Comment was successfully updated.'
+      redirect_to @explanation.art, notice: 'Comment was successfully updated.'
     else
       render :edit
     end
