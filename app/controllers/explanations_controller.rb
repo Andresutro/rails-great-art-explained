@@ -1,6 +1,6 @@
 class ExplanationsController < ApplicationController
-  before_action :set_art, only: [:create, :destroy]
-  before_action :set_explanation, only: [:destroy]
+  before_action :set_art, only: [:create, :destroy, :edit]
+  before_action :set_explanation, only: [:edit, :update, :destroy]
 
   def create
     @art = Art.find(params[:art_id])
@@ -8,6 +8,7 @@ class ExplanationsController < ApplicationController
     authorize @explanation
     if @explanation.save
       redirect_to @art, notice: 'La foto fue subida con éxito.'
+
     else
       render :new
     end
@@ -16,19 +17,29 @@ class ExplanationsController < ApplicationController
   def destroy
     @explanation.destroy
     authorize @explanation
-    redirect_to @art, notice: 'Art was successfully destroyed.'
+    redirect_to @art, notice: 'Explanation was successfully destroyed.'
+  end
+
+  def edit
+
+  end
+
+  def update
+    if @explanation.update(explanation_params)
+      redirect_to @explanation.art, notice: 'Comment was successfully updated.'
+    else
+      render :edit
+    end
   end
 
   private
 
   def set_art
     @art = Art.find(params[:art_id])
-    authorize @art
   end
 
   def set_explanation
     @explanation = Explanation.find(params[:id])
-    authorize @explanation
 
   end
 

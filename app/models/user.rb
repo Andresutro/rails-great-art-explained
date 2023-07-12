@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_many :donations
   has_many :appreciations
   has_many :arts
+  has_many :likes
   has_one_attached :photo
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
