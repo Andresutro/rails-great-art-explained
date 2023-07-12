@@ -1,155 +1,37 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @art %>
-
-<div>
-  <%= link_to "Back to arts", arts_path %>
-  <% if policy(@art).edit? %>
-    <%= link_to "Edit this art", edit_art_path(@art) %> |
-  <% end %>
-  <% if policy(@art).destroy? %>
-    <%= button_to "Destroy this art", @art, method: :delete %>
-  <% end %>
-</div>
-    <% if current_user == @art.user %>
-      <%= simple_form_for [@art, @explanation] do |f| %>
-        <%= f.input :description, placeholder: "Add a description here...", label: false, class: "form-control pt-4" %>
-        <%= f.input :image, as: :file, required: true, label: false, placeholder: "Image", id: "upload_widget", class: "cloudinary-button" %>
-        <%= f.submit "Submit", class: "btn btn-primary text-white py-3 px-5 mt-4 rounded-10", style: 'border-radius: 15px;' %>
-      <% end %>
-    <% end %>
-
-  <% @art.explanations.each do |explanation| %>
-    <div class="d-flex">
-      <div>
-        <p><%= explanation.description %></p>
-        <% if policy(@art).destroy? %>
-          <%= link_to 'destroy', art_explanation_path(@art, explanation),  data: {turbo_method: :delete}, class: 'btn btn-outline-secondary btn-sm' %>
-        <% end %>
+<div class="artpost-container">
+  <div class="d-flex gap-5">
+    <p><%= link_to 'Volver', arts_path, class: 'text-black text-decoration-none' %></p>
+    <p><%= link_to 'Editar', edit_art_path(@art), class: 'text-black text-decoration-none' %></p>
+    <p><%= link_to 'Eliminar', art_path(@art), data: { turbo_method: :delete }, confirm: '¿Estás seguro de eliminar este arte?', class: 'text-black text-decoration-none' %></p>
+  </div>
+  <div class="big-image" style="background-image: url(<%= cl_image_path(@art.photo.key)  %>)"></div>
+  <div class="button-container">
+    <div class="text-container">
+      <h2 class="font-italic mt-auto text-decoration-none text-black"><%= @art.title %></h2>
+      <div class="artist-info">
+        <% artista = User.find(@art.user_id) %>
+        <div href="#" class="avatar" style="background-image: url(<%= cl_image_path(artista.photo.key)%>); background-size: cover; background-position: center;"></div>
+        <div class="mt-4 artist-description">
+          <h5 href="#" class="text-black" style="line-height: 0;">
+            <%= artista.email %>
+          </h5>
+        </div>
       </div>
-    <div id="imageContainer" style="position: relative;">
-      <%= cl_image_tag(explanation.image.key, id: "image", class: "img-fluid", alt: "Imagen de arte", style: "max-width: 100%;") %>
-      <div id="pointer" style="position: absolute; width: 20px; height: 20px; background: red; display: none;"></div>
+      <div class="d-flex gap-5">
+        <div class="d-flex gap-2">
+          <h5 class="text-decoration-underline">Técnica:</h5>
+          <h5>Surrealismo</h5>
+        </div>
+        <div class="d-flex gap-2">
+          <h5 class="text-decoration-underline">Año:</h5>
+          <h5><%=@art.year%></h5>
+        </div>
+      </div>
     </div>
-
-
-    </div>
-  <% end %>
-
-
-
-
-<div>
-  <div id='appreciations-and-such' class="d-flex spacing-4 mb-2">
-    <div>
-      <!-- Stars -->
-      <i class="fas fa-star star-gray"></i>
-      <!-- Spacer -->
-      <small><em class="text-muted mx-2">·</em></small>
-
-      <!-- Number of appreciations -->
-      <small><em class="text-muted">@art.appreciations.count appreciations</em></small>
+    <div class="d-flex gap-5">
+      <div class="w-100">
+        <p class="lh-lg"><%=@art.description %></p>
+      </div>
     </div>
   </div>
-
-  <%# <% if @art.appreciations.count == 0  %>
-    <%# <small><em class="text-muted">Be the first one to appreciate this list</em></small> %>
-  <%# <% else %>
-    <%# <% @art.appreciations.each do |appreciation| %>
-      <%# <div> %>
-        <%# <small><%= appreciation.user.email <em class="text-muted"><%= distance_of_time_in_words_to_now(appreciation.created_at) ago</em></small> %>
-        <%# <p><%= appreciation.content</p> %>
-        <%# # <% appreciation.like_appreciations.count Likes %>
-        <%# <% like_appreciation = current_user.like_appreciations.find_by(appreciation: appreciation) 
-        <%# <% if like_appreciation.nil? %>
-
-        <%# <form action='/like_appreciations' method='post'> %>
-          <%# <input type="hidden"  name='authenticity_token' value="<%= form_authenticity_token %>
-          <%# <input type="hidden"  name='like_appreciation[appreciation_id]' value="<%= appreciation.id %>
-          <%# <input type="submit" value="Like"> %>
-        <%# </form> %>
-        <%# <% else %>
-        <%# unlike %>
-        <%# <form action='<%= like_appreciation_path(like_appreciation)' method='post'>  %>
-          <%# <input type="hidden"  name='authenticity_token' value="<%= form_authenticity_token">  %>
-          <%# <input type="hidden"  name='_method' value="DELETE"> %>
-          <%# <input type="submit" value="Unlike"> %>
-        <%# </form> %>
-
-
-        <%# <% end %>
-      <%# </div> %>
-      <%# <hr> %>
-    <%# <% end %>
-  <%# <% end %>
-
-<% if @art.appreciations.any? %>
-  <% @art.appreciations.each do |appreciation| %>
-    <div>
-      <small>
-        <%= appreciation.user.email %>
-        <em class="text-muted"><%= time_ago_in_words(appreciation.created_at) %> ago</em>
-      </small>
-      <p><%= appreciation.content %></p>
-      <%= pluralize(appreciation.like_appreciations.count, 'Like') %>
-      <% like_appreciation = current_user.like_appreciations.find_by(appreciation: appreciation) %>
-      <% if like_appreciation.nil? %>
-        <%= form_with url: like_appreciations_path, method: :post do %>
-          <%= hidden_field_tag 'like_appreciation[appreciation_id]', appreciation.id %>
-          <%= submit_tag 'Like', class: 'btn btn-primary' %>
-        <% end %>
-      <% else %>
-        <%= form_with url: like_appreciation_path(like_appreciation), method: :delete do %>
-          <%= submit_tag 'Unlike', class: 'btn btn-danger' %>
-        <% end %>
-      <% end %>
-    </div>
-    <hr>
-  <% end %>
-<% else %>
-  <small><em class="text-muted">Be the first one to appreciate this list</em></small>
-<% end %>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <% if current_user != @art.user %>
-    <div>
-      <div class="bg-white rounded py-3">
-        <h5>Add your appreciation</h5>
-        <%= simple_form_for [@art, @appreciation] do |f| %>
-          <%= f.input :content, placeholder: "Write your appreciation here...", label: false, class: "form-control pt-4" %>
-          <%= f.submit "Submit", class: "btn btn-primary text-white py-3 px-5 mt-4 rounded-10", style: 'border-radius: 15px;' %>
-        <% end %>
-      </div>
-    </div>
-  <% end %>
 </div>
-
-
-
-  <script>
-  document.addEventListener('DOMContentLoaded', function() {
-  var imageContainer = document.getElementById('imageContainer');
-  var pointer = document.getElementById('pointer');
-
-  imageContainer.addEventListener('click', function(event) {
-    var x = event.offsetX;
-    var y = event.offsetY;
-
-    pointer.style.top = (y - 10) + 'px'; // Ajustamos 10 (la mitad del tamaño del puntero) para centrar el puntero.
-    pointer.style.left = (x - 10) + 'px';
-    pointer.style.display = 'block';
-  });
-});
-</script>

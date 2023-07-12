@@ -1,11 +1,121 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<%# Landing %>
 
-<div id="arts">
-  <% @arts.each do |art| %>
-    <%= render art %>
-    <p>
-      <%= link_to "Show this art", art %>
-    </p>
-  <% end %>
+<div id="landing" class="d-flex align-items-end p-3" style="width: 100vw; height: 100vh; background-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.75) 100%), url('<%= cl_image_path(@art.photo.key) %>'); background-size: cover; background-position: center;">
+  <div class='m-4'>
+    <h1 class="font-italic mt-auto"><%= link_to @art.title, art_path(@art), class:'text-decoration-none text-white' %></h1>
+      <div class="artist-info">
+        <% artista = User.find(@art.user_id) %>
+        <div href="#" class="avatar" style="background-image: url(<%= cl_image_path(artista.photo.key)%>); background-size: cover; background-position: center;"></div>
+        <div class="mt-4 artist-description">
+          <h5 href="#" class="text-white" style="line-height: 0;">
+            <%= artista.email %>
+          </h5>
+        </div>
+      </div>
+  </div>
+</div>
+
+<%# Recomendacion del dia %>
+<div class="container">
+  <h2>Recomendación del día</h2>
+  <div class="arts-container">
+    <div class="art-card-inactive" style="background-image: url(<%= cl_image_path(@art.photo.key) %>)">
+
+    </div>
+    <div class="art-card-inactive" style="background-image: url(<%= cl_image_path(@art.photo.key) %>)">
+
+    </div>
+    <div class="art-card" style="background-image: url(<%= cl_image_path(@art.photo.key) %>), linear-gradient(rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.75) 100%)">
+      <h2><%= @art.title %></h2>
+    </div>
+    <div class="art-card-inactive" style="background-image: url(<%= cl_image_path(@art.photo.key) %>)">
+
+    </div>
+    <div class="art-card-inactive" style="background-image: url(<%= cl_image_path(@art.photo.key) %>)">
+
+    </div>
+  </div>
+</div>
+
+<%# Artista destacado %>
+<div style="background-color: #E8EAEC;">
+  <div class="container">
+    <h2>Piérdete en el mundo de Ray</h2>
+    <%# Left %>
+    <div class="horizontal-container">
+      <div class="button-container gap-2">
+        <div class="text-container">
+          <h2><%= artista.email %></h2>
+          <h5 class="w-75">
+            El artista español que muchos catalogan como el mejor artista del siglo 20.
+          <h5>
+        </div>
+        <div class="button">
+          Ver su trabajo
+        </div>
+      </div>
+
+      <%# Right %>
+      <div class="big-avatar" style="background-image: url(<%= cl_image_path(artista.photo.key)%>); background-size: cover; background-position: center;">
+      </div>
+    </div>
+  </div>
+</div>
+
+<%# Populares %>
+<div class="container">
+  <h2>Populares</h2>
+  <!-- Gallery -->
+  <div class="row">
+    <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+      <img
+        src="<%= cl_image_path(@art.photo.key) %>"
+        class="w-100 shadow-1-strong rounded mb-4"
+      />
+
+      <img
+        src="<%= cl_image_path(@art.photo.key) %>"
+        class="w-100 shadow-1-strong rounded mb-4"
+      />
+    </div>
+
+    <div class="col-lg-4 mb-4 mb-lg-0">
+      <img
+        src="<%= cl_image_path(@art.photo.key) %>"
+        class="w-100 shadow-1-strong rounded mb-4"
+      />
+
+      <img
+        src="<%= cl_image_path(@art.photo.key) %>"
+        class="w-100 shadow-1-strong rounded mb-4"
+      />
+    </div>
+
+    <div class="col-lg-4 mb-4 mb-lg-0">
+      <img
+        src="<%= cl_image_path(@art.photo.key) %>"
+        class="w-100 shadow-1-strong rounded mb-4"
+      />
+
+      <img
+        src="<%= cl_image_path(@art.photo.key) %>"
+        class="w-100 shadow-1-strong rounded mb-4"
+      />
+    </div>
+  </div>
+  <!-- Gallery -->
+</div>
+
+<%# Obra Clasica %>
+
+<div class="container" style="border-radius: 40px; background-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.75) 100%), url('<%= cl_image_path(@art.photo.key) %>'); background-size: cover; background-position: center; margin-bottom: 200px;">
+  <div class="d-flex flex-column align-items-center button-container">
+    <div class="justify-content-center text-container">
+      <h2 class="text-white text-center">¿Cómo se conecta '<%= @art.title %>' con la cultura pop</h2>
+      <h5 class="text-white text-center w-100">Súmate al mundo de De Goya para entender como su obra cruza fronteras</h5>
+    </div>
+    <div class="border-white text-white button">
+      Ver su trabajo
+    </div>
+  </div>
 </div>

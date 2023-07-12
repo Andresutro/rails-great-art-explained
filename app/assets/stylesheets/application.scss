@@ -10,6 +10,316 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
-// our imports
 
-@import "https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.min.css";
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+h1 {
+  font-family: $headers-font;
+  font-size: 7.5rem;
+  font-style: italic;
+  line-height: 100%;
+}
+
+h5 {
+  font-family: $headers-font;
+  font-size: 1.5rem;
+  line-height: 140%;
+}
+
+li {
+  font-family: $headers-font;
+  font-size: 1.5rem;
+}
+
+.pill {
+  display: flex;
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  border-radius: 4rem;
+}
+
+.artist-info {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 1rem;
+}
+
+.avatar {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 48px;
+}
+
+.avatar2 {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 48px;
+}
+
+.dropdown-menu{
+  font-family: $headers-font;
+  font-size: 1.5rem;
+  border: 0px;
+  background: transparent;
+}
+
+.dropdown-menu>a{
+  color: white;
+  text-align: end;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  padding: 6rem 4rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+  align-self: stretch;
+  justify-content: center;
+}
+
+
+h2 {
+  font-family: $headers-font;
+  line-height: 110%;
+  font-size: 3rem;
+}
+
+.h2 {
+  font-family: $headers-font;
+  line-height: 110%;
+  font-size: 4rem;
+}
+
+.h3 {
+  font-family: $headers-font;
+  margin-top: 10px;
+  line-height: 90%;
+  font-size: 1.25rem;
+}
+
+.arts-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  align-self: stretch;
+  height: 31.25rem;
+}
+
+.art-card {
+  display: flex;
+  padding: 1rem 1.5rem;
+  width: 40rem;
+  color: white;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: 0.625rem;
+  align-self: stretch;
+  border-radius: 20px;
+}
+
+.art-card-inactive {
+  flex: 1 0 0;
+  border-radius: 20px;
+  align-self: stretch;
+  transition: 0.5s ease;
+}
+
+.art-card-inactive:hover {
+  display: flex;
+  padding: 1rem 1.5rem;
+  width: 40rem;
+  color: white;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: 0.625rem;
+  align-self: stretch;
+  border-radius: 20px;
+  flex: 1 0 0;
+}
+
+.text-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3rem;
+}
+
+.button {
+  padding: 0.75rem 2rem;
+  align-items: flex-start;
+  font-size: 1.5rem;
+  font-family: $headers-font;
+  border: 1px solid var(--bg-dark, #272A2D);
+  transition: 0.5s ease;
+}
+
+.button:hover {
+  background-color: black;
+  color: white;
+  border: 0px solid var(--bg-dark, #272A2D);
+}
+
+.big-avatar {
+  width: 23.25rem;
+  height: 23.25rem;
+  border-radius: 372px;
+}
+
+.horizontal-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+}
+
+.how {
+  margin: 0rem 12rem;
+  width: 100%;
+  display: flex;
+  padding: 6rem 4rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+  align-self: stretch;
+  justify-content: center;
+  height: 31.25rem;
+  align-items: center;
+  border-radius: 20px;
+  color:white;
+}
+
+.footer {
+  display: flex;
+  padding: 0.0625rem 4rem 6rem 4rem;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4.5rem;
+  align-self: stretch;
+}
+
+.columns {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  align-self: stretch;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.8125rem;
+}
+
+.image-container {
+  width: 72rem;
+  display: flex;
+  padding: 6rem 4rem;
+  flex-direction: column;
+  align-items: center;
+  align-self: stretch;
+}
+
+.artpost-container {
+  display: flex;
+  margin-top: 5rem;
+  padding: 4rem 8rem 6rem 8rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3rem;
+  align-self: stretch;
+}
+
+.big-image {
+  height: 40rem;
+  align-self: stretch;
+}
+
+p {
+  line-height: 160%;
+  text-align: justify;
+  font-family: $body-font;
+}
+
+.artist-description {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.form-inputs {
+  width: 100%;
+}
+
+#registration {
+  margin-top: 120px;
+}
+
+
+// External
+
+.photo-gallery {
+  color:#313437;
+  background-color:#fff;
+}
+
+.photo-gallery p {
+  color:#7d8285;
+}
+
+.photo-gallery h2 {
+  font-weight:bold;
+  margin-bottom:40px;
+  padding-top:40px;
+  color:inherit;
+}
+
+@media (max-width:767px) {
+  .photo-gallery h2 {
+    margin-bottom:25px;
+    padding-top:25px;
+    font-size:24px;
+  }
+}
+
+.photo-gallery .intro {
+  font-size:16px;
+  max-width:500px;
+  margin:0 auto 40px;
+}
+
+.photo-gallery .intro p {
+  margin-bottom:0;
+}
+
+.photo-gallery .photos {
+  padding-bottom:20px;
+}
+
+.photo-gallery .item {
+  padding-bottom:30px;
+}
+
+.welcome-container {
+  display: flex;
+  padding: 4rem 8rem 6rem 8rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3rem;
+  align-self: stretch;
+}

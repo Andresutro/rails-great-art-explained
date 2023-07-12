@@ -24,13 +24,12 @@
     <%= art.category %>
   </p>
 
-  <% if art && art.image.present? %>
-    <div class="w-100 h-20 rounded-2" style='height: 75vh; background-image: url("<%= cl_image_path art.image.key %>"); background-size: cover; background-repeat: no-repeat; background-position: center center;'></div>
+  <% if art && art.photo.present? %>
+    <div class="w-100 h-20 rounded-2" style='height: 75vh; background-image: url("<%= cl_image_path art.photo.key %>"); background-size: cover; background-repeat: no-repeat; background-position: center center;'></div>
   <% else %>
     <!-- puedes poner alguna imagen por defecto en caso de que no haya imagen -->
     <strong>no hay foto</strong>
 
   <% end %>
-
 
 </div>
