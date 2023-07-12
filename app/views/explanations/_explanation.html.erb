@@ -1,6 +1,7 @@
-<%= turbo_frame_tag dom_id(explanation) %>
+<%= turbo_frame_tag dom_id(explanation) do %>
   <div class='d-flex'>
     <%= link_to 'Edit', [:edit, explanation.art,explanation] %>
+
     <p>
       <strong>Description:</strong>
       <%= explanation.description %>
@@ -17,3 +18,7 @@
       <% end %>
     </div>
   </div>
+<% end %>
+    <% if policy(@art).destroy? %>
+      <%= link_to 'destroy', art_explanation_path(@art, explanation),  data: {turbo_method: :delete}, class: 'btn btn-outline-secondary btn-sm' %>
+    <% end %>

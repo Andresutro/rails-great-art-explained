@@ -21,19 +21,31 @@ class ExplanationsController < ApplicationController
   end
 
   def edit
-    
+    # respond_to do |format|
+    #   format.turbo_stream do
+    #     render turbo_stream: turbo_stream.update(@explanation,
+    #                                              partial: "explanation/form",
+    #                                              locals: {message: @explanation})
+    #   end
+    # end
+  end
+
+  def update
+    if @explanation.update(explanation_params)
+      redirect_to @explanation.art, notice: 'Comment was successfully updated.'
+    else
+      render :edit
+    end
   end
 
   private
 
   def set_art
     @art = Art.find(params[:art_id])
-    authorize @art
   end
 
   def set_explanation
     @explanation = Explanation.find(params[:id])
-    authorize @explanation
 
   end
 

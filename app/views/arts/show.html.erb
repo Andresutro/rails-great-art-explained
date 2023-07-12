@@ -20,6 +20,7 @@
     <% end %>
 
 
+<%# <%= turbo_stream_from [@art, :view] %> 
 
 <% @art.explanations.each do |explanation| %>
   <%= render 'explanations/explanation', explanation: explanation %>
