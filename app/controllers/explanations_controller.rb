@@ -8,6 +8,7 @@ class ExplanationsController < ApplicationController
     authorize @explanation
     if @explanation.save
       redirect_to @art, notice: 'La foto fue subida con éxito.'
+      
     else
       render :new
     end
@@ -16,7 +17,7 @@ class ExplanationsController < ApplicationController
   def destroy
     @explanation.destroy
     authorize @explanation
-    redirect_to @art, notice: 'Art was successfully destroyed.'
+    redirect_to @art, notice: 'Explanation was successfully destroyed.'
   end
 
   private

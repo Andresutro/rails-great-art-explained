@@ -1,9 +1,13 @@
+
 <%= simple_form_for [@art, @explanation] do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="form-inputs">
+    <% frame_id = dom_id(@explanation,'name_turbo_frame') %>
+    <%= turbo_frame_tag frame_id do %>
     <%= f.input :description, placeholder: "Add a description here...", label: false, class: "form-control pt-4" %>
+    <% end %>
     <%= f.input :image, as: :file, required: true, label: false, placeholder: "Image", id: "upload_widget", class: "cloudinary-button" %>
   </div>
 

@@ -21,8 +21,17 @@
 
   <% @art.explanations.each do |explanation| %>
     <div class="d-flex">
-      <div>
-        <p><%= explanation.description %></p>
+      <div style='width:500px;'>
+
+        <% frame_id = dom_id(explanation,'name_turbo_frame') %>
+        <%= form_with model: [explanation.art,explanation], data: {turbo_frame: frame_id }  do |form|%>
+          <%= turbo_frame_tag frame_id, class: 'inline-edit' do %>
+            <p><%= explanation.description %></p>
+            <%= link_to 'EDIT EXPLANATION', edit_art_explanation_path(explanation) %>
+          <% end %>
+        <% end %>
+
+
         <% if policy(@art).destroy? %>
           <%= link_to 'destroy', art_explanation_path(@art, explanation),  data: {turbo_method: :delete}, class: 'btn btn-outline-secondary btn-sm' %>
         <% end %>
@@ -60,7 +69,7 @@
         <%# <small><%= appreciation.user.email <em class="text-muted"><%= distance_of_time_in_words_to_now(appreciation.created_at) ago</em></small> %>
         <%# <p><%= appreciation.content</p> %>
         <%# # <% appreciation.like_appreciations.count Likes %>
-        <%# <% like_appreciation = current_user.like_appreciations.find_by(appreciation: appreciation) 
+        <%# <% like_appreciation = current_user.like_appreciations.find_by(appreciation: appreciation)
         <%# <% if like_appreciation.nil? %>
 
         <%# <form action='/like_appreciations' method='post'> %>
@@ -94,7 +103,7 @@
       <%= pluralize(appreciation.like_appreciations.count, 'Like') %>
       <% like_appreciation = current_user.like_appreciations.find_by(appreciation: appreciation) %>
       <% if like_appreciation.nil? %>
-        <%= form_with url: like_appreciations_path, method: :post do %>
+        <%= form_with url: like_appreciations_path, method: :post, remote: true do %>
           <%= hidden_field_tag 'like_appreciation[appreciation_id]', appreciation.id %>
           <%= submit_tag 'Like', class: 'btn btn-primary' %>
         <% end %>
