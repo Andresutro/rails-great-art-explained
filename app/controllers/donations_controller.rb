@@ -5,14 +5,11 @@ class DonationsController < ApplicationController
  # app/controllers/donations_controller.rb
   def index
     @user = User.find(params[:user_id])
-    @donations = policy_scope(Donation.where(user_id: @user.id))
-
-
+    @donations = policy_scope(Donation.where(@user_id))
   end
 
   def create
-  @current_user = current_user
-  @donation = @current_user.donations.build(donation_params)
+  @donation = current_user.donations.build(donation_params)
   authorize @donation
   if @donation.save
     redirect_to user_donations_path(@user), notice: 'Gracias por tu donación!'

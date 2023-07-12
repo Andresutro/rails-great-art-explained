@@ -9,6 +9,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :like_appreciations
 
-  validates :first_name,  length: { maximum: 30 }
-  validates :last_name,  length: { maximum: 30 }
+  # validates :first_name,  length: { maximum: 30 }
+  # validates :last_name,  length: { maximum: 30 }
 end
