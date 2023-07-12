@@ -20,7 +20,7 @@
     <% end %>
 
 
-<%# <%= turbo_stream_from [@art, :view] %> 
+<%# <%= turbo_stream_from [@art, :view] %>
 
 <% @art.explanations.each do |explanation| %>
   <%= render 'explanations/explanation', explanation: explanation %>
@@ -75,11 +75,10 @@
 <% if @art.appreciations.any? %>
   <% @art.appreciations.each do |appreciation| %>
     <div>
-      <small>
-        <%= appreciation.user.email %>
-        <em class="text-muted"><%= time_ago_in_words(appreciation.created_at) %> ago</em>
-      </small>
-      <p><%= appreciation.content %></p>
+
+      <%= render 'appreciations/appreciation', appreciation: appreciation %>
+
+
       <%= pluralize(appreciation.like_appreciations.count, 'Like') %>
       <% like_appreciation = current_user.like_appreciations.find_by(appreciation: appreciation) %>
       <% if like_appreciation.nil? %>

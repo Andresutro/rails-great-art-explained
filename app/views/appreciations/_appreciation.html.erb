@@ -1,0 +1,12 @@
+<%= turbo_frame_tag dom_id(appreciation) do %>
+
+  <%= link_to 'Edit', [:edit, appreciation.art,appreciation] %>
+
+  <small>
+    <%= appreciation.user.email %>
+    <em class="text-muted"><%= time_ago_in_words(appreciation.created_at) %> ago</em>
+  </small>
+
+  <p><%= appreciation.content %></p>
+
+<% end %>

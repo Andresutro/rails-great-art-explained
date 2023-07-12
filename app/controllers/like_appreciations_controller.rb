@@ -19,6 +19,9 @@ class LikeAppreciationsController < ApplicationController
 
   end
 
+
+
+
   private
   def like_appreciation_params
     params.require(:like_appreciation).permit(:appreciation_id)
