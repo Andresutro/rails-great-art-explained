@@ -19,3 +19,6 @@
     </div>
   </div>
 <% end %>
+    <% if policy(@art).destroy? %>
+      <%= link_to 'destroy', art_explanation_path(@art, explanation),  data: {turbo_method: :delete}, class: 'btn btn-outline-secondary btn-sm' %>
+    <% end %>
