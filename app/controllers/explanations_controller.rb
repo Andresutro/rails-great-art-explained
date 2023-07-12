@@ -21,13 +21,7 @@ class ExplanationsController < ApplicationController
   end
 
   def edit
-    # respond_to do |format|
-    #   format.turbo_stream do
-    #     render turbo_stream: turbo_stream.update(@explanation,
-    #                                              partial: "explanation/form",
-    #                                              locals: {message: @explanation})
-    #   end
-    # end
+
   end
 
   def update
