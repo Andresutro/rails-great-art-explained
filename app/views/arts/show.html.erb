@@ -19,23 +19,11 @@
       <% end %>
     <% end %>
 
-  <% @art.explanations.each do |explanation| %>
-    <div class="d-flex">
-      <div>
-        <p><%= explanation.description %></p>
-        <% if policy(@art).destroy? %>
-          <%= link_to 'destroy', art_explanation_path(@art, explanation),  data: {turbo_method: :delete}, class: 'btn btn-outline-secondary btn-sm' %>
-        <% end %>
-      </div>
-    <div id="imageContainer" style="position: relative;">
-      <%= cl_image_tag(explanation.image.key, id: "image", class: "img-fluid", alt: "Imagen de arte", style: "max-width: 100%;") %>
-      <div id="pointer" style="position: absolute; width: 20px; height: 20px; background: red; display: none;"></div>
-    </div>
 
 
-    </div>
-  <% end %>
-
+<% @art.explanations.each do |explanation| %>
+  <%= render 'explanations/explanation', explanation: explanation %>
+<% end %>
 
 
 
@@ -60,7 +48,7 @@
         <%# <small><%= appreciation.user.email <em class="text-muted"><%= distance_of_time_in_words_to_now(appreciation.created_at) ago</em></small> %>
         <%# <p><%= appreciation.content</p> %>
         <%# # <% appreciation.like_appreciations.count Likes %>
-        <%# <% like_appreciation = current_user.like_appreciations.find_by(appreciation: appreciation) 
+        <%# <% like_appreciation = current_user.like_appreciations.find_by(appreciation: appreciation)
         <%# <% if like_appreciation.nil? %>
 
         <%# <form action='/like_appreciations' method='post'> %>
@@ -94,7 +82,7 @@
       <%= pluralize(appreciation.like_appreciations.count, 'Like') %>
       <% like_appreciation = current_user.like_appreciations.find_by(appreciation: appreciation) %>
       <% if like_appreciation.nil? %>
-        <%= form_with url: like_appreciations_path, method: :post do %>
+        <%= form_with url: like_appreciations_path, method: :post, remote: true do %>
           <%= hidden_field_tag 'like_appreciation[appreciation_id]', appreciation.id %>
           <%= submit_tag 'Like', class: 'btn btn-primary' %>
         <% end %>

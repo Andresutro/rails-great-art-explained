@@ -11,6 +11,12 @@ class AppreciationsController < ApplicationController
     end
   end
 
+  def destroy
+    @appreciation =  Appreciation.find(params[:id])
+    @appreciation.destroy
+  end
+
+
 
   private
 

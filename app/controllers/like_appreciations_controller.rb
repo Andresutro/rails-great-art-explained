@@ -7,6 +7,7 @@ class LikeAppreciationsController < ApplicationController
     end
 
     redirect_to @like_appreciation.appreciation.art
+
   end
 
   def destroy
