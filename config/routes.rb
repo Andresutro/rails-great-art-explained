@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :donations
+
   resources :arts do
     resources :explanations, only: [:create, :update,:destroy]
     resources :appreciations, only: [:create, :update,:destroy]
@@ -7,6 +9,16 @@ Rails.application.routes.draw do
   resources :like_appreciations, only: [:create, :destroy]
   devise_for :users
 
+  resources :users do
+    resources :donations, only: [:new, :create]
+  end
+  
+  resources :users do
+    resources :donations, only: [:index]
+  end
+  resources :users do
+    resources :donations
+  end
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

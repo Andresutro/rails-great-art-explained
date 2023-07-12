@@ -60,7 +60,7 @@
         <%# <small><%= appreciation.user.email <em class="text-muted"><%= distance_of_time_in_words_to_now(appreciation.created_at) ago</em></small> %>
         <%# <p><%= appreciation.content</p> %>
         <%# # <% appreciation.like_appreciations.count Likes %>
-        <%# <% like_appreciation = current_user.like_appreciations.find_by(appreciation: appreciation) 
+        <%# <% like_appreciation = current_user.like_appreciations.find_by(appreciation: appreciation)
         <%# <% if like_appreciation.nil? %>
 
         <%# <form action='/like_appreciations' method='post'> %>
@@ -136,6 +136,16 @@
   <% end %>
 </div>
 
+<% if current_user != @art.user %>
+  <%= form_with(model: Donation.new, url: user_donations_path(@art.user)) do |form| %>
+    <%= form.hidden_field :art_id, value: @art.id %>
+    <div class="field">
+      <%= form.label :amount %>
+      <%= form.number_field :amount %>
+    </div>
+    <%= form.submit 'Donate' %>
+  <% end %>
+<% end %>
 
 
   <script>

@@ -1,0 +1,6 @@
+<h1>Donation Summary</h1>
+<% @donations.each do |donation| %>
+  <p>Amount: <%= donation.amount %></p>
+  <p>Donor: <%= donation.donor.email %></p>
+  <hr>
+<% end %>
