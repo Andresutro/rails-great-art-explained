@@ -5,6 +5,7 @@ class ArtsController < ApplicationController
   # GET /arts or /arts.json
   def index
     @arts = policy_scope(Art)
+    authorize @arts
   end
 
   # GET /arts/1 or /arts/1.json
