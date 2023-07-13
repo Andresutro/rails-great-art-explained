@@ -1,0 +1,9 @@
+<%= link_to art_path(art), class: 'text-decoration-none' do %>
+  <div id="card" style="height: 75vh;">
+    <div class="w-100 h-75" style="background-image: url('<%= cl_image_path(art.photo.key) %>'); background-size: cover; background-repeat: no-repeat; background-position: center center;"></div>
+    <div class="mt-4">
+      <h4 class="text-black"><%= art.title %></h4>
+      <p class="text-black text-decoration-none"><%= art.year %></p>
+    </div>
+  </div>
+<% end %>
