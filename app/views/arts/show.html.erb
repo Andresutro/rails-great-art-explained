@@ -127,6 +127,16 @@
   <% end %>
 </div>
 
+<% if current_user != @art.user %>
+  <%= form_with(model: Donation.new, url: user_donations_path(@art.user)) do |form| %>
+    <%= form.hidden_field :art_id, value: @art.id %>
+    <div class="field">
+      <%= form.label :amount %>
+      <%= form.number_field :amount %>
+    </div>
+    <%= form.submit 'Donate' %>
+  <% end %>
+<% end %>
 
 
   <script>
