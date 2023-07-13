@@ -17,4 +17,5 @@ class DonationPolicy < ApplicationPolicy
     user.present?
   end
 
+
 end
