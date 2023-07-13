@@ -1,0 +1,23 @@
+<p style="color: green"><%= notice %></p>
+
+<% @donations.each do |donation| %>
+  <%= render donation %>
+
+
+<div>
+  <%= link_to "Back to donations", user_donations_path %>
+</div>
+
+<p>
+  <strong>User:</strong>
+  <%= donation.user.email %>
+</p>
+<p>
+  <strong>Amount:</strong>
+  <%= donation.amount %>
+</p>
+<p>
+  <strong>Message:</strong>
+  <%= donation.message %>
+</p>
+<% end %>

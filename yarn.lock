@@ -762,6 +762,11 @@ tom-select@^2.2.2:
     "@orchidjs/sifter" "^1.0.3"
     "@orchidjs/unicode-variants" "^1.0.4"
 
+turbo-frames-debug@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/turbo-frames-debug/-/turbo-frames-debug-1.0.0.tgz#500fc7458d55eb069907c9d6cea1aaf7bc51c4a0"
+  integrity sha512-iuWNQzPo+pnMym9LL02hRW4FENKLi2iIjs9AZ73D+77rLtR1G74YtbgEbuB2WPSYnzbjX2XadQ73ZDw9gOk6QQ==
+
 update-browserslist-db@^1.0.11:
   version "1.0.11"
   resolved "https://registry.yarnpkg.com/update-browserslist-db/-/update-browserslist-db-1.0.11.tgz#9a2a641ad2907ae7b3616506f4b977851db5b940"

@@ -1,13 +1,24 @@
+
 <%= simple_form_for [@art, @explanation] do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="form-inputs">
-    <%= f.input :description, placeholder: "Add a description here...", label: false, class: "form-control pt-4" %>
-    <%= f.input :image, as: :file, required: true, label: false, placeholder: "Image", id: "upload_widget", class: "cloudinary-button" %>
-  </div>
+    <div class='d-flex'>
 
+
+    <div>
+    <%= f.input :description, placeholder: "Add a description here...", label: false, class: "form-control pt-4" %>
+    <%# <% end %>
+
+    <%= f.input :image, as: :file, required: true, label: false, placeholder: "Image", id: "upload_widget", class: "cloudinary-button" %>
+    </div>
+    <div id="imageContainer" style="position: relative;">
+    <%= cl_image_tag(explanation.image.key, id: "image", class: "img-fluid", alt: "Imagen de arte", style: "max-width: 100%;") %>
+    <div id="pointer" style="position: absolute; width: 20px; height: 20px; background: red; display: none;"></div>
+  </div>
+  </div>
   <div class="form-actions">
-    <%= f.submit "Submit", class: "btn btn-primary text-white py-3 px-5 mt-4 rounded-10", style: 'border-radius: 15px;' %>
+    <%= f.submit "Submit", data: {turbo_action: "advance", turbo_frame: "_top"} , class: "btn btn-primary text-white py-3 px-5 mt-4 rounded-10", style: 'border-radius: 15px;' %>
   </div>
 <% end %>
