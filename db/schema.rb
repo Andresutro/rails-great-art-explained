@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_13_030800) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_13_035125) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -100,6 +100,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_13_030800) do
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
+  create_table "participants", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "tour_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tour_id"], name: "index_participants_on_tour_id"
+    t.index ["user_id"], name: "index_participants_on_user_id"
+  end
+
   create_table "reviews", force: :cascade do |t|
     t.text "content"
     t.bigint "user_id", null: false
@@ -148,6 +157,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_13_030800) do
   add_foreign_key "like_appreciations", "users"
   add_foreign_key "likes", "arts"
   add_foreign_key "likes", "users"
+  add_foreign_key "participants", "tours"
+  add_foreign_key "participants", "users"
   add_foreign_key "reviews", "arts"
   add_foreign_key "reviews", "users"
   add_foreign_key "tours", "users"

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'participants/_form'
+  get 'participants/_participant'
   resources :tours
   resources :donations
 
