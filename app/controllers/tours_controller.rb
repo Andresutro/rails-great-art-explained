@@ -22,7 +22,7 @@ class ToursController < ApplicationController
   # POST /tours or /tours.json
   def create
     @tour = Tour.new(tour_params)
-
+    @tour.user =  current_user
     respond_to do |format|
       if @tour.save
         format.html { redirect_to tour_url(@tour), notice: "Tour was successfully created." }
@@ -65,6 +65,6 @@ class ToursController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def tour_params
-      params.require(:tour).permit(:start_date, :end_date, :capacity, :mode, :address, :description, :title, :user_id)
+      params.require(:tour).permit(:start_date, :end_date, :capacity, :mode, :address, :description, :title)
     end
 end
