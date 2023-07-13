@@ -1,16 +1,24 @@
-<div id="<%= dom_id explanation %>">
+<%= turbo_frame_tag dom_id(explanation) do %>
   <div class='d-flex'>
+    <%= link_to 'Edit', [:edit, explanation.art,explanation] %>
+
     <p>
       <strong>Description:</strong>
       <%= explanation.description %>
     </p>
 
     <div>
-    <% if explanation && explanation.image.present? %>
-      <div class="w-100 h-20 rounded-2" style='height: 75vh; background-image: url("<%= cl_image_path explanation.image.key %>"); background-size: cover; background-repeat: no-repeat; background-position: center center;'></div>
-    <% else %>
-      <strong>no hay foto</strong>
-    <% end %>
+      <% if explanation.image.present? %>
+        <div id="imageContainer" style="position: relative;">
+          <%= cl_image_tag(explanation.image.key, id: "image", class: "img-fluid", alt: "Imagen de arte", style: "max-width: 100%;") %>
+          <div id="pointer" style="position: absolute; width: 20px; height: 20px; background: red; display: none;"></div>
+        </div>
+      <% else %>
+        <strong>no hay foto</strong>
+      <% end %>
     </div>
   </div>
-</div>
+<% end %>
+    <% if policy(@art).destroy? %>
+      <%= link_to 'destroy', art_explanation_path(@art, explanation),  data: {turbo_method: :delete}, class: 'btn btn-outline-secondary btn-sm' %>
+    <% end %>

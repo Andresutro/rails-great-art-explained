@@ -1,0 +1,8 @@
+
+<%= simple_form_for [@art, @appreciation] do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <%= f.input :content, placeholder: "Write your appreciation here...", label: false, class: "form-control pt-4" %>
+    <%= f.submit "Submit", data: {turbo_action: "advance", turbo_frame: "_top"} , class: "btn btn-primary text-white py-3 px-5 mt-4 rounded-10", style: 'border-radius: 15px;' %>
+<% end %>
