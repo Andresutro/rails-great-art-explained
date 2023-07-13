@@ -134,9 +134,18 @@
       <%= form.label :amount %>
       <%= form.number_field :amount %>
     </div>
+      </div>
+    <div class="field">
+      <%= form.label :message %>
+      <%= form.text_area :message %>
+    </div>
     <%= form.submit 'Donate' %>
   <% end %>
 <% end %>
+
+
+<%= link_to "Donaciones Recibidas", received_user_donations_path(@user) %>
+<%= link_to "Donaciones Realizadas", made_user_donations_path(current_user) %>
 
 
   <script>

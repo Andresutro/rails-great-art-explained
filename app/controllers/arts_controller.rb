@@ -12,6 +12,9 @@ class ArtsController < ApplicationController
   def show
     @explanation =  Explanation.new
     @appreciation = Appreciation.new
+    @user = @art.user
+    @donation = @user.donations.last
+
   end
 
   # GET /arts/new
