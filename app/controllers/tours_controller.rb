@@ -8,11 +8,23 @@ class ToursController < ApplicationController
 
   # GET /tours/1 or /tours/1.json
   def show
+    @participant =  Participant.new
+    
+    respond_to do |format|
+      format.html
+      format.ics do
+        # render plain: @tour.to_icalendar
+        tour_ics = Tours::IcalendarEvent.new(tour: Tour.first).call
+        # send_data @game.to_icalendar, filename: "#{@game.title}.ics"
+        send_data tour_ics, filename: "#{@tour.title}.ics"
+      end
+    end
   end
 
   # GET /tours/new
   def new
     @tour = Tour.new
+
   end
 
   # GET /tours/1/edit

@@ -81,5 +81,4 @@ end
 # Nuestras gemas
 gem "pundit"
 gem "cloudinary"
-
 gem "icalendar", "~> 2.8"
