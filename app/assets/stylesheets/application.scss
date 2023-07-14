@@ -11,7 +11,7 @@
 @import "components/index";
 @import "pages/index";
 
-// Adicional
+// Adicionales
 @import "https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.min.css";
 @import 'turbo-frames-debug/dist/turbo-frames-debug.css';
 
@@ -90,7 +90,7 @@ li {
 h2 {
   font-family: $headers-font;
   line-height: 110%;
-  font-size: 3rem;
+  font-size: 4rem;
 }
 
 .h2 {
@@ -174,7 +174,6 @@ h2 {
 .button:hover {
   background-color: black;
   color: white;
-  border: 0px solid var(--bg-dark, #272A2D);
 }
 
 .big-avatar {
@@ -244,7 +243,7 @@ h2 {
   padding: 4rem 8rem 6rem 8rem;
   flex-direction: column;
   align-items: flex-start;
-  gap: 3rem;
+  gap: 1rem;
   align-self: stretch;
 }
 

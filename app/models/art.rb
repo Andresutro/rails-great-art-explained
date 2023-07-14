@@ -1,6 +1,6 @@
 class Art < ApplicationRecord
   belongs_to :user
-  
+
   has_one_attached :photo
   has_many :explanations
   has_many :appreciations
@@ -15,6 +15,6 @@ class Art < ApplicationRecord
   validates :year, presence: true
   validates :category, presence: true
 
-  validates :description, length: { maximum: 1000 }
+  validates :description, length: { maximum: 10000 }
 
 end

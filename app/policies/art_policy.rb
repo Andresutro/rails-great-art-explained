@@ -1,5 +1,4 @@
 class ArtPolicy < ApplicationPolicy
-
   class Scope < Scope
     def resolve
       scope.where(user:)
