@@ -1,0 +1,51 @@
+<div id="<%= dom_id tour %>">
+  <p>
+    <strong>Start date:</strong>
+    <%= tour.start_date %>
+  </p>
+
+  <p>
+    <strong>End date:</strong>
+    <%= tour.end_date %>
+  </p>
+
+  <p>
+    <strong>Capacity:</strong>
+    <%= tour.capacity %>
+  </p>
+
+  <p>
+    <strong>Mode:</strong>
+    <%= tour.mode %>
+  </p>
+
+  <p>
+    <strong>Address:</strong>
+    <%= tour.address %>
+  </p>
+
+  <p>
+    <strong>Description:</strong>
+    <%= tour.description %>
+  </p>
+
+  <p>
+    <strong>Title:</strong>
+    <%= tour.title %>
+  </p>
+
+  <p>
+    <strong>User:</strong>
+    <%= tour.user_id %>
+  </p>
+
+  <p>
+    <strong>Cantidad de personas por asistir hasta el momemento:</strong>
+    <%= tour.participants.count %>
+  </p>
+
+  <%# <%= tour.to_icalendar %>
+<%= link_to 'add calendar', tour_path(tour, format: :ics) %>
+
+
+<!-- Para usar un formulario HTML en lugar del link_to -->
