@@ -1,19 +1,17 @@
-<p style="color: green"><%= notice %></p>
+<div class="artpost-container">
+  <div class="d-flex gap-5">
+    <p style="color: green"><%= notice %></p>
 
-<%= render @art %>
+    <%= render @art %>
 
-<div>
-  <%= link_to "Back to arts", arts_path %>
-  <% if policy(@art).edit? %>
-    <%= link_to "Edit this art", edit_art_path(@art) %> |
-  <% end %>
-  <% if policy(@art).destroy? %>
-    <%= button_to "Destroy this art", @art, method: :delete %>
-  <% end %>
+    <%= link_to "Back to arts", arts_path %>
+    <% if policy(@art).edit? %>
+      <%= link_to "Edit this art", edit_art_path(@art) %> |
+    <% end %>
+    <% if policy(@art).destroy? %>
+      <%= button_to "Destroy this art", @art, method: :delete %>
+    <% end %>
 
-
-
-</div>
     <% if current_user == @art.user %>
       <%= simple_form_for [@art, @explanation] do |f| %>
         <%= f.input :description, placeholder: "Add a description here...", label: false, class: "form-control pt-4" %>
@@ -23,13 +21,43 @@
     <% end %>
 
 
-<%# <%= turbo_stream_from [@art, :view] %>
+    <%# <%= turbo_stream_from [@art, :view] %>
 
-<% @art.explanations.each do |explanation| %>
-  <%= render 'explanations/explanation', explanation: explanation %>
-<% end %>
-
-
+    <% @art.explanations.each do |explanation| %>
+      <%= render 'explanations/explanation', explanation: explanation %>
+    <% end %>
+  </div>
+  <div class="big-image" style="background-image: url(<%= cl_image_path(@art.photo.key)  %>)"></div>
+  <div class="button-container">
+    <div class="text-container">
+      <h2 class="font-italic mt-auto text-decoration-none text-black"><%= @art.title %></h2>
+      <div class="artist-info">
+        <% artista = User.find(@art.user_id) %>
+        <div href="#" class="avatar" style="background-image: url(<%= cl_image_path(artista.photo.key)%>); background-size: cover; background-position: center;"></div>
+        <div class="mt-4 artist-description">
+          <h5 href="#" class="text-black" style="line-height: 0;">
+            <%= artista.email %>
+          </h5>
+        </div>
+      </div>
+      <div class="d-flex gap-5">
+        <div class="d-flex gap-2">
+          <h5 class="text-decoration-underline">Técnica:</h5>
+          <h5>Surrealismo</h5>
+        </div>
+        <div class="d-flex gap-2">
+          <h5 class="text-decoration-underline">Año:</h5>
+          <h5><%=@art.year%></h5>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex gap-5">
+      <div class="w-100">
+        <p class="lh-lg"><%=@art.description %></p>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div>
   <div id='appreciations-and-such' class="d-flex spacing-4 mb-2">
@@ -134,9 +162,18 @@
       <%= form.label :amount %>
       <%= form.number_field :amount %>
     </div>
+      </div>
+    <div class="field">
+      <%= form.label :message %>
+      <%= form.text_area :message %>
+    </div>
     <%= form.submit 'Donate' %>
   <% end %>
 <% end %>
+
+
+<%= link_to "Donaciones Recibidas", received_user_donations_path(@user) %>
+<%= link_to "Donaciones Realizadas", made_user_donations_path(current_user) %>
 
 
   <script>
