@@ -15,6 +15,6 @@ class Art < ApplicationRecord
   validates :year, presence: true
   validates :category, presence: true
 
-  validates :description, length: { maximum: 1000 }
+  #validates :description, length: { maximum: 1000 }
 
 end
