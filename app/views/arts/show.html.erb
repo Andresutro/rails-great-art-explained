@@ -194,7 +194,7 @@
   <div class="w-100">
     <% if @art.appreciations.any? %>
       <% @art.appreciations.each do |appreciation| %>
-        <div>
+        <div class="w-100">
           <%= render 'appreciations/appreciation', appreciation: appreciation %>
           <%= pluralize(appreciation.like_appreciations.count, 'Like') %>
           <% like_appreciation = current_user&.like_appreciations&.find_by(appreciation: appreciation) %>
