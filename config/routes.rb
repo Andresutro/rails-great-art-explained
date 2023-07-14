@@ -1,12 +1,15 @@
 Rails.application.routes.draw do
-  resources :donations, only: [:show]
+
+  resources :tours do
+    resources :participants, only: [:create, :destroy, :index]
+  end
+
+  resources :donations
 
   resources :arts do
     resources :explanations, only: [:create, :update,:destroy, :edit]
     resources :appreciations, only: [:create, :update, :edit,:destroy] #arreglar destroy sin nested
   end
-
-
 
   resources :like_appreciations, only: [:create, :destroy]
   resources :likes, only: [:create, :destroy]
