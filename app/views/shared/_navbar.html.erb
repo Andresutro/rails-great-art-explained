@@ -29,23 +29,23 @@
       </div>
 
       <%# Second Div %>
-      <%# Dropdown %>
       <% if user_signed_in? %>
         <!-- User dropdown menu -->
-        <li class="mt-5 nav-item" style="list-style: none;">
-          <div class="dropdown-menu dropdown-menu-end rounded-4" aria-labelledby="navbarDropdown">
+        <li class="w-25 mt-5 nav-item" style="list-style: none;">
+          <div class="dropdown-menu dropdown-menu-end rounded-4 right-align" aria-labelledby="navbarDropdown">
             <%= link_to "Profile", "/listo", class: "dropdown-item" %>
-            <%= link_to "Log out",  destroy_user_session_path, class: "dropdown-item", data: {turbo_method: :delete} %>
+            <%= link_to "Log out", destroy_user_session_path, class: "dropdown-item", data: { turbo_method: :delete } %>
           </div>
         </li>
       <% else %>
-        <li class="nav-item dropdown-menu-end" style="list-style: none;">
-          <div class="dropdown-menu rounded-4" aria-labelledby="navbarDropdown">
+        <li class="w-25 nav-item dropdown-menu-end" style="list-style: none;">
+          <div class="dropdown-menu rounded-4 right-align" aria-labelledby="navbarDropdown">
             <%= link_to "Sign Up", new_user_registration_path, class: "dropdown-item" %>
             <%= link_to "Log In", new_user_session_path, class: "dropdown-item" %>
           </div>
         </li>
       <% end %>
+
 
       <%# Pill %>
       <div id="pill" class="pill border border-1 <%="#{action_name!='show' ? 'border-white' : 'border-black'}" %>" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
