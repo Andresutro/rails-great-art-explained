@@ -10,10 +10,11 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
 
-  <body class="<%= 'debug-turbo' if Rails.env.development? %>">
+  <body class="bg-white <%= 'debug-turbo' if Rails.env.development? %>">
   <%= render "shared/navbar" %>
   <%= render "shared/flashes" %>
 
     <%= yield %>
+  <%= render "shared/footer" %>
   </body>
 </html>

@@ -1,25 +1,15 @@
+<%# Post %>
+
 <div class="artpost-container">
-  <div class="d-flex gap-5">
-    <p style="color: green"><%= notice %></p>
-
-    <%= render @art %>
-
-    <%= link_to "Back to arts", arts_path %>
+  <%# Policies %>
+  <div class="d-flex gap-3 align-items-center">
+    <%# <%= link_to "Volver", arts_path, class: 'text-decoration-none text-black' %>
     <% if policy(@art).edit? %>
-      <%= link_to "Edit this art", edit_art_path(@art) %> |
+      <%= link_to "Editar el arte", edit_art_path(@art), class: 'text-decoration-none text-black' %> |
     <% end %>
     <% if policy(@art).destroy? %>
-      <%= button_to "Destroy this art", @art, method: :delete %>
+      <%= button_to "Borrar el arte", @art, method: :delete, class: 'text-decoration-none text-black border-0 bg-transparent' %>
     <% end %>
-
-    <% if current_user == @art.user %>
-      <%= simple_form_for [@art, @explanation] do |f| %>
-        <%= f.input :description, placeholder: "Add a description here...", label: false, class: "form-control pt-4" %>
-        <%= f.input :image, as: :file, required: true, label: false, placeholder: "Image", id: "upload_widget", class: "cloudinary-button" %>
-        <%= f.submit "Submit", class: "btn btn-primary text-white py-3 px-5 mt-4 rounded-10", style: 'border-radius: 15px;' %>
-      <% end %>
-    <% end %>
-
 
     <%# <%= turbo_stream_from [@art, :view] %>
 
@@ -27,158 +17,181 @@
       <%= render 'explanations/explanation', explanation: explanation %>
     <% end %>
   </div>
-  <div class="big-image" style="background-image: url(<%= cl_image_path(@art.photo.key)  %>)"></div>
-  <div class="button-container">
-    <div class="text-container">
-      <h2 class="font-italic mt-auto text-decoration-none text-black"><%= @art.title %></h2>
-      <div class="artist-info">
-        <% artista = User.find(@art.user_id) %>
-        <div href="#" class="avatar" style="background-image: url(<%= cl_image_path(artista.photo.key)%>); background-size: cover; background-position: center;"></div>
-        <div class="mt-4 artist-description">
-          <h5 href="#" class="text-black" style="line-height: 0;">
-            <%= artista.email %>
-          </h5>
-        </div>
+
+  <%# Titulo + Tags %>
+  <div class="w-100 justify-content-center text-container text-center">
+
+    <%# Titulo %>
+    <h2 class="w-100 font-italic mt-auto text-decoration-none text-black"><%= @art.title %></h2>
+
+    <%# Avatar + Nombre %>
+    <div class="w-100 justify-content-center artist-info">
+      <% artista = User.find(@art.user_id) %>
+      <div href="#" class="avatar" style="background-image: url(<%= cl_image_path(artista.photo.key)%>); background-size: cover; background-position: center;"></div>
+      <div class="mt-2 artist-description">
+        <h5 href="#" class="text-black" style="line-height: 0;">
+          <%= artista.email %>
+        </h5>
       </div>
-      <div class="d-flex gap-5">
-        <div class="d-flex gap-2">
-          <h5 class="text-decoration-underline">Técnica:</h5>
-          <h5>Surrealismo</h5>
+    </div>
+
+    <%# Likes and Comments %>
+    <div class="w-100 justify-content-center mt-2">
+      <div id='appreciations-and-such' class="w-100 justify-content-center d-flex gap-3 mb-2">
+        <%# Likes %>
+        <div class="d-flex spacing-4 mb-2 align-items-center gap-2">
+          <!-- Hearts -->
+          <i class="fas fa-xl fa-heart text-secondary"></i>
+
+          <!-- Number of likes -->
+          <p class="mt-3 text-secondary"><%= @art.appreciations.count %></p>
         </div>
-        <div class="d-flex gap-2">
-          <h5 class="text-decoration-underline">Año:</h5>
-          <h5><%=@art.year%></h5>
+
+        <%# Comments %>
+        <div class="d-flex spacing-4 mb-2 align-items-center gap-2">
+          <!-- Comment -->
+          <i class="fas fa-xl fa-comment text-secondary"></i>
+
+          <!-- Number of likes -->
+          <p class="mt-3 text-secondary"><%= @art.appreciations.count %></p>
         </div>
       </div>
     </div>
-    <div class="d-flex gap-5">
-      <div class="w-100">
-        <p class="lh-lg"><%=@art.description %></p>
-      </div>
+  </div>
+
+  <%# Imagen %>
+  <div class="mt-3 big-image" style="background-image: url(<%= cl_image_path(@art.photo.key)  %>)"></div>
+
+  <%# Tags %>
+  <div class="mt-3 d-flex gap-5">
+    <div class="d-flex gap-2">
+      <h6 class='button'><%= @art.category %></h6>
+      <h6 class='button'><%= @art.year %></h6>
+    </div>
+  </div>
+
+  <%# Texto %>
+  <div class="mb-5 row">
+    <div class="col-lg-6">
+      <p class="lh-xl"><%= simple_format(@art.description.split(' ').slice(0, @art.description.split(' ').length / 2).join(' ')) %></p>
+    </div>
+    <div class="col-lg-6">
+      <p class="lh-xl"><%= simple_format(@art.description.split(' ').slice(@art.description.split(' ').length / 2, @art.description.split(' ').length).join(' ')) %></p>
     </div>
   </div>
 </div>
 
-<div>
-  <div id='appreciations-and-such' class="d-flex spacing-4 mb-2">
-    <div>
-      <!-- Stars -->
-      <i class="fas fa-star star-gray"></i>
-      <!-- Spacer -->
-      <small><em class="text-muted mx-2">·</em></small>
+<%# Policy %>
+<%# <% if @art.appreciations.count == 0  %>
+  <%# <small><em class="text-muted">Be the first one to appreciate this list</em></small> %>
+<%# <% else %>
+  <%# <% @art.appreciations.each do |appreciation| %>
+    <%# <div> %>
+      <%# <small><%= appreciation.user.email <em class="text-muted"><%= distance_of_time_in_words_to_now(appreciation.created_at) ago</em></small> %>
+      <%# <p><%= appreciation.content</p> %>
+      <%# # <% appreciation.like_appreciations.count Likes %>
+      <%# <% like_appreciation = current_user.like_appreciations.find_by(appreciation: appreciation)
+      <%# <% if like_appreciation.nil? %>
 
-      <!-- Number of appreciations -->
-      <small><em class="text-muted">@art.appreciations.count appreciations</em></small>
-    </div>
-  </div>
-
-  <%# <% if @art.appreciations.count == 0  %>
-    <%# <small><em class="text-muted">Be the first one to appreciate this list</em></small> %>
-  <%# <% else %>
-    <%# <% @art.appreciations.each do |appreciation| %>
-      <%# <div> %>
-        <%# <small><%= appreciation.user.email <em class="text-muted"><%= distance_of_time_in_words_to_now(appreciation.created_at) ago</em></small> %>
-        <%# <p><%= appreciation.content</p> %>
-        <%# # <% appreciation.like_appreciations.count Likes %>
-        <%# <% like_appreciation = current_user.like_appreciations.find_by(appreciation: appreciation)
-        <%# <% if like_appreciation.nil? %>
-
-        <%# <form action='/like_appreciations' method='post'> %>
-          <%# <input type="hidden"  name='authenticity_token' value="<%= form_authenticity_token %>
-          <%# <input type="hidden"  name='like_appreciation[appreciation_id]' value="<%= appreciation.id %>
-          <%# <input type="submit" value="Like"> %>
-        <%# </form> %>
-        <%# <% else %>
-        <%# unlike %>
-        <%# <form action='<%= like_appreciation_path(like_appreciation)' method='post'>  %>
-          <%# <input type="hidden"  name='authenticity_token' value="<%= form_authenticity_token">  %>
-          <%# <input type="hidden"  name='_method' value="DELETE"> %>
-          <%# <input type="submit" value="Unlike"> %>
-        <%# </form> %>
+      <%# <form action='/like_appreciations' method='post'> %>
+        <%# <input type="hidden"  name='authenticity_token' value="<%= form_authenticity_token %>
+        <%# <input type="hidden"  name='like_appreciation[appreciation_id]' value="<%= appreciation.id %>
+        <%# <input type="submit" value="Like"> %>
+      <%# </form> %>
+      <%# <% else %>
+      <%# unlike %>
+      <%# <form action='<%= like_appreciation_path(like_appreciation)' method='post'>  %>
+        <%# <input type="hidden"  name='authenticity_token' value="<%= form_authenticity_token">  %>
+        <%# <input type="hidden"  name='_method' value="DELETE"> %>
+        <%# <input type="submit" value="Unlike"> %>
+      <%# </form> %>
 
 
-        <%# <% end %>
-      <%# </div> %>
-      <%# <hr> %>
-    <%# <% end %>
+      <%# <% end %>
+    <%# </div> %>
+    <%# <hr> %>
   <%# <% end %>
+<%# <% end %>
 
-<% if @art.appreciations.any? %>
-  <% @art.appreciations.each do |appreciation| %>
-    <div>
+<%# Divider %>
+<%# <div class="opacity-50" style="background-color: #272A2D; height: 1px; width: 100%;"></div> %>
 
-      <%= render 'appreciations/appreciation', appreciation: appreciation %>
-
-
-      <%= pluralize(appreciation.like_appreciations.count, 'Like') %>
-      <% like_appreciation = current_user&.like_appreciations&.find_by(appreciation: appreciation) %>
-      <% if like_appreciation.nil? %>
-        <%= form_with url: like_appreciations_path, method: :post, remote: true do %>
-          <%= hidden_field_tag 'like_appreciation[appreciation_id]', appreciation.id %>
-          <%= submit_tag 'Like', class: 'btn btn-primary' %>
-        <% end %>
-      <% else %>
-        <%= form_with url: like_appreciation_path(like_appreciation), method: :delete do %>
-          <%= submit_tag 'Unlike', class: 'btn btn-danger' %>
-        <% end %>
-      <% end %>
-    </div>
-    <hr>
-  <% end %>
-<% else %>
-  <small><em class="text-muted">Be the first one to appreciate this list</em></small>
-<% end %>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<div class="mt-0 bg-light artpost-container">
+  <%# Escribe tu comentario %>
   <% if current_user != @art.user %>
-    <div>
-      <div class="bg-white rounded py-3">
-        <h5>Add your appreciation</h5>
-        <%= simple_form_for [@art, @appreciation] do |f| %>
-          <%= f.input :content, placeholder: "Write your appreciation here...", label: false, class: "form-control pt-4" %>
-          <%= f.submit "Submit", class: "btn btn-primary text-white py-3 px-5 mt-4 rounded-10", style: 'border-radius: 15px;' %>
-        <% end %>
+    <div class="w-100">
+      <div class="d-flex flex-start gap-4 align-items-top mb-5">
+        <%# Avatar del Usuario %>
+        <div class="avatar" style="background-image: url(<%= cl_image_path(current_user.photo.key)%>); background-size: cover; background-position: center; width: 4rem; height: 4rem; border-radius: 100%;"></div>
+
+        <%# Field %>
+        <div class="mt-1 w-100">
+          <%= simple_form_for [@art, @appreciation] do |f| %>
+
+            <%= f.input :content, placeholder: "Escribe tu comentario...", label: false, class: "w-100", input_html: { style: 'background-color: white; height: 10rem;' } %>
+            <%= f.submit "Publicar", class: "btn btn-dark btn-md" %>
+          <% end %>
+        </div>
       </div>
     </div>
   <% end %>
+
+  <%# Mensaje si no hay/hay comentarios %>
+  <div class="w-100">
+    <% if @art.appreciations.any? %>
+      <% @art.appreciations.each do |appreciation| %>
+        <div>
+          <%= render 'appreciations/appreciation', appreciation: appreciation %>
+          <%= pluralize(appreciation.like_appreciations.count, 'Like') %>
+          <% like_appreciation = current_user&.like_appreciations&.find_by(appreciation: appreciation) %>
+          <% if like_appreciation.nil? %>
+            <%= form_with url: like_appreciations_path, method: :post, remote: true do %>
+              <%= hidden_field_tag 'like_appreciation[appreciation_id]', appreciation.id %>
+              <%= submit_tag 'Like', class: 'fas fa-xl fa-heart text-secondary"' %>
+            <% end %>
+          <% else %>
+            <%= form_with url: like_appreciation_path(like_appreciation), method: :delete do %>
+              <%= submit_tag 'Unlike', class: 'btn btn-danger' %>
+            <% end %>
+          <% end %>
+        </div>
+        <hr>
+      <% end %>
+    <% else %>
+      <p class="text-secondary">Se el primero en dejar tu comentario</p>
+    <% end %>
+  </div>
+
 </div>
 
-<% if current_user != @art.user %>
-  <%= form_with(model: Donation.new, url: user_donations_path(@art.user)) do |form| %>
-    <%= form.hidden_field :art_id, value: @art.id %>
-    <div class="field">
-      <%= form.label :amount %>
-      <%= form.number_field :amount %>
-    </div>
-    <%= form.submit 'Donate' %>
+<%# Donaciones %>
+<div class="artpost-container">
+  <% if current_user != @art.user %>
+    <%= form_with(model: Donation.new, url: user_donations_path(@art.user)) do |form| %>
+      <%= form.hidden_field :art_id, value: @art.id %>
+      <div class="field">
+        <%= form.label :amount %>
+        <%= form.number_field :amount %>
+      </div>
+      <%= form.submit 'Donate' %>
+    <% end %>
   <% end %>
-<% end %>
+</div>
 
+<%# Scripts %>
 
-  <script>
+<script>
   document.addEventListener('DOMContentLoaded', function() {
-  var imageContainer = document.getElementById('imageContainer');
-  var pointer = document.getElementById('pointer');
+    var imageContainer = document.getElementById('imageContainer');
+    var pointer = document.getElementById('pointer');
 
-  imageContainer.addEventListener('click', function(event) {
-    var x = event.offsetX;
-    var y = event.offsetY;
+    imageContainer.addEventListener('click', function(event) {
+      var x = event.offsetX;
+      var y = event.offsetY;
 
-    pointer.style.top = (y - 10) + 'px'; // Ajustamos 10 (la mitad del tamaño del puntero) para centrar el puntero.
-    pointer.style.left = (x - 10) + 'px';
-    pointer.style.display = 'block';
+      pointer.style.top = (y - 10) + 'px';
+      pointer.style.left = (x - 10) + 'px';
+      pointer.style.display = 'block';
+    });
   });
-});
 </script>
