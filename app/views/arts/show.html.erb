@@ -35,7 +35,9 @@
     </div>
 
     <%# Likes and Comments %>
-    <%= render "shared/likes_comments" %>
+    <div class="w-100 justify-content-center">
+      <%= render "shared/likes_comments" %>
+    </div>
   </div>
 
   <%# Imagen %>
@@ -172,3 +174,12 @@
     });
   });
 </script>
+
+<div class="w-100 m-4">
+  <div class="d-flex gap-5">
+    <%= render "shared/artcard", art: @art %>
+    <%= render "shared/artcard", art: @art %>
+    <%= render "shared/artcard", art: @art %>
+    <%= render "shared/artcard", art: @art %>
+  </div>
+</div>

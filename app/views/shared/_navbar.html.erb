@@ -19,7 +19,7 @@
       <div class="collapse navbar-collapse gap-3" id="navbarSupportedContent" style="list-style: none;">
 
         <%# Main Navigation ✅ %>
-        <%= link_to "Explorar", "/", class: "nav-item nav-link #{action_name=='home' ? 'text-underline-white' : 'text-underline-black'} h3" %>
+        <%= link_to "Explorar", arts_path, class: "nav-item nav-link #{action_name=='home' ? 'text-underline-white' : 'text-underline-black'} h3" %>
 
         <%# Divider %>
         <li class="nav-item h3 <%= action_name == 'home' ? 'text-underline-white' : 'text-underline-black' %>">/</li>
