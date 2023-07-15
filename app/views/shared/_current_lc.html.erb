@@ -2,7 +2,7 @@
 <div class="mt-2">
   <div id='appreciations-and-such' class="w-100 justify-content-center d-flex gap-4 mb-2">
     <%# Likes %>
-    <div class="d-flex spacing-4 mb-2 align-items-center gap-2">
+    <div class="d-flex spacing-4 mb-2 align-items-center gap-1">
       <% like = current_user&.likes&.find_by(art: art) %>
       <% if current_user.nil? || like.nil? %>
         <%= form_with url: likes_path, method: :post, remote: true, id: "like-form-#{art.id}" do |form| %>
@@ -35,11 +35,11 @@
     </div>
 
     <%# Comments %>
-    <div class="d-flex spacing-4 mb-2 align-items-center gap-2">
+    <div class="d-flex spacing-4 mb-2 align-items-center gap-1">
       <% appreciate = current_user&.appreciations&.find_by(art: art) %>
       <% if current_user.nil? || appreciate.nil? %>
         <%= form_with url: appreciate, method: :post, remote: true, id: "appreciate-form-#{art.id}" do |form| %>
-          <%= hidden_field_tag "appreciation[art_id]", art.id %>
+          <%= hidden_field_tag "like[art_id]", art.id %>
           <button type="submit" class="border-0 bg-transparent" id="comment-icon-<%= art.id %>">
             <i class="fas fa-xl fa-comment"></i>
           </button>
