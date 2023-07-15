@@ -1,12 +1,17 @@
 Rails.application.routes.draw do
 
   resources :tours do
-    resources :participants, only: [:create, :destroy, :index]
+    resources :participants, only: [:create, :destroy, :index] do
+      member do
+        get 'download_ics'
+      end
+    end
   end
+
 
   resources :donations
 
-  
+
   get '/arts/vr', to: 'arts#vr'
 
   resources :arts do
