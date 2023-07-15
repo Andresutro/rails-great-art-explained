@@ -60,9 +60,8 @@
           </svg>
 
           <%# Avatar %>
-          <div class="avatar" style="background-image: url('<%= current_user ? cl_image_path(current_user.photo.key) : 'https://simulacionymedicina.es/wp-content/uploads/2015/11/default-avatar-300x300-1.jpg' %>'); background-size: cover; background-position: center; border-radius: 100%;">
+        <div class="avatar" style="background-image: url('<%= user_signed_in? && current_user.photo.attached? ? cl_image_path(current_user.photo.key) : image_url('default_photo.jpg') %>'); background-size: cover; background-position: center; border-radius: 100%;">
           </div>
-
 
           <%# End of Second Div %>
         </div>
