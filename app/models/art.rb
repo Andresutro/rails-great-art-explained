@@ -17,4 +17,19 @@ class Art < ApplicationRecord
 
   validates :description, length: { maximum: 10000 }
 
+  def self.with_most_likes
+    self.joins(:likes)
+        .group('arts.id')
+        .order('COUNT(likes.id) DESC')
+        .select('arts.*, COUNT(likes.id) as likes_count')
+        .limit(6)
+  end
+
+  def self.with_least_likes
+    self.joins(:likes)
+        .group('arts.id')
+        .order('COUNT(likes.id) ASC')
+        .select('arts.*, COUNT(likes.id) as likes_count')
+        .limit(6)
+  end
 end
