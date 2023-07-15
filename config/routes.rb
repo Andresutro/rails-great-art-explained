@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :database_authenticatable, :registerable,
+  :recoverable, :rememberable, :validatable
 
   resources :tours do
     resources :participants, only: [:create, :destroy, :index]
@@ -14,7 +16,6 @@ Rails.application.routes.draw do
   resources :like_appreciations, only: [:create, :destroy]
   resources :likes, only: [:create, :destroy]
 
-  devise_for :users
 
   resources :users do
     resources :donations, only: [:index, :create] do

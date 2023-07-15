@@ -1,6 +1,7 @@
 # Seed made by the team
 require 'open-uri'
-
+Art.destroy_all
+User.destroy_all
 # Users – Artists
 
 # User N°1

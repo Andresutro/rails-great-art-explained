@@ -6,4 +6,4 @@ class PagesController < ApplicationController
     @arts = Art.all
   end
 end
-exit
+
