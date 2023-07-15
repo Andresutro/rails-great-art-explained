@@ -1,5 +1,5 @@
 <%# Nueva %>
-<div id="navbar" class="fixed-top navbar navbar-expand-sm navbar-lewagon bg-transparent m-4">
+<div id="navbar" class="fixed-top navbar navbar-expand-sm navbar-lewagon <%= action_name=='home' ? 'bg-transparent' : 'white' %> p-4">
   <div class="container-fluid">
     <%# Logo ✅ %>
     <%= link_to "/", class: "navbar-brand" do %>
@@ -19,7 +19,7 @@
       <div class="collapse navbar-collapse gap-3" id="navbarSupportedContent" style="list-style: none;">
 
         <%# Main Navigation ✅ %>
-      <%= link_to "Explorar", "/", class: "nav-item nav-link #{action_name=='home' ? 'text-underline-white' : 'text-underline-black'} h3" %>
+      <%= link_to "Explorar", allarts_arts_path, class: "nav-item nav-link #{action_name=='home' ? 'text-underline-white' : 'text-underline-black'} h3" %>
 
       <%# First Div End  %>
       </div>
@@ -32,6 +32,8 @@
             <%= link_to "Profile", user_path(current_user), class: "dropdown-item #{action_name == 'home' ? 'text-white' : 'text-black'}" %>
 
             <%= link_to "Mis artes", arts_path, class: "dropdown-item #{action_name == 'home' ? 'text-white' : 'text-black'}" %>
+
+            <%= link_to "Crear arte", new_art_path, class: "dropdown-item #{action_name == 'home' ? 'text-white' : 'text-black'}" %>
 
             <%= link_to "Log out", destroy_user_session_path, class: "dropdown-item #{action_name == 'home' ? 'text-white' : 'text-black'}", data: { turbo_method: :delete } %>
           </div>
