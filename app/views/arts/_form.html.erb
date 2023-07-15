@@ -4,14 +4,15 @@
 
   <div class="my-5 form-inputs d-flex gap-5">
     <div class="w-100">
-      <%= f.input :title %>
-      <%= f.input :year %>
+      <%= f.input :title, input_html: { style: "background-color: white;" } %>
+      <%= f.input :year, input_html: { style: "background-color: white;" } %>
 
       <div data-controller="character-counter">
         <%= f.text_area :description,
                         rows: "3",
                         class: "form-control mb-2",
                         placeholder: "Type something",
+                        style: "background-color: white;",
                         data: { action: "keyup->character-counter#updateCounter" } %>
         <i data-character-counter-target="counter"></i>
       </div>
@@ -53,8 +54,10 @@
       "Gráficos Vectoriales",
       "Pixel Art",
       "Fotomanipulación"
-      ] %>
-      <%= f.input :photo, as: :file, required: true, label: false, placeholder: "Photo", id: "upload_widget", class: "cloudinary-button" %>
+      ],
+      input_html: { style: "background-color: white;" } %>
+
+      <%= f.input :photo, as: :file, required: true, label: false, placeholder: "Photo", id: "upload_widget", class: "cloudinary-button", input_html: { style: "background-color: white;" }  %>
       <%= f.button :submit, class: "mt-4 btn btn-dark" %>
       <% end %>
     </div>
