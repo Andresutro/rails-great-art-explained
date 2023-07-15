@@ -10,7 +10,8 @@ class ExplanationsController < ApplicationController
       redirect_to @art, notice: 'La foto fue subida con éxito.'
 
     else
-      render :new
+      redirect_to @art, notice: 'La foto no fue subida con éxito.'
+
     end
   end
 

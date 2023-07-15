@@ -1,5 +1,5 @@
 <%# Nueva %>
-<div id="navbar" class="fixed-top navbar navbar-expand-sm navbar-lewagon bg-transparent m-4">
+<div id="navbar" class="fixed-top navbar navbar-expand-sm navbar-lewagon <%= action_name=='home' ? 'bg-transparent' : 'bg-white' %> p-4">
   <div class="container-fluid">
     <%# Logo ✅ %>
     <%= link_to "/", class: "navbar-brand" do %>
@@ -19,12 +19,7 @@
       <div class="collapse navbar-collapse gap-3" id="navbarSupportedContent" style="list-style: none;">
 
         <%# Main Navigation ✅ %>
-        <%= link_to "Explorar", "/", class: "nav-item nav-link #{action_name=='home' ? 'text-underline-white' : 'text-underline-black'} h3" %>
-
-        <%# Divider %>
-        <li class="nav-item h3 <%= action_name == 'home' ? 'text-underline-white' : 'text-underline-black' %>">/</li>
-
-        <%= link_to "Cerca", "#", class: "nav-item nav-link h3 #{action_name=='home' ? 'text-underline-white' : 'text-underline-black'}" %>
+      <%= link_to "Explorar", allarts_arts_path, class: "nav-item nav-link #{action_name=='home' ? 'text-underline-white' : 'text-underline-black'} h3" %>
 
       <%# First Div End  %>
       </div>
@@ -35,6 +30,10 @@
         <li class="w-25 mt-5 nav-item" style="list-style: none;">
           <div class="dropdown-menu rounded-4 right-align" aria-labelledby="navbarDropdown">
             <%= link_to "Profile", user_path(current_user), class: "dropdown-item #{action_name == 'home' ? 'text-white' : 'text-black'}" %>
+
+            <%= link_to "Mis artes", arts_path, class: "dropdown-item #{action_name == 'home' ? 'text-white' : 'text-black'}" %>
+
+            <%= link_to "Nuevo arte", new_art_path, class: "dropdown-item #{action_name == 'home' ? 'text-white' : 'text-black'}" %>
 
             <%= link_to "Log out", destroy_user_session_path, class: "dropdown-item #{action_name == 'home' ? 'text-white' : 'text-black'}", data: { turbo_method: :delete } %>
           </div>
@@ -50,22 +49,23 @@
 
 
       <%# Pill %>
-      <div id="pill" class="pill border border-2 <%="#{action_name=='home' ? 'border-white' : 'border-black'}" %>" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <% if user_signed_in? %>
+        <div id="pill" class="pill border border-2 <%="#{action_name=='home' ? 'border-white' : 'border-black'}" %>" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
-        <%# Burger %>
-        <svg class="burger" width="34" height="30" viewBox="0 0 17 15" fill="<%= action_name=='home' ? 'white' : 'black' %>" xmlns="http://www.w3.org/2000/svg">
-          <path d="M2.46338 4.09229H14.13" stroke="<%= action_name== 'home' ? 'white' : 'black' %>" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M2.46338 7.20337H14.13" stroke="<%= action_name=='home' ? 'white' : 'black' %>" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M2.46338 10.3145H14.13" stroke="<%= action_name=='home' ? 'white' : 'black' %>" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+          <%# Burger %>
+          <svg class="burger" width="34" height="30" viewBox="0 0 17 15" fill="<%= action_name=='home' ? 'white' : 'black' %>" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2.46338 4.09229H14.13" stroke="<%= action_name== 'home' ? 'white' : 'black' %>" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M2.46338 7.20337H14.13" stroke="<%= action_name=='home' ? 'white' : 'black' %>" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M2.46338 10.3145H14.13" stroke="<%= action_name=='home' ? 'white' : 'black' %>" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
 
-        <%# Avatar %>
-        <div class="avatar" style="background-image: url('<%= current_user ? cl_image_path(current_user.photo.key) : 'https://simulacionymedicina.es/wp-content/uploads/2015/11/default-avatar-300x300-1.jpg' %>'); background-size: cover; background-position: center; border-radius: 100%;">
+          <%# Avatar %>
+        <div class="avatar" style="background-image: url('<%= user_signed_in? && current_user.photo.attached? ? cl_image_path(current_user.photo.key) : image_url('default_photo.jpg') %>'); background-size: cover; background-position: center; border-radius: 100%;">
+          </div>
+
+          <%# End of Second Div %>
         </div>
-
-
-        <%# End of Second Div %>
-      </div>
+      <% end %>
     </div>
     <%# End of Pill %>
   </div>

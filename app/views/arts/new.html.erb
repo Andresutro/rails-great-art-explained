@@ -1,9 +1,10 @@
-<h1>New art</h1>
+<div class="artpost-container" style="margin-top: 10rem;">
+  <div class="d-flex gap-3 mb-5">
+    <%= link_to "Show this art", @art, class: 'link text-secondary text-decoration-none' %>
+    <span class="text-secondary">|</span>
+    <%= link_to "Back to arts", arts_path, class: 'link text-secondary text-decoration-none' %>
+  </div>
 
-<%= render "form", art: @art %>
-
-<br>
-
-<div>
-  <%= link_to "Back to arts", arts_path %>
+  <h1>New art</h1>
+  <%= render "form", art: @art %>
 </div>

@@ -18,9 +18,11 @@ Rails.application.routes.draw do
   get '/arts/vr', to: 'arts#vr'
 
   resources :arts do
+    get 'allarts', on: :collection
     resources :explanations, only: [:create, :update,:destroy, :edit]
-    resources :appreciations, only: [:create, :update, :edit,:destroy] #arreglar destroy sin nested
+    resources :appreciations, only: [:create, :update, :edit,:destroy]
   end
+
 
 
 

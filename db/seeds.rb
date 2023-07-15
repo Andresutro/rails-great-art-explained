@@ -102,7 +102,7 @@ hesse.photo.attach(io: avatar_7, filename: "Hesse.jpg", content_type: "image/jpg
 
 # User N°8
 
-avatar_8 = URI.open('https://res.cloudinary.com/dygidrhdn/image/upload/v1687635998/Flor_lwnfcm.webp')
+avatar_8 = URI.open('https://res.cloudinary.com/dygidrhdn/image/upload/v1687635996/kahlo_crvd9k.jpg')
 
 kahlo = User.create!(
   email: 'kahlo@gmail.com',
@@ -624,3 +624,13 @@ kahlo_2.photo.attach(io: file_21, filename: "Flor.jpg", content_type: "image/jpg
 
 
 # –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+puts('Likes')
+
+
+User.all.each do |user|
+  Art.all.each do |art|
+    if rand > 0.5
+      Like.create!(user: user, art: art)
+    end
+  end
+end

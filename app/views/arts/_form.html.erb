@@ -2,66 +2,70 @@
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-  <div class="form-inputs">
-    <%= f.input :title %>
-    <%= f.input :year %>
-    <div data-controller="character-counter">
-      <%= f.text_area :description,
-                      rows: "3",
-                      class: "form-control mb-2",
-                      placeholder: "Type something",
-                      data: { action: "keyup->character-counter#updateCounter" } %>
-      <i data-character-counter-target="counter"></i>
+  <div class="my-5 form-inputs d-flex gap-5">
+    <div class="w-100">
+      <%= f.input :title, input_html: { style: "background-color: white;" } %>
+      <%= f.input :year, input_html: { style: "background-color: white;" } %>
+
+      <div data-controller="character-counter">
+        <%= f.text_area :description,
+                        rows: "3",
+                        class: "form-control mb-2",
+                        placeholder: "Type something",
+                        style: "background-color: white;",
+                        data: { action: "keyup->character-counter#updateCounter" } %>
+        <i data-character-counter-target="counter"></i>
+      </div>
+
+      <%= f.input :category, collection: [
+      "Pintura al Óleo",
+      "Acuarela",
+      "Gouache",
+      "Acrílicos",
+      "Pastel",
+      "Témpera",
+      "Encausto",
+      "Pintura al Fresco",
+      "Pintura Mural",
+      "Escultura de Bronce",
+      "Escultura de Mármol",
+      "Escultura de Madera",
+      "Escultura de Terracota",
+      "Escultura de Vidrio",
+      "Escultura de Hierro y Metales",
+      "Escultura de Luz",
+      "Escultura Cinética",
+      "Instalaciones Escultóricas",
+      "Fotografía en Blanco y Negro",
+      "Fotografía en Color",
+      "Fotoperiodismo",
+      "Fotografía de Retrato",
+      "Fotografía de Paisaje",
+      "Fotografía de Moda",
+      "Fotografía de Bodegones",
+      "Fotografía de Vida Silvestre",
+      "Fotografía Macro",
+      "Fotografía Aérea",
+      "Fotografía Subacuática",
+      "Fotografía de Calle",
+      "Fotografía Abstracta",
+      "Pintura Digital",
+      "Modelado 3D",
+      "Gráficos Vectoriales",
+      "Pixel Art",
+      "Fotomanipulación"
+      ],
+      input_html: { style: "background-color: white;" } %>
+
+      <%= f.input :photo, as: :file, required: true, label: false, placeholder: "Photo", id: "upload_widget", class: "cloudinary-button", input_html: { style: "background-color: white;" }  %>
+      <%= f.button :submit, class: "mt-4 btn btn-dark" %>
+      <% end %>
     </div>
 
-
-    <%= f.input :category, collection: [
-    "Pintura al Óleo",
-    "Acuarela",
-    "Gouache",
-    "Acrílicos",
-    "Pastel",
-    "Témpera",
-    "Encausto",
-    "Pintura al Fresco",
-    "Pintura Mural",
-    "Escultura de Bronce",
-    "Escultura de Mármol",
-    "Escultura de Madera",
-    "Escultura de Terracota",
-    "Escultura de Vidrio",
-    "Escultura de Hierro y Metales",
-    "Escultura de Luz",
-    "Escultura Cinética",
-    "Instalaciones Escultóricas",
-    "Fotografía en Blanco y Negro",
-    "Fotografía en Color",
-    "Fotoperiodismo",
-    "Fotografía de Retrato",
-    "Fotografía de Paisaje",
-    "Fotografía de Moda",
-    "Fotografía de Bodegones",
-    "Fotografía de Vida Silvestre",
-    "Fotografía Macro",
-    "Fotografía Aérea",
-    "Fotografía Subacuática",
-    "Fotografía de Calle",
-    "Fotografía Abstracta",
-    "Pintura Digital",
-    "Modelado 3D",
-    "Gráficos Vectoriales",
-    "Pixel Art",
-    "Fotomanipulación"
-  ] %>
-
-
-    <%= f.input :image, as: :file, required: true, label: false, placeholder: "Image", id: "upload_widget", class: "cloudinary-button" %>
-
+    <div id="imageContainer" style="position: relative;">
+      <% if @art.photo.present? %>
+        <%= cl_image_tag(@art.photo.key, id: "photo", class: "img-fluid", alt: "Imagen de arte", style: "max-width: 100%;") %>
+      <% end %>
+      <div id="pointer" style="position: absolute; width: 20px; height: 20px; background: red; display: none;"></div>
+    </div>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
-
-
-<% end %>

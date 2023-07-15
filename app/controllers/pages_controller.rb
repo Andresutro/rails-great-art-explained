@@ -3,7 +3,9 @@ class PagesController < ApplicationController
 
   def home
     @art = Art.last
-    @arts = Art.all
+    @art_recomendation =  Art.all.sample
+    @arts_with_most_likes = Art.with_most_likes
+    @arts_with_least_likes = Art.with_least_likes.first
   end
 end
 

@@ -1,0 +1,27 @@
+<%# Container %>
+<div class="w-100" style="border-radius: 40px;">
+  <%# Art %>
+  <%= link_to art_path(art) do %>
+    <% if art.photo.present? %>
+      <div class="w-100" style="background-image: url('<%= cl_image_path(art.photo.key) %>'); background-size: cover; background-repeat: no-repeat; background-position: center center; height:400px; border-radius: 2rem;">
+      </div>
+    <% end %>
+  <% end %>
+
+  <%# Likes and Comments %>
+  <div class="d-flex justify-content-between align-items-bottom">
+    <div class="artist-info">
+      <% artista = User.find(art.user_id) %>
+      <div href="#" class="avatar2" style="background-image: url(<%= cl_image_path(artista.photo.key)%>); background-size: cover; background-position: center;"></div>
+      <div class="mt-2 artist-description align-items-center">
+        <h5 href="#" class="text-black" style="line-height: 0;">
+          <%= artista.email.split('@').first.capitalize %>
+        </h5>
+      </div>
+    </div>
+    <%# Likes & Comments %>
+    <div class="mt-2">
+      <%= render "shared/current_lc", art: art %>
+    </div>
+  </div>
+</div>
