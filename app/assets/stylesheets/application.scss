@@ -423,3 +423,15 @@ p {
   color: white;
   background-color: #cd1d52;
 }
+
+.link {
+  transition: color 0.3s ease;
+
+  &.text-secondary {
+    color: #6C757D !important;
+
+    &:hover {
+      color: black !important;
+    }
+  }
+}
