@@ -10,11 +10,6 @@
     <% if policy(@art).destroy? %>
       <%= button_to "Borrar el arte", @art, method: :delete, class: 'text-secondary border-0 bg-transparent' %>
     <% end %>
-
-    <%# <%= turbo_stream_from [@art, :view]  %>
-    <% @art.explanations.each do |explanation| %>
-      <%= render 'explanations/explanation', explanation: explanation %>
-    <% end %>
   </div>
 
   <%# Titulo + Tags %>
@@ -59,6 +54,13 @@
     <div class="col-lg-6">
       <p class="lh-xl"><%= simple_format(@art.description.split(' ').slice(@art.description.split(' ').length / 2, @art.description.split(' ').length).join(' ')) %></p>
     </div>
+  </div>
+
+  <%# Explicaciones Nuevas %>
+  <div class="w-100">
+    <% @art.explanations.each do |explanation| %>
+      <%= render 'explanations/explanation', explanation: explanation %>
+    <% end %>
   </div>
 
   <%# Anadir descripcion %>
@@ -178,12 +180,3 @@
     });
   });
 </script>
-
-<div class="w-100 m-4">
-  <div class="d-flex gap-5">
-    <%= render "shared/artcard", art: @art %>
-    <%= render "shared/artcard", art: @art %>
-    <%= render "shared/artcard", art: @art %>
-    <%= render "shared/artcard", art: @art %>
-  </div>
-</div>

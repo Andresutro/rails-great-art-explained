@@ -1,24 +1,31 @@
+<div class="">
 <%= turbo_frame_tag dom_id(explanation) do %>
-  <div class='d-flex'>
-    <%= link_to 'Edit', [:edit, explanation.art,explanation] %>
+  <%# Image %>
+  <div>
+    <% if explanation.image.present? %>
+      <div id="imageContainer" style="position: relative;">
+        <%= cl_image_tag(explanation.image.key, id: "image", class: "img-fluid", alt: "Imagen de arte", style: "max-width: 100%;") %>
+        <div id="pointer" style="position: absolute; width: 20px; height: 20px; background: red; display: none;"></div>
+      </div>
+    <% end %>
+  </div>
 
-    <p>
-      <strong>Description:</strong>
-      <%= explanation.description %>
-    </p>
-
-    <div>
-      <% if explanation.image.present? %>
-        <div id="imageContainer" style="position: relative;">
-          <%= cl_image_tag(explanation.image.key, id: "image", class: "img-fluid", alt: "Imagen de arte", style: "max-width: 100%;") %>
-          <div id="pointer" style="position: absolute; width: 20px; height: 20px; background: red; display: none;"></div>
-        </div>
-      <% else %>
-        <strong>no hay foto</strong>
-      <% end %>
+  <%# Explanation %>
+  <div class="my-5 row">
+    <div class="col-lg-6">
+      <p class="lh-xl"><%= simple_format(explanation.description.split(' ')&.slice(0, explanation.description.split(' ')&.length / 2)&.join(' ')) %></p>
+    </div>
+    <div class="col-lg-6">
+      <p class="lh-xl"><%= simple_format(explanation&.description&.split(' ')&.slice(explanation.description.split(' ')&.length / 2, explanation.description.split(' ')&.length)&.join(' ')) %></p>
     </div>
   </div>
 <% end %>
+
+  <div class="mt-5 d-flex gap-3">
+    <%= link_to 'Edit', [:edit, explanation.art,explanation], class: 'btn btn-dark' %>
+
     <% if policy(@art).destroy? %>
-      <%= link_to 'destroy', art_explanation_path(@art, explanation),  data: {turbo_method: :delete}, class: 'btn btn-outline-secondary btn-sm' %>
+      <%= link_to 'Destroy', art_explanation_path(@art, explanation),  data: {turbo_method: :delete}, class: 'btn btn-outline-dark' %>
     <% end %>
+  </div>
+</div>
