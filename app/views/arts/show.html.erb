@@ -10,7 +10,7 @@
     <% if policy(@art).destroy? %>
       <%= button_to "Borrar el arte", @art, method: :delete, class: 'text-underline-black text-black border-0 bg-transparent' %>
     <% end %>
-    
+
     <% if current_user == @art.user %>
       <%= simple_form_for [@art, @explanation] do |f| %>
         <%= f.input :description, placeholder: "Add a description here...", label: false, class: "form-control pt-4" %>
