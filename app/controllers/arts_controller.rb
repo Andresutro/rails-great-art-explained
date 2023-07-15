@@ -1,12 +1,19 @@
 class ArtsController < ApplicationController
   before_action :set_art, only: %i[ show edit update destroy ]
-  skip_before_action :authenticate_user!, only: :show
+  skip_before_action :authenticate_user!, only:  %i[ show allarts ]
 
   # GET /arts or /arts.json
   def index
     @arts = policy_scope(Art)
     authorize @arts
   end
+
+  def allarts
+    @arts = Art.all
+    authorize @arts
+
+  end
+
 
   # GET /arts/1 or /arts/1.json
   def show
@@ -73,6 +80,8 @@ class ArtsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
