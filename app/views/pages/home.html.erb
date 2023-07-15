@@ -1,16 +1,19 @@
 <%# Landing %>
 <div id="landing" class="d-flex align-items-end p-3" style="width: 100vw; height: 100vh; background-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.75) 100%), url('<%= cl_image_path(@art.photo.key) %>'); background-size: cover; background-position: center;">
-  <div class='m-4'>
+  <div class='gap-5 m-4'>
+    <%# Nombre arte %>
     <h1 class="font-italic mt-auto"><%= link_to @art.title, art_path(@art), class:'text-decoration-none text-white' %></h1>
-      <div class="artist-info">
-        <% artista = User.find(@art.user_id) %>
-        <div href="#" class="avatar" style="background-image: url(<%= cl_image_path(artista.photo.key)%>); background-size: cover; background-position: center;"></div>
-        <div class="mt-4 artist-description">
-          <h5 href="#" class="text-white" style="line-height: 0;">
-            <%= artista.email %>
-          </h5>
-        </div>
+
+    <%# Info %>
+    <div class="mt-4 artist-info align-items-center">
+      <% artista = User.find(@art.user_id) %>
+      <div href="#" class="avatar" style="background-image: url(<%= cl_image_path(artista.photo.key)%>); background-size: cover; background-position: center;"></div>
+      <div class="artist-description">
+        <h5 href="#" class="text-white mt-2">
+          <%= artista.email %>
+        </h5>
       </div>
+    </div>
   </div>
 </div>
 
