@@ -43,7 +43,7 @@
 <%# Artista destacado %>
 <div style="background-color: #E8EAEC;">
   <div class="container">
-    <h2>Piérdete en el mundo de Ray</h2>
+    <h2>Piérdete en el mundo de <%= artista.email %></h2>
     <%# Left %>
     <div class="horizontal-container">
       <div class="button-container gap-2">
@@ -54,7 +54,7 @@
           <h5>
         </div>
         <div class="button">
-          Ver su trabajo
+      <%= link_to 'Ver su trabajo', @arts_with_least_likes %>
         </div>
       </div>
 
