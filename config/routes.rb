@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :tours do
     resources :participants, only: [:create, :destroy, :index] do
       member do
-        get 'download_ics'
+        post 'invite'
       end
     end
   end

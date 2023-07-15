@@ -11,7 +11,7 @@
   <%= button_to "Destroy this tour", @tour, method: :delete %>
   <%= @tour.maximum?  %>
 
-<% if @tour.maximum? && current_user != @tour.user %>
+<% if @tour.maximum? && current_user != @tour.user && !@tour.participants.map(&:user).include?(current_user) %>
   <%= simple_form_for [@tour, @participant], method: :post, format: :ics do |f| %>
     <%= f.submit "Join Tour", class: "btn btn-primary text-white py-3 px-5 mt-4 rounded-10", style: 'border-radius: 15px;' %>
   <% end %>
@@ -23,6 +23,6 @@
   <% end %>
 
   <% @tour.participants.each do |participant| %>
-
+    <%# <%= button_to 'send email', invite_tour_participant_path(participant) %> %>
     <%= participant.user.email  %>
   <% end %>
