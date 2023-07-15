@@ -1,5 +1,5 @@
 <%# Nueva %>
-<div id="navbar" class="fixed-top navbar navbar-expand-sm navbar-lewagon bg-transparent m-4">
+<div id="navbar" class="fixed-top navbar navbar-expand-sm navbar-lewagon <%= action_name=='home' ? 'bg-transparent' : 'bg-white' %> p-4">
   <div class="container-fluid">
     <%# Logo ✅ %>
     <%= link_to "/", class: "navbar-brand" do %>
