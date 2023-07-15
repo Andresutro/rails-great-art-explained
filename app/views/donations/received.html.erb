@@ -1,23 +1,23 @@
 <p style="color: green"><%= notice %></p>
 
-<% @donations.each do |donation| %>
+<% @donations_received.each do |donation| %>
   <%= render donation %>
 
 
 <div>
-  <%= link_to "Back to donations", user_donations_path %>
+  <%= link_to "Volver", arts_path(@art) %>
 </div>
 
 <p>
   <strong>User:</strong>
-  <%= @donation.user.email %>
+  <%= donation.user.username() %>
 </p>
 <p>
   <strong>Amount:</strong>
-  <%= @donation.amount %>
+  <%= donation.amount %>
 </p>
 <p>
   <strong>Message:</strong>
-  <%= @donation.message %>
+  <%= donation.message %>
 </p>
 <% end %>

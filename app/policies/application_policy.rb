@@ -8,6 +8,14 @@ class ApplicationPolicy
     @record = record
   end
 
+  def received?
+    true
+  end
+
+  def made?
+    true
+  end
+
   def index?
     false
   end
