@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :database_authenticatable, :registerable,
-  :recoverable, :rememberable, :validatable
+  devise_for :user
 
   get 'participants', to: 'participants#index'
 
