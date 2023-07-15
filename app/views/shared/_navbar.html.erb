@@ -1,5 +1,5 @@
 <%# Nueva %>
-<div id="navbar" class="fixed-top navbar navbar-expand-sm navbar-lewagon <%= action_name=='home' ? 'bg-transparent' : 'bg-white' %> p-4">
+<div id="navbar" class="fixed-top navbar navbar-expand-sm navbar-lewagon <%= action_name=='home' ? 'bg-transparent' : 'bg-white' %> px-4 py-2">
   <div class="container-fluid">
     <%# Logo ✅ %>
     <%= link_to "/", class: "navbar-brand" do %>
@@ -51,7 +51,7 @@
         <div id="pill" class="pill border border-2 <%="#{action_name=='home' ? 'border-white' : 'border-black'}" %>" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
           <%# Burger %>
-          <svg class="burger" width="34" height="30" viewBox="0 0 17 15" fill="<%= action_name=='home' ? 'white' : 'black' %>" xmlns="http://www.w3.org/2000/svg">
+          <svg class="burger" width="30" height="26" viewBox="0 0 17 15" fill="<%= action_name=='home' ? 'white' : 'black' %>" xmlns="http://www.w3.org/2000/svg">
             <path d="M2.46338 4.09229H14.13" stroke="<%= action_name== 'home' ? 'white' : 'black' %>" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M2.46338 7.20337H14.13" stroke="<%= action_name=='home' ? 'white' : 'black' %>" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M2.46338 10.3145H14.13" stroke="<%= action_name=='home' ? 'white' : 'black' %>" stroke-linecap="round" stroke-linejoin="round"/>
