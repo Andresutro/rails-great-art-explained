@@ -101,7 +101,7 @@ hesse.photo.attach(io: avatar_7, filename: "Hesse.jpg", content_type: "image/jpg
 
 # User N°8
 
-avatar_8 = URI.open('https://res.cloudinary.com/dygidrhdn/image/upload/v1687635998/Flor_lwnfcm.webp')
+avatar_8 = URI.open('https://res.cloudinary.com/dygidrhdn/image/upload/v1687635996/kahlo_crvd9k.jpg')
 
 kahlo = User.create!(
   email: 'kahlo@gmail.com',
