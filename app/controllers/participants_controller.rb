@@ -37,7 +37,7 @@ def create
   end
 
   def index
-    @participations = Participant.where(user: current_user)
+    @participants = Participant.where(user: current_user)
   end
 
 

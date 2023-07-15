@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'participants', to: 'participants#index'
+
   resources :tours do
-    resources :participants, only: [:create, :destroy, :index] do
+    resources :participants, only: [:create, :destroy] do
       member do
         post 'invite'
       end
