@@ -1,3 +1,26 @@
+
+<div class="artpost-container">
+  <div class="d-flex gap-5">
+    <p style="color: green"><%= notice %></p>
+
+    <%= render @art %>
+
+    <%= link_to "Back to arts", arts_path %>
+    <% if policy(@art).edit? %>
+      <%= link_to "Edit this art", edit_art_path(@art) %> |
+    <% end %>
+    <% if policy(@art).destroy? %>
+      <%= button_to "Destroy this art", @art, method: :delete %>
+    <% end %>
+
+    <% if current_user == @art.user %>
+      <%= simple_form_for [@art, @explanation] do |f| %>
+        <%= f.input :description, placeholder: "Add a description here...", label: false, class: "form-control pt-4" %>
+        <%= f.input :image, as: :file, required: true, label: false, placeholder: "Image", id: "upload_widget", class: "cloudinary-button" %>
+        <%= f.submit "Submit", class: "btn btn-primary text-white py-3 px-5 mt-4 rounded-10", style: 'border-radius: 15px;' %>
+      <% end %>
+    <% end %>
+
 <%# Post %>
 
 <div class="artpost-container">
@@ -10,13 +33,44 @@
     <% if policy(@art).destroy? %>
       <%= button_to "Borrar el arte", @art, method: :delete, class: 'text-decoration-none text-black border-0 bg-transparent' %>
     <% end %>
-
     <%# <%= turbo_stream_from [@art, :view] %>
 
     <% @art.explanations.each do |explanation| %>
       <%= render 'explanations/explanation', explanation: explanation %>
     <% end %>
   </div>
+
+  <div class="big-image" style="background-image: url(<%= cl_image_path(@art.photo.key)  %>)"></div>
+  <div class="button-container">
+    <div class="text-container">
+      <h2 class="font-italic mt-auto text-decoration-none text-black"><%= @art.title %></h2>
+      <div class="artist-info">
+        <% artista = User.find(@art.user_id) %>
+        <div href="#" class="avatar" style="background-image: url(<%= cl_image_path(artista.photo.key)%>); background-size: cover; background-position: center;"></div>
+        <div class="mt-4 artist-description">
+          <h5 href="#" class="text-black" style="line-height: 0;">
+            <%= artista.email %>
+          </h5>
+        </div>
+      </div>
+      <div class="d-flex gap-5">
+        <div class="d-flex gap-2">
+          <h5 class="text-decoration-underline">Técnica:</h5>
+          <h5>Surrealismo</h5>
+        </div>
+        <div class="d-flex gap-2">
+          <h5 class="text-decoration-underline">Año:</h5>
+          <h5><%=@art.year%></h5>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex gap-5">
+      <div class="w-100">
+        <p class="lh-lg"><%=@art.description %></p>
+      </div>
+    </div>
+  </div>
+</div>
 
   <%# Titulo + Tags %>
   <div class="w-100 justify-content-center text-container text-center">
@@ -140,7 +194,7 @@
   <div class="w-100">
     <% if @art.appreciations.any? %>
       <% @art.appreciations.each do |appreciation| %>
-        <div>
+        <div class="w-100">
           <%= render 'appreciations/appreciation', appreciation: appreciation %>
           <%= pluralize(appreciation.like_appreciations.count, 'Like') %>
           <% like_appreciation = current_user&.like_appreciations&.find_by(appreciation: appreciation) %>
@@ -182,7 +236,7 @@
 <%# Scripts %>
 
 <script>
-=======
+
 <% if current_user != @art.user %>
   <%= form_with(model: Donation.new, url: user_donations_path(@art.user)) do |form| %>
     <%= form.hidden_field :art_id, value: @art.id %>
