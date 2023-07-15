@@ -18,8 +18,8 @@
         <%= f.submit "Submit", class: "btn btn-primary text-white py-3 px-5 mt-4 rounded-10", style: 'border-radius: 15px;' %>
       <% end %>
     <% end %>
-    <%# <%= turbo_stream_from [@art, :view] %>
 
+    <%# <%= turbo_stream_from [@art, :view]  %> 
     <% @art.explanations.each do |explanation| %>
       <%= render 'explanations/explanation', explanation: explanation %>
     <% end %>
@@ -168,7 +168,6 @@
 
 <%# Scripts %>
 
-<script>
 <% if current_user != @art.user %>
   <%= form_with(model: Donation.new, url: user_donations_path(@art.user)) do |form| %>
     <%= form.hidden_field :art_id, value: @art.id %>
