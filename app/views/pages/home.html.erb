@@ -28,7 +28,7 @@
 
     </div>
     <div class="art-card" style="background-image: url(<%= cl_image_path(@art_recomendation.photo.key) %>), linear-gradient(rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.75) 100%)">
-    <h2> <%= link_to @art_recomendation.title, @art_recomendation, class:'text-decoration-none text-white' %> </h2>
+      <h2> <%= link_to @art_recomendation.title, @art_recomendation, class:'text-decoration-none text-white' %> </h2>
 
     </div>
     <div class="art-card-inactive" style="background-image: url(<%= cl_image_path(@art_recomendation.photo.key) %>)">
@@ -43,7 +43,7 @@
 <%# Artista destacado %>
 <div style="background-color: #E8EAEC;">
   <div class="container">
-    <h2>Piérdete en el mundo de Ray</h2>
+    <h2>Piérdete en el mundo de <%= artista.email %></h2>
     <%# Left %>
     <div class="horizontal-container">
       <div class="button-container gap-2">
@@ -54,7 +54,7 @@
           <h5>
         </div>
         <div class="button">
-          Ver su trabajo
+      <%= link_to 'Ver su trabajo', @arts_with_least_likes %>
         </div>
       </div>
 
@@ -97,6 +97,7 @@
     </div>
     <div>
       <%= link_to 'Ver su trabajo', @arts_with_least_likes, class:'text-decoration-none button-inv' %>
+
     </div>
   </div>
 </div>

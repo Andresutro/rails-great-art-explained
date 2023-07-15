@@ -8,3 +8,4 @@ class PagesController < ApplicationController
     @arts_with_least_likes = Art.with_least_likes.first
   end
 end
+  

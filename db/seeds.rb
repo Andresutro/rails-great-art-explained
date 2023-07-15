@@ -623,3 +623,13 @@ kahlo_2.photo.attach(io: file_21, filename: "Flor.jpg", content_type: "image/jpg
 
 
 # –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+puts('Likes')
+
+
+User.all.each do |user|
+  Art.all.each do |art|
+    if rand > 0.5
+      Like.create!(user: user, art: art)
+    end
+  end
+end

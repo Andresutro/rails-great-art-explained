@@ -10,8 +10,8 @@
     <% if policy(@art).destroy? %>
       <%= button_to "Borrar el arte", @art, method: :delete, class: 'text-secondary border-0 bg-transparent' %>
     <% end %>
-    <%# <%= turbo_stream_from [@art, :view] %>
 
+    <%# <%= turbo_stream_from [@art, :view]  %>
     <% @art.explanations.each do |explanation| %>
       <%= render 'explanations/explanation', explanation: explanation %>
     <% end %>
@@ -129,7 +129,6 @@
 
 <%# Scripts %>
 
-<script>
 <% if current_user != @art.user %>
   <%= form_with(model: Donation.new, url: user_donations_path(@art.user)) do |form| %>
     <%= form.hidden_field :art_id, value: @art.id %>
@@ -146,10 +145,15 @@
   <% end %>
 <% end %>
 
-
-<%= link_to "Donaciones Recibidas", received_user_donations_path(@user) %>
-<%= link_to "Donaciones Realizadas", made_user_donations_path(current_user) %>
-
+<% if user_signed_in?  %>
+  <% if current_user == @art.user %>
+    <%= link_to "Donaciones Recibidas", received_user_donations_path(@user) %>
+  <% else %>
+    <%= link_to "Donaciones Realizadas", made_user_donations_path(current_user) %>
+  <% end %>
+<% else %>
+  <p>Para ver tus donaciones debes iniciar sesión</p>
+<% end %>
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {

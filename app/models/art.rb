@@ -32,5 +32,4 @@ class Art < ApplicationRecord
         .select('arts.*, COUNT(likes.id) as likes_count')
         .limit(6)
   end
-
 end
