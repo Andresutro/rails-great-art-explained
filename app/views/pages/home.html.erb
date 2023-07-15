@@ -28,7 +28,7 @@
 
     </div>
     <div class="art-card" style="background-image: url(<%= cl_image_path(@art_recomendation.photo.key) %>), linear-gradient(rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.75) 100%)">
-    <h2> <%= link_to @art_recomendation.title, @art_recomendation %> </h2>
+      <h2> <%= link_to @art_recomendation.title, @art_recomendation, class:'text-decoration-none text-white' %> </h2>
 
     </div>
     <div class="art-card-inactive" style="background-image: url(<%= cl_image_path(@art_recomendation.photo.key) %>)">
@@ -76,7 +76,8 @@
         <% arts_slice.each do |art| %>
           <img
             src="<%= cl_image_path(art.photo.key) %>"
-            class="w-100 shadow-1-strong rounded mb-4"
+            class="w-100 shadow-1-strong mb-4"
+            style="border-radius: 40px;"
           />
         <% end %>
       </div>
@@ -90,12 +91,14 @@
 
 <div class="container" style="border-radius: 40px; background-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.75) 100%), url('<%= cl_image_path(@arts_with_least_likes.photo.key) %>'); background-size: cover; background-position: center; margin-bottom: 200px;">
   <div class="d-flex flex-column align-items-center button-container">
-    <div class="justify-content-center text-container">
-      <h2 class="text-white text-center">¿Cómo se conecta '<%= @arts_with_least_likes.title %>' con la cultura pop</h2>
+    <div class="justify-content-center text-container w-75">
+      <h2 class="text-white text-center w-100">¿Cómo se conecta '<%= @arts_with_least_likes.title %>' con la cultura pop?</h2>
       <h5 class="text-white text-center w-100">Súmate al mundo de De Goya para entender como su obra cruza fronteras</h5>
     </div>
-    <div class="border-white text-white button">
-      <%= link_to 'Ver su trabajo', @arts_with_least_likes %>
+    <div>
+      <%= link_to 'Ver su trabajo', @arts_with_least_likes, class:'text-decoration-none button-inv' %>
+
     </div>
   </div>
 </div>
+

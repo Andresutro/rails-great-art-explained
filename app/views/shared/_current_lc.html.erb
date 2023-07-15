@@ -1,0 +1,70 @@
+<%# Likes and Comments %>
+<div class="mt-2">
+  <div id='appreciations-and-such' class="w-100 justify-content-center d-flex gap-4 mb-2">
+    <%# Likes %>
+    <div class="d-flex spacing-4 mb-2 align-items-center gap-1">
+      <% like = current_user&.likes&.find_by(art: art) %>
+      <% if current_user.nil? || like.nil? %>
+        <%= form_with url: likes_path, method: :post, remote: true, id: "like-form-#{art.id}" do |form| %>
+          <%= hidden_field_tag "like[art_id]", art.id %>
+          <button type="submit" class="border-0 bg-transparent" id="heart-icon-<%= art.id %>">
+            <i class="fas fa-xl fa-heart"></i>
+          </button>
+        <% end %>
+      <% else %>
+        <%= form_with url: like_path(like), method: :delete, id: "unlike-form-#{art.id}" do |form| %>
+          <button type="submit" class="border-0 bg-transparent" id="liked-button-<%= art.id %>">
+            <i class="fas fa-xl fa-heart" id="heart-icon-<%= art.id %>" style="color: #F92665 !important;"></i>
+          </button>
+        <% end %>
+      <% end %>
+
+      <p class="mt-3 text-secondary"><%= art.likes.count %></p>
+
+      <script>
+        $(document).ready(function() {
+          $('#heart-icon-<%= art.id %>').on('click', function() {
+            if ($('#like-button-<%= art.id %>')) {
+              $('#like-form-<%= art.id %>').submit();
+            } else if ($('#liked-button-<%= art.id %>')) {
+              $('#unlike-form-<%= art.id %>').submit();
+            }
+          });
+        });
+      </script>
+    </div>
+
+    <%# Comments %>
+    <div class="d-flex spacing-4 mb-2 align-items-center gap-1">
+      <% appreciate = current_user&.appreciations&.find_by(art: art) %>
+      <% if current_user.nil? || appreciate.nil? %>
+        <%= form_with url: appreciate, method: :post, remote: true, id: "appreciate-form-#{art.id}" do |form| %>
+          <%= hidden_field_tag "like[art_id]", art.id %>
+          <button type="submit" class="border-0 bg-transparent" id="comment-icon-<%= art.id %>">
+            <i class="fas fa-xl fa-comment"></i>
+          </button>
+        <% end %>
+      <% else %>
+        <%= form_with url: art_appreciation_path(art_id: art.id, id: appreciate.id), method: :delete, id: "unappreciate-form-#{art.id}" do |form| %>
+          <button type="submit" class="border-0 bg-transparent" id="appreciated-button-<%= art.id %>">
+            <i class="fas fa-xl fa-comment" id="comment-icon-<%= art.id %>" style="color: black !important;"></i>
+          </button>
+        <% end %>
+      <% end %>
+
+      <script>
+        $(document).ready(function() {
+          $('#comment-icon-<%= art.id %>').on('click', function() {
+            if ($('#appreciate-button-<%= art.id %>')) {
+              $('#appreciate-form-<%= art.id %>').submit();
+            } else if ($('#appreciated-button-<%= art.id %>')) {
+              $('#unappreciate-form-<%= art.id %>').submit();
+            }
+          });
+        });
+      </script>
+
+      <p class="mt-3 text-secondary"><%= art.appreciations.count %></p>
+    </div>
+  </div>
+</div>

@@ -22,7 +22,6 @@ h1 {
   font-size: 7.5rem;
   font-style: italic;
   line-height: 100%;
-  width: 65%;
 }
 
 h5 {
@@ -174,6 +173,7 @@ h2 {
   align-items: flex-start;
   font-size: 1.5rem;
   font-family: $headers-font;
+  color: black;
   border: 1px solid var(--bg-dark, #272A2D);
   transition: 0.5s ease;
 }
@@ -188,7 +188,7 @@ h2 {
   align-items: flex-start;
   font-size: 1.5rem;
   font-family: $headers-font;
-  color: black;
+  color: white;
   border: 1px solid var(--bg-white, white);
   transition: 0.5s ease;
 }
@@ -422,4 +422,16 @@ p {
 .btn-red:hover {
   color: white;
   background-color: #cd1d52;
+}
+
+.link {
+  transition: color 0.3s ease;
+
+  &.text-secondary {
+    color: #6C757D !important;
+
+    &:hover {
+      color: black !important;
+    }
+  }
 }
