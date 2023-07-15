@@ -1,0 +1,8 @@
+<h1>Mis Tours</h1>
+
+<% @participants.each do |participation| %>
+  <div>
+    <h2><%= link_to participation.tour.title, tour_path(participation.tour) %></h2>
+    <!-- Aquí puedes poner más detalles sobre el tour -->
+  </div>
+<% end %>

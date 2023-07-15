@@ -25,6 +25,7 @@
         <li class="nav-item h3 <%= action_name == 'home' ? 'text-underline-white' : 'text-underline-black' %>">/</li>
 
         <%= link_to "Cerca", "#", class: "nav-item nav-link h3 #{action_name=='home' ? 'text-underline-white' : 'text-underline-black'}" %>
+
       <%# First Div End  %>
       </div>
 
@@ -60,8 +61,6 @@
 
         <%# Avatar %>
         <div class="avatar" style="background-image: url('<%= current_user ? cl_image_path(current_user.photo.key) : 'https://simulacionymedicina.es/wp-content/uploads/2015/11/default-avatar-300x300-1.jpg' %>'); background-size: cover; background-position: center; border-radius: 100%;">
-        </div>
-
         </div>
 
 
