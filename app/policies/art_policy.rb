@@ -25,6 +25,10 @@ class ArtPolicy < ApplicationPolicy
     user_is_owner?
   end
 
+  def allarts?
+    true
+  end
+
   # def vr?
   #   true
   # end
