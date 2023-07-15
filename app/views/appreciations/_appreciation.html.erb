@@ -13,27 +13,7 @@
       <p><%= appreciation.content %></p>
 
         <%# Likes and Comments %>
-        <div class="mt-2">
-          <div id='appreciations-and-such' class="d-flex gap-3">
-            <%# Likes %>
-            <div class="d-flex spacing-4 mb-2 align-items-center gap-2">
-              <!-- Hearts -->
-              <i class="fas fa-xl fa-heart text-secondary"></i>
-
-              <!-- Number of likes -->
-              <p class="mt-3 text-secondary"><%= @art.appreciations.count %></p>
-            </div>
-
-            <%# Comments %>
-            <div class="d-flex spacing-4 mb-2 align-items-center gap-2">
-              <!-- Comment -->
-              <i class="fas fa-xl fa-comment text-secondary"></i>
-
-              <!-- Number of likes -->
-              <p class="mt-3 text-secondary"><%= @art.appreciations.count %></p>
-            </div>
-          </div>
-        </div>
+        <%= render "shared/likes_comments" %>
 
         <%# Borrar %>
         <div class="d-flex gap-3">
