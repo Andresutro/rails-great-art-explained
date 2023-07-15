@@ -116,46 +116,54 @@
 
 
   <%# Donaciones %>
-  <div class="artpost-container w-100 h-100">
-    <% if current_user != @art.user %>
-      <%= form_with(model: Donation.new, url: user_donations_path(@art.user)) do |form| %>
-        <%= form.hidden_field :art_id, value: @art.id %>
-        <div class="field">
-          <%= form.label :amount %>
-          <%= form.number_field :amount %>
-        </div>
-        <%= form.submit 'Donate' %>
-      <% end %>
-    <% end %>
-  </div>
-</div>
+<svg class="dn">
+  <defs>
+    <symbol id="svg-confetti">
+      <path fill="currentColor" d="M-.017 6.91L4.035.012l2.587 1.52L2.57 8.43z"></path>
+    </symbol>
+  </defs>
+</svg>
 
 <%# Scripts %>
 
 <% if current_user != @art.user %>
   <%= form_with(model: Donation.new, url: user_donations_path(@art.user)) do |form| %>
     <%= form.hidden_field :art_id, value: @art.id %>
-    <div class="field">
-      <%= form.label :amount %>
-      <%= form.number_field :amount %>
-    </div>
-      </div>
-    <div class="field">
-      <%= form.label :message %>
-      <%= form.text_area :message %>
-    </div>
-    <%= form.submit 'Donate' %>
-  <% end %>
-<% end %>
+    <button type="button" id="confirmButton" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#donateModal">
+      Haz tu donación
+    </button>
 
-<% if user_signed_in?  %>
-  <% if current_user == @art.user %>
-    <%= link_to "Donaciones Recibidas", received_user_donations_path(@user) %>
-  <% else %>
-    <%= link_to "Donaciones Realizadas", made_user_donations_path(current_user) %>
+    <div class="modal fade" id="donateModal" tabindex="-1" aria-labelledby="donateModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered-top">
+        <div class="modal-content transparent-bg">
+          <div class="modal-header">
+            <h5 class="modal-title" id="donateModalLabel">Ingresa tu donación</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col">
+                <div class="field">
+                  <%= form.label :amount %>
+                  <%= form.number_field :amount %>
+                </div>
+              </div>
+              <div class="col">
+                <div class="field">
+                  <%= form.label :message %>
+                  <%= form.text_area :message %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <%= form.submit 'Confirm', class: "btn btn-primary" %>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
   <% end %>
-<% else %>
-  <p>Para ver tus donaciones debes iniciar sesión</p>
 <% end %>
 
 <% if current_user %>
@@ -165,7 +173,9 @@
 
 
 
-  <script>
+
+
+
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
