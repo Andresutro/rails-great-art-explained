@@ -25,6 +25,10 @@ class ArtPolicy < ApplicationPolicy
     user_is_owner?
   end
 
+  # def vr?
+  #   true
+  # end
+
   private
 
   def user_is_owner?

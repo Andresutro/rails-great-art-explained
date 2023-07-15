@@ -9,7 +9,7 @@ class ToursController < ApplicationController
   # GET /tours/1 or /tours/1.json
   def show
     @participant =  Participant.new
-    
+
     respond_to do |format|
       format.html
       format.ics do
@@ -20,6 +20,9 @@ class ToursController < ApplicationController
       end
     end
   end
+
+
+  
 
   # GET /tours/new
   def new

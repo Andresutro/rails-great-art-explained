@@ -14,8 +14,12 @@ class ArtsController < ApplicationController
     @appreciation = Appreciation.new
     @user = @art.user
     @donation = @user.donations.last
-
   end
+
+  def vr
+    skip_authorization
+  end
+
 
   # GET /arts/new
   def new

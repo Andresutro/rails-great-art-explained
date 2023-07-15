@@ -11,17 +11,18 @@
   <%= button_to "Destroy this tour", @tour, method: :delete %>
   <%= @tour.maximum?  %>
 
-  <% if @tour.maximum? && current_user != @tour.user %>
-    <%= simple_form_for [@tour, @participant], method: :post do |f| %>
-      <%= f.submit "Join Tour", class: "btn btn-primary text-white py-3 px-5 mt-4 rounded-10", style: 'border-radius: 15px;' %>
-    <% end %>
+<% if @tour.maximum? && current_user != @tour.user && !@tour.participants.map(&:user).include?(current_user) %>
+  <%= simple_form_for [@tour, @participant], method: :post, format: :ics do |f| %>
+    <%= f.submit "Join Tour", class: "btn btn-primary text-white py-3 px-5 mt-4 rounded-10", style: 'border-radius: 15px;' %>
   <% end %>
+<% end %>
+
 
   <% if participant_exists %>
     <%= link_to 'Eliminar mi participacion', tour_participant_path(@tour, current_user.participant_in(@tour)), data: {turbo_method: :delete}, class: 'btn btn-outline-secondary btn-sm' %>
   <% end %>
 
   <% @tour.participants.each do |participant| %>
+    <%# <%= button_to 'send email', invite_tour_participant_path(participant) %> %>
     <%= participant.user.email  %>
   <% end %>
-</div>
