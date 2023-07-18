@@ -19,7 +19,8 @@
       <div class="collapse navbar-collapse gap-3" id="navbarSupportedContent" style="list-style: none; margin-right: 3rem;">
 
         <%# Main Navigation ✅ %>
-        <%= link_to "Explorar", allarts_arts_path, class: "nav-item nav-link #{action_name=='home' ? 'text-underline-white' : 'text-underline-black'} h3" %>
+        <%= link_to "Explorar", allarts_arts_path, id: 'underline-scrolled', class: "nav-item nav-link h3" %>
+
       <%# First Div End  %>
       </div>
 
@@ -39,23 +40,24 @@
         </li>
       <% else %>
           <div class="d-flex gap-4" style="list-style: none;">
-              <%= link_to "Log In", new_user_session_path, class: "nav-item nav-link border-2 #{action_name=='home' ? ' border-white button-inv' : 'border-black button'} h3" %>
+            <%= link_to "Log In", new_user_session_path, id: 'login-button-scrolled', class: "nav-item nav-link h3" %>
 
-              <%= link_to "Sign Up", new_user_registration_path, class: "nav-item nav-link border-2 #{action_name=='home' ? 'border-white button-inv' : 'border-black button'} h3" %>
+            <%= link_to "Sign Up", new_user_registration_path, id: 'signup-button-scrolled', class: "nav-item nav-link h3" %>
           </div>
       <% end %>
 
 
       <%# Pill %>
       <% if user_signed_in? %>
-        <div id="pill" class="pill border border-2 <%="#{action_name=='home' ? 'border-white' : 'border-black'}" %>" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <div id="pill" class="pill border border-2 <%="#{action_name!='home' ? 'border-black' : 'border-white'}" %>" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
           <%# Burger %>
-          <svg class="burger" width="30" height="26" viewBox="0 0 17 15" fill="<%= action_name=='home' ? 'white' : 'black' %>" xmlns="http://www.w3.org/2000/svg">
-            <path d="M2.46338 4.09229H14.13" stroke="<%= action_name== 'home' ? 'white' : 'black' %>" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M2.46338 7.20337H14.13" stroke="<%= action_name=='home' ? 'white' : 'black' %>" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M2.46338 10.3145H14.13" stroke="<%= action_name=='home' ? 'white' : 'black' %>" stroke-linecap="round" stroke-linejoin="round"/>
+          <svg class="burger" width="30" height="26" viewBox="0 0 17 15" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2.46338 4.09229H14.13" class="burger-path" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M2.46338 7.20337H14.13" class="burger-path" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M2.46338 10.3145H14.13" class="burger-path" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
+
 
           <%# Avatar %>
         <div class="avatar" style="background-image: url('<%= user_signed_in? && current_user.photo.attached? ? cl_image_path(current_user.photo.key) : image_url('default_photo.jpg') %>'); background-size: cover; background-position: center; border-radius: 100%;">
