@@ -1,3 +1,4 @@
+require 'mercadopago'
 class DonationsController < ApplicationController
   before_action :set_user
   before_action :set_donation, only: %i[show edit update destroy]
@@ -18,29 +19,66 @@ class DonationsController < ApplicationController
     authorize Donation
   end
 
-
   def show
-    @donation = Donation.find(params[:id])
-    authorize @donation
+    sdk = Mercadopago::SDK.new(ENV['MERCADOPAGO_ACCESS_TOKEN'])
+
+    preference_data = {
+      items: [
+        {
+          title: 'Mi producto',
+          quantity: 1,
+          currency_id: 'CLP', # o la moneda que corresponda
+          unit_price: @donation.amount
+        }
+      ],
+      back_urls: {
+        success: "http://localhost:3000/users/#{@donation.user.id}/donations/#{@donation.id}",
+        failure: "http://localhost:3000/users/#{@donation.user.id}/donations/#{@donation.id}",
+        pending: "http://localhost:3000/users/#{@donation.user.id}/donations/#{@donation.id}"
+      } # Aquí estamos pasando el id del producto como external_reference
+    }
+    preference_response = sdk.preference.create(preference_data)
+    preference = preference_response[:response]
+
+    @preference_id = preference['id']
+
+    if params[:collection_status] == 'approved'
+      @donation.state = true
+      redirect_to made_user_donations_path(current_user)
+    end
+
+
   end
 
   def create
-  @donation = current_user.donations.build(donation_params)
-  authorize @donation
-  if @donation.save
-    redirect_to user_donations_path(@user), notice: 'Gracias por tu donación!'
-  else
-    render :new, status: :unprocessable_entity
+    @donation = current_user.donations.build(donation_params)
+    authorize @donation
+
+    respond_to do |format|
+      if @donation.save
+        format.html { redirect_to user_donation_path(current_user, @donation), notice: "Donation was successfully created." }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+      end
+    end
   end
-  end
+
+
+
 
   private
 
+  def set_donation
+    @donation = Donation.find(params[:id])
+    authorize @donation
+    return @donation
+  end
+
   def set_user
-  @user = User.find(params[:user_id])
+    @user = User.find(params[:user_id])
   end
 
   def donation_params
-  params.require(:donation).permit(:amount, :message)
+    params.require(:donation).permit(:amount, :message)
   end
 end

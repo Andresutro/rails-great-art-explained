@@ -82,3 +82,5 @@ end
 gem "pundit"
 gem "cloudinary"
 gem "icalendar", "~> 2.8"
+
+gem 'mercadopago-sdk'

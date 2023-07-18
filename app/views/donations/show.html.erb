@@ -1,3 +1,24 @@
+
 <h1>Donation Details</h1>
 <p>Amount: <%= @donation.amount %></p>
 <p>Donor: <%= @donation.user.email %></p>
+<script src="https://sdk.mercadopago.com/js/v2"></script>
+
+<!-- Contenedor donde se colocará el botón de pago -->
+<div id="wallet_container"></div>
+
+
+<script>
+  const mp = new MercadoPago('TEST-2a56a125-0912-4516-95a3-96947efeb336');
+  const bricksBuilder = mp.bricks();
+  const preferenceId = "<%= @preference_id %>";
+
+  mp.bricks().create("wallet", "wallet_container", {
+    initialization: {
+        preferenceId: preferenceId,
+        redirectMode: "modal"
+
+    },
+  });
+
+</script>
