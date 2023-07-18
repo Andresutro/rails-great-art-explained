@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'vr/index'
 
   get 'participants', to: 'participants#index'
 
@@ -30,8 +31,9 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  
+
   resources :users do
+    resources :vr , only: [:index]
     resources :donations, only: [:index, :create, :show] do
       collection do
         get 'received'

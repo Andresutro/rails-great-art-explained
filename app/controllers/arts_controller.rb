@@ -60,6 +60,8 @@ class ArtsController < ApplicationController
   end
 
   def vr
+    @art = Art.first
+    @user = User.first
     skip_authorization
   end
 

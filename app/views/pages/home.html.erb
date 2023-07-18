@@ -73,18 +73,22 @@
   <div class="row">
     <% @arts_with_most_likes.each_slice(2).with_index do |arts_slice, index| %>
       <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+
         <% arts_slice.each do |art| %>
-          <img
-            src="<%= cl_image_path(art.photo.key) %>"
-            class="w-100 shadow-1-strong mb-4"
-            style="border-radius: 40px;"
-          />
+          <%= link_to art_path(art) do %>
+            <img
+              src="<%= cl_image_path(art.photo.key) %>"
+              class="w-100 shadow-1-strong mb-4"
+              style="border-radius: 40px;"
+            />
+          <% end %>
         <% end %>
       </div>
     <% end %>
   </div>
   <!-- Gallery -->
 </div>
+
 
 
 <%# Obra Clasica %>
