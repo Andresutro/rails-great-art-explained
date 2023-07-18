@@ -44,6 +44,7 @@
     <div class="d-flex gap-2">
       <h6 class='button'><%= @art.category %></h6>
       <h6 class='button'><%= @art.year %></h6>
+      <h6 class='button'><%= link_to 'Ver VR', user_vr_index_path(@art.user.id), class: 'text-decoration-none' %></h6>
     </div>
   </div>
 
@@ -160,21 +161,7 @@
   <%= link_to "Donaciones Realizadas", made_user_donations_path(current_user), class: "btn btn-secondary" %>
 <% end %>
 
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var imageContainer = document.getElementById('imageContainer');
-    var pointer = document.getElementById('pointer');
 
-    imageContainer.addEventListener('click', function(event) {
-      var x = event.offsetX;
-      var y = event.offsetY;
-
-      pointer.style.top = (y - 10) + 'px';
-      pointer.style.left = (x - 10) + 'px';
-      pointer.style.display = 'block';
-    });
-  });
-</script>
 
 <script>
   $(document).ready(function() {

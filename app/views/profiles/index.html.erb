@@ -1,3 +1,15 @@
+
+<div style='display: flex ; align-items: center; gap: 48px; align-self: stretch;'>
+  <div  style="background-image: url(<%= cl_image_path(@user.photo.key)%>); background-size: cover; background-position: center;">
+  </div>
+  <div style='display: flex; flex-direction: column; align-items: flex-start; gap: 48px; flex: 1 0 0;' >
+    <div>
+      <h1><%= @user.email.split('@').first.capitalize %></h1>
+    </div>
+  </div>
+</div>
+
+
 <div class="artpost-container gap-5 mb-5">
   <p style="color: green"><%= notice %></p>
   <div class="d-flex w-100 justify-content-between align-items-center">
