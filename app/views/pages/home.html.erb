@@ -10,7 +10,7 @@
       <div href="#" class="avatar" style="background-image: url(<%= cl_image_path(artista.photo.key)%>); background-size: cover; background-position: center;"></div>
       <div class="artist-description">
         <h5 href="#" class="text-white mt-2">
-          <%= artista.email %>
+          <%= link_to artista.email, user_profiles_path(artista), class:'text-decoration-none text-white' %>
         </h5>
       </div>
     </div>
@@ -54,7 +54,7 @@
           <h5>
         </div>
         <div>
-      <%= link_to 'Ver su trabajo', @arts_with_least_likes, class: 'text-decoration-none button' %>
+      <%= link_to 'Ver su trabajo', user_profiles_path(artista), class: 'text-decoration-none button' %>
         </div>
       </div>
 
@@ -100,7 +100,7 @@
       <h5 class="text-white text-center w-100">Súmate al mundo de De Goya para entender como su obra cruza fronteras</h5>
     </div>
     <div>
-      <%= link_to 'Ver su trabajo', @arts_with_least_likes, class:'text-decoration-none button-inv' %>
+      <%= link_to 'Ver su trabajo',  user_profiles_path(@arts_with_least_likes.user), class:'text-decoration-none button-inv' %>
 
     </div>
   </div>
