@@ -10,7 +10,7 @@ class DonationsController < ApplicationController
   end
 
   def received
-    @donations_received = current_user.received_donations
+    @donations_received = current_user.received_donations.where(status: 'approved')
     authorize @donations_received
   end
 
@@ -25,7 +25,7 @@ class DonationsController < ApplicationController
     preference_data = {
       items: [
         {
-          title: 'Mi producto',
+          title: "Donacion a #{@donation.recipient.email}",
           quantity: 1,
           currency_id: 'CLP', # o la moneda que corresponda
           unit_price: @donation.amount
@@ -43,7 +43,10 @@ class DonationsController < ApplicationController
     @preference_id = preference['id']
 
     if params[:collection_status] == 'approved'
-      @donation.state = true
+      @donation.status = 'approved'
+      redirect_to made_user_donations_path(current_user)
+    else
+      @donation.status = 'pending'
       redirect_to made_user_donations_path(current_user)
     end
 
