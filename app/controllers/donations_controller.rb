@@ -21,7 +21,6 @@ class DonationsController < ApplicationController
 
   def show
     sdk = Mercadopago::SDK.new(ENV['MERCADOPAGO_ACCESS_TOKEN'])
-
     preference_data = {
       items: [
         {
@@ -45,10 +44,8 @@ class DonationsController < ApplicationController
     if params[:collection_status] == 'approved'
       @donation.status = 'approved'
       redirect_to made_user_donations_path(current_user)
-    else
-      @donation.status = 'pending'
-      redirect_to made_user_donations_path(current_user)
     end
+
 
 
   end

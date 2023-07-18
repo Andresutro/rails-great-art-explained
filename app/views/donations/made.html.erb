@@ -1,23 +1,30 @@
-<p style="color: green"><%= notice %></p>
+<div class="container">
+  <div class="alert alert-success" role="alert">
+    <%= notice %>
+  </div>
 
-<% @donations_made.each do |donation| %>
-  <%= render donation %>
+  <% @donations_made.each do |donation| %>
+    <div class="card text-bg-<%= donation.status == 'approved' ? 'success' : 'secondary' %> mb-3" style="max-width: 18rem;">
+      <div class="card-header">Tu donación para <%= donation.recipient.email %></div>
+      <div class="card-body">
+        <h5 class="card-title">Donación <%= donation.status == 'approved' ? 'Aprobada' : 'Pendiente' %></h5>
+        <p class="card-text">
+          <strong>Monto donado:</strong> <%= donation.amount %>
+        </p>
+        <p class="card-text">
+          <strong>Mensaje:</strong> <%= donation.message %>
+        </p>
+        <p class="card-text">
+          <strong>Estado:</strong> <%= donation.status.capitalize %>
+        </p>
+        <% if donation.status != 'approved' %>
+          <%= link_to "Ver donación", user_donation_path(current_user, donation), class: "btn btn-primary mt-2" %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 
-
-<div>
-  <%= link_to "Volver", arts_path(@art) %>
+  <div class="mt-3">
+    <%= link_to "Volver", root_path, class: "btn btn-primary" %>
+  </div>
 </div>
-
-<p>
-  <strong>User:</strong>
-  <%= donation.user.username %>
-</p>
-<p>
-  <strong>Amount:</strong>
-  <%= donation.amount %>
-</p>
-<p>
-  <strong>Message:</strong>
-  <%= donation.message %>
-</p>
-<% end %>

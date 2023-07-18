@@ -33,6 +33,9 @@
             <%= link_to "Mis artes", arts_path, class: "dropdown-item #{action_name == 'home' ? 'text-white' : 'text-black'}" %>
 
             <%= link_to "Nuevo arte", new_art_path, class: "dropdown-item #{action_name == 'home' ? 'text-white' : 'text-black'}" %>
+            <%= link_to "Donaciones recibidas", received_user_donations_path(current_user), class: "dropdown-item #{action_name == 'received' ? 'text-white' : 'text-black'}" %>
+
+            <%= link_to "Mis donaciones", made_user_donations_path(current_user), class: "dropdown-item #{action_name == 'received' ? 'text-white' : 'text-black'}" %>
 
             <%= link_to "Log out", destroy_user_session_path, class: "dropdown-item #{action_name == 'home' ? 'text-white' : 'text-black'}", data: { turbo_method: :delete } %>
           </div>

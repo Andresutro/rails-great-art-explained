@@ -1,7 +1,27 @@
+<div class="container my-5">
+  <div class="card">
+    <div class="card-header">
+      Detalles de la donación
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Donación Pendiente</h5>
+      <p class="card-text">
+        <strong>Monto:</strong> <%= @donation.amount %>
+      </p>
+      <p class="card-text">
+        <strong>Donante:</strong> <%= @donation.user.email %>
+      </p>
+      <p class="card-text">
+        <strong>Donante:</strong> <%= @donation.recipient.email %>
+      </p>
 
-<h1>Donation Details</h1>
-<p>Amount: <%= @donation.amount %></p>
-<p>Donor: <%= @donation.user.email %></p>
+    </div>
+  </div>
+  <div class="mt-3">
+    <%= link_to "Volver", root_path, class: "btn btn-primary" %>
+  </div>
+</div>
+
 <script src="https://sdk.mercadopago.com/js/v2"></script>
 
 <!-- Contenedor donde se colocará el botón de pago -->
