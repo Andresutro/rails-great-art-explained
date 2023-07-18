@@ -1,22 +1,26 @@
 <div>
 <%= turbo_frame_tag dom_id(explanation) do %>
-  <%# Image %>
-  <div>
+  <div class="row">
+    <%# Image %>
     <% if explanation.image.present? %>
-      <div id="imageContainer" style="position: relative;">
-        <%= cl_image_tag(explanation.image.key, id: "image", class: "img-fluid", alt: "Imagen de arte", style: "max-width: 100%;") %>
-        <div id="pointer" style="position: absolute; width: 20px; height: 20px; background: red; display: none;"></div>
+      <div class="col-lg-6">
+        <div id="imageContainer" style="position: relative;">
+          <%= cl_image_tag(explanation.image.key, id: "image", class: "img-fluid", alt: "Imagen de arte", style: "max-width: 100%;") %>
+          <div id="pointer" style="position: absolute; width: 20px; height: 20px; background: red; display: none;"></div>
+        </div>
       </div>
     <% end %>
-  </div>
 
-  <%# Explanation %>
-  <div class="my-5 row">
-    <div class="col-lg-6">
-      <p class="lh-xl"><%= simple_format(explanation.description.split(' ')&.slice(0, explanation.description.split(' ')&.length / 2)&.join(' ')) %></p>
-    </div>
-    <div class="col-lg-6">
-      <p class="lh-xl"><%= simple_format(explanation&.description&.split(' ')&.slice(explanation.description.split(' ')&.length / 2, explanation.description.split(' ')&.length)&.join(' ')) %></p>
+    <%# Explanation %>
+    <div class="col-lg-6 my-5">
+      <div class="row">
+        <div class="col-lg-12">
+          <p class="lh-xl"><%= simple_format(explanation.description.split(' ')&.slice(0, explanation.description.split(' ')&.length / 2)&.join(' ')) %></p>
+        </div>
+        <div class="col-lg-12">
+          <p class="lh-xl"><%= simple_format(explanation&.description&.split(' ')&.slice(explanation.description.split(' ')&.length / 2, explanation.description.split(' ')&.length)&.join(' ')) %></p>
+        </div>
+      </div>
     </div>
   </div>
 <% end %>
