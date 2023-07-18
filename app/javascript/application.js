@@ -25,3 +25,4 @@ window.addEventListener('scroll', function() {
     logo.style.setProperty('fill', 'white');
   }
 });
+
