@@ -1,3 +1,5 @@
+require 'mercadopago'
+
 class ArtsController < ApplicationController
   before_action :set_art, only: %i[ show edit update destroy ]
   skip_before_action :authenticate_user!, only:  %i[ show allarts ]
@@ -17,6 +19,40 @@ class ArtsController < ApplicationController
 
   # GET /arts/1 or /arts/1.json
   def show
+    sdk = Mercadopago::SDK.new(ENV['MERCADOPAGO_ACCESS_TOKEN'])
+
+    preference_data = {
+      items: [
+        {
+          title: 'Mi producto',
+          quantity: 1,
+          currency_id: 'CLP', # o la moneda que corresponda
+          unit_price: 1000
+        }
+      ],
+      back_urls: {
+        success: "http://localhost:3000/arts/#{@art.id}",
+        failure: "http://localhost:3000/arts/#{@art.id}",
+        pending: "http://localhost:3000/arts/#{@art.id}"
+      } # Aquí estamos pasando el id del producto como external_reference
+    }
+    preference_response = sdk.preference.create(preference_data)
+    preference = preference_response[:response]
+
+    @preference_id = preference['id']
+
+    if params[:collection_status] == 'approved'
+      raise
+      collection_id = params[:collection_id]
+      puts collection_id
+      # Obtener la información del pago
+      payment_info = sdk.payment.get(collection_id)
+      payment = payment_info[:response]
+
+      puts payment['status']
+      puts payment['transaction_amount']
+    end
+
     @explanation =  Explanation.new
     @appreciation = Appreciation.new
     @user = @art.user
@@ -89,7 +125,6 @@ class ArtsController < ApplicationController
       @art = Art.find(params[:id])
       authorize @art
       return @art
-
     end
 
     # Only allow a list of trusted parameters through.

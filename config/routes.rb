@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   end
 
 
-  resources :donations
+
 
 
   get '/arts/vr', to: 'arts#vr'
@@ -30,14 +30,17 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+  
   resources :users do
-    resources :donations, only: [:index, :create] do
+    resources :donations, only: [:index, :create, :show] do
       collection do
         get 'received'
         get 'made'
       end
     end
   end
+
+
 
 
 
