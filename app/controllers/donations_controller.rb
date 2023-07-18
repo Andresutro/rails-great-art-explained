@@ -10,7 +10,7 @@ class DonationsController < ApplicationController
   end
 
   def received
-    @donations_received = Donation.where.not(user_id: current_user)
+    @donations_received = current_user.received_donations
     authorize @donations_received
   end
 
@@ -51,9 +51,12 @@ class DonationsController < ApplicationController
   end
 
   def create
-    @donation = current_user.donations.build(donation_params)
+    @donation = Donation.new
+    @donation.user = current_user
+    @donation.amount = donation_params[:amount]
+    @donation.message = donation_params[:message]
+    @donation.recipient_id = donation_params[:art_id]
     authorize @donation
-
     respond_to do |format|
       if @donation.save
         format.html { redirect_to user_donation_path(current_user, @donation), notice: "Donation was successfully created." }
@@ -79,6 +82,6 @@ class DonationsController < ApplicationController
   end
 
   def donation_params
-    params.require(:donation).permit(:amount, :message)
+    params.require(:donation).permit(:amount, :message, :art_id)
   end
 end

@@ -6,6 +6,8 @@ class User < ApplicationRecord
   has_many :appreciations
   has_many :arts
   has_many :likes
+  has_many :received_donations, class_name: 'Donation', foreign_key: 'recipient_id'
+
 
   ## si es el que crea el tour
   has_many :tours
