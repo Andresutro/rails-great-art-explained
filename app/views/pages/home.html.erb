@@ -10,7 +10,7 @@
       <div href="#" class="avatar" style="background-image: url(<%= cl_image_path(artista.photo.key)%>); background-size: cover; background-position: center;"></div>
       <div class="artist-description">
         <h5 href="#" class="text-white mt-2">
-          <%= artista.email %>
+          <%= link_to artista.email, user_profiles_path(artista), class:'text-decoration-none text-white' %>
         </h5>
       </div>
     </div>
@@ -54,7 +54,7 @@
           <h5>
         </div>
         <div>
-      <%= link_to 'Ver su trabajo', @arts_with_least_likes, class: 'text-decoration-none button' %>
+      <%= link_to 'Ver su trabajo', user_profiles_path(artista), class: 'text-decoration-none button' %>
         </div>
       </div>
 
@@ -73,18 +73,22 @@
   <div class="row">
     <% @arts_with_most_likes.each_slice(2).with_index do |arts_slice, index| %>
       <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+
         <% arts_slice.each do |art| %>
-          <img
-            src="<%= cl_image_path(art.photo.key) %>"
-            class="w-100 shadow-1-strong mb-4"
-            style="border-radius: 40px;"
-          />
+          <%= link_to art_path(art) do %>
+            <img
+              src="<%= cl_image_path(art.photo.key) %>"
+              class="w-100 shadow-1-strong mb-4"
+              style="border-radius: 40px;"
+            />
+          <% end %>
         <% end %>
       </div>
     <% end %>
   </div>
   <!-- Gallery -->
 </div>
+
 
 
 <%# Obra Clasica %>
@@ -96,7 +100,7 @@
       <h5 class="text-white text-center w-100">Súmate al mundo de De Goya para entender como su obra cruza fronteras</h5>
     </div>
     <div>
-      <%= link_to 'Ver su trabajo', @arts_with_least_likes, class:'text-decoration-none button-inv' %>
+      <%= link_to 'Ver su trabajo',  user_profiles_path(@arts_with_least_likes.user), class:'text-decoration-none button-inv' %>
 
     </div>
   </div>

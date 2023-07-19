@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_13_035125) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_18_214739) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -69,6 +69,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_13_035125) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "recipient_id"
+    t.string "status", default: "pending"
+    t.index ["recipient_id"], name: "index_donations_on_recipient_id"
     t.index ["user_id"], name: "index_donations_on_user_id"
   end
 
@@ -152,6 +155,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_13_035125) do
   add_foreign_key "appreciations", "users"
   add_foreign_key "arts", "users"
   add_foreign_key "donations", "users"
+  add_foreign_key "donations", "users", column: "recipient_id"
   add_foreign_key "explanations", "arts"
   add_foreign_key "like_appreciations", "appreciations"
   add_foreign_key "like_appreciations", "users"

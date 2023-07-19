@@ -8,9 +8,14 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
   </head>
 
-  <body class="bg-white <%= 'debug-turbo' if Rails.env.development? %>">
+  <%# <body class="bg-white <#%= 'debug-turbo' if Rails.env.development? %>
+  <body>
+
   <%= render "shared/navbar" %>
   <%= render "shared/flashes" %>
 

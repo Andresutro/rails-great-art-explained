@@ -4,11 +4,14 @@
 
 import { application } from "./application"
 
+import AframeController from "./aframe_controller"
+application.register("aframe", AframeController)
+
+import CharacterCounterController from "./character_counter_controller"
+application.register("character-counter", CharacterCounterController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
 import TomSelectController from "./tom_select_controller"
 application.register("tom-select", TomSelectController)
-
-import CharacterCounterController from "./character_counter_controller"
-application.register("character-counter", CharacterCounterController)

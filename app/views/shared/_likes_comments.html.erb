@@ -22,18 +22,18 @@
 
       <p class="mt-3 text-secondary"><%= @art.likes.count %></p>
 
-      <script>
-        $(document).ready(function() {
+  <script>
+      $(document).ready(function() {
           $('#heart-icon').on('click', function() {
-            ($('#like-button')) {
-              $('#like-form').submit();
-            } ($('#liked-button')) {
-              $('#unlike-form').submit();
-            }
+              if ($('#like-button').length > 0) {
+                  $('#like-form').submit();
+              } else if ($('#liked-button').length > 0) {
+                  $('#unlike-form').submit();
+              }
           });
-        });
-      </script>
-    </div>
+      });
+  </script>
+
 
     <%# Comments %>
     <div class="d-flex spacing-4 mb-2 align-items-center gap-2">
@@ -57,17 +57,18 @@
         <% end %>
       <% end %>
 
-      <script>
+    <script>
         $(document).ready(function() {
-          $('#comment-icon').on('click', function() {
-            ($('#appreciate-button')) {
-              $('#appreciate-form').submit();
-            } ($('#appreciated-button')) {
-              $('#unappreciate-form').submit();
-            }
-          });
+            $('#comment-icon').on('click', function() {
+                if ($('#appreciate-button').length > 0) {
+                    $('#appreciate-form').submit();
+                } else if ($('#appreciated-button').length > 0) {
+                    $('#unappreciate-form').submit();
+                }
+            });
         });
-      </script>
+    </script>
+
 
       <p class="mt-3 text-secondary"><%= @art.appreciations.count %></p>
     </div>

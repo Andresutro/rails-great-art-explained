@@ -1,17 +1,36 @@
-  <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+<a-scene>
+    <!-- Crea el contenedor para las imágenes -->
+    <a-entity id="image-container"></a-entity>
 
-    <a-scene>
-      <a-assets>
-        <img id="my-image" src="san_francisco.jpg">
-      </a-assets>
-      <a-image src="#my-image" width="3" height="1.5" ></a-image>
-      <a-image src="san_francisco.jpg" position="-3 0.5 -3" width="3" height="1.5"  ></a-image>
+    <a-cylinder position="0 0 0" radius="0.5" height="30" color=" #283747 "></a-cylinder>
+    <a-plane position="0 0 -4" rotation="-90 0 0" width="30" height="150"  color="black"></a-plane>
+    <a-sky color="#ECECEC"></a-sky>
+</a-scene>
+<script>
+    let radius = 5;  // este es el radio del círculo
+    let container = document.querySelector("#image-container");
+    let theta, x, y, z, image, rotation, scale;
+    let count = <%= @user.arts.length %>;
 
-      <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
-      <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
-      <a-sphere position="7 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
-      <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
-      <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
-      <a-sky color="#ECECEC"></a-sky>
+    <% @user.arts.each_with_index do |art, i| %>
+        theta = ((<%= i %> / count) * Math.PI * 2) + Math.PI;
+        x = radius * Math.cos(theta);
+        z = radius * Math.sin(theta);
 
-    <a-scene>
+        // Ajusta la rotación de la imagen para que mire hacia el centro del círculo
+        rotation = 90 - ((<%= i %> / count) * 360);
+
+        // Establece la altura a 1
+        y = 1.4;
+
+        // Ajusta el tamaño de la imagen según la cantidad de imágenes
+        scale = 2 / Math.sqrt(count);
+
+        image = document.createElement("a-image");
+        image.setAttribute("src", "<%= cl_image_path(art.photo.key) %>");
+        image.setAttribute("position", `${x} ${y} ${z}`);
+        image.setAttribute("rotation", `0 ${rotation} 0`);
+        image.setAttribute("width", scale);
+        container.appendChild(image);
+    <% end %>
+</script>
