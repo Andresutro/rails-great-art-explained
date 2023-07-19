@@ -26,7 +26,12 @@
 <% end %>
 
   <div class="mt-5 d-flex gap-3">
-    <%= link_to 'Edit', [:edit, explanation.art,explanation], class: 'btn btn-dark' %>
+    <% if user_signed_in? %>
+      <% if current_user == explanation.art.user  %>
+        <%= link_to 'Edit', [:edit, explanation.art,explanation], class: 'btn btn-dark' %>
+      <% end %>
+    <% end %>
+
 
     <% if policy(@art).destroy? %>
       <%= link_to 'Destroy', art_explanation_path(@art, explanation),  data: {turbo_method: :delete}, class: 'btn btn-outline-dark' %>

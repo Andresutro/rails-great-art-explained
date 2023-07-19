@@ -633,3 +633,16 @@ User.all.each do |user|
     end
   end
 end
+
+puts('andres')
+
+andres = User.create!(
+  email: 'andres@gmail.com',
+  password: '123456',
+  # name: 'Francisco De Goya',
+)
+a = URI.open('https://res.cloudinary.com/dygidrhdn/image/upload/v1689723319/default_photo_ax0gek.jpg')
+
+andres.photo.attach(io: a, filename: "andres.jpg", content_type: "image/jpg")
+
+puts('andres')
