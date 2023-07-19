@@ -297,7 +297,6 @@ DEPENDENCIES
   bootsnap
   capybara
   cloudinary
-  concurrent-ruby
   debug
   devise
   dotenv-rails
