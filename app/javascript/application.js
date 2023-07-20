@@ -1,3 +1,7 @@
+import "@hotwired/turbo-rails"
+import "./controllers"
+import "bootstrap"
+
 window.addEventListener('scroll', function() {
   const underline = document.getElementById('underline-scrolled');
   const landing = document.getElementById('landing');

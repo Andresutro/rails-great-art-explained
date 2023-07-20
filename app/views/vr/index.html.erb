@@ -1,16 +1,34 @@
 <a-scene>
+    <a-camera wasd-controls="fly: false"></a-camera>
     <a-entity id="image-container"></a-entity>
-    <a-cylinder position="0 0 0" radius="0.5" height="30" color=" #283747 "></a-cylinder>
-    <a-plane position="0 0 -4" rotation="-90 0 0" width="30" height="150"  color="black"></a-plane>
     <a-sky color="#ECECEC"></a-sky>
 </a-scene>
 
+
 <script>
     document.addEventListener('DOMContentLoaded', (event) => {
-        let radius = 5;
+        let radius = 8;
         let container = document.querySelector("#image-container");
         let theta, x, y, z, image, rotation, scale;
         let count = <%= @user.arts.length %>;
+        let frameWidth = 0.02;
+        let frameDepth = 0.1;
+
+
+        frame = document.createElement("a-circle");
+        frame.setAttribute("color", "white");
+        frame.setAttribute("radius", "1.1"); // Asegúrate de que el marco sea más grande que la foto del usuario
+        frame.setAttribute("position", "0 2 -5.1"); // Posiciónalo ligeramente delante de la foto del usuario
+        frame.setAttribute("side", "double"); // Hacer el marco visible desde ambos lados
+        container.appendChild(frame);
+
+        // Añadir foto del usuario
+        userPhoto = document.createElement("a-circle");
+        userPhoto.setAttribute("src", "<%= cl_image_path(@user.photo.key) %>");
+        userPhoto.setAttribute("radius", "1"); // Ajustar el tamaño según sea necesario
+        userPhoto.setAttribute("position", "0 2 -5"); // Ajustar la posición según sea necesario
+        userPhoto.setAttribute("side", "double");
+        container.appendChild(userPhoto);
 
         <% @user.arts.each_with_index do |art, i| %>
             theta = ((<%= i %> / count) * Math.PI * 2) + Math.PI;
@@ -18,17 +36,38 @@
             z = radius * Math.sin(theta);
 
             rotation = 90 - ((<%= i %> / count) * 360);
+            y = 3;
+            scale = 6
 
-            y = 1.4;
-
-            scale = 2 / Math.sqrt(count);
-
-            image = document.createElement("a-image");
+            image = document.createElement("a-box");
             image.setAttribute("src", "<%= cl_image_path(art.photo.key) %>");
             image.setAttribute("position", `${x} ${y} ${z}`);
             image.setAttribute("rotation", `0 ${rotation} 0`);
             image.setAttribute("width", scale);
+            image.setAttribute("height", scale);
+            image.setAttribute("depth", frameDepth);
             container.appendChild(image);
+    // Añadir título y descripción
+            title = document.createElement("a-text");
+            title.setAttribute("value", "<%= art.title %>");
+            title.setAttribute("position", `${x} ${y + scale / 2 + 0.1} ${z}`); // posicionarlo encima de la imagen
+            title.setAttribute("rotation", `0 ${rotation} 0`);
+            title.setAttribute("align", "center");
+            title.setAttribute("color", "black");
+            container.appendChild(title);
+
+            desc = document.createElement("a-text");
+            desc.setAttribute("value", "<%= art.user.email %>");
+            desc.setAttribute("position", `${x} ${y - scale / 2 - 0.1} ${z}`); // posicionarlo debajo de la imagen
+            desc.setAttribute("rotation", `0 ${rotation} 0`);
+            desc.setAttribute("align", "center");
+            desc.setAttribute("color", "black");
+            container.appendChild(desc);
+
+
+
+
+
         <% end %>
     });
 </script>
