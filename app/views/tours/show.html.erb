@@ -17,12 +17,659 @@
   <% end %>
 <% end %>
 
+<div class="w-100 mb-3 justify-content-center nav-item d-flex gap-3 align-items-center">
+  <%= link_to "Edit this tour", edit_tour_path(@tour) %> |
+  <%= link_to "Back to tours", tours_path %>
+  <%= button_to "Destroy this tour", @tour, method: :delete %>
+</div>
 
-  <% if participant_exists %>
-    <%= link_to 'Eliminar mi participacion', tour_participant_path(@tour, current_user.participant_in(@tour)), data: {turbo_method: :delete}, class: 'btn btn-outline-secondary btn-sm' %>
-  <% end %>
+<style>
+.arrow-right-icon {
+  	position: relative;
+  	width: 20px;
+  	height: 20px;
+  	overflow: hidden;
+  	flex-shrink: 0;
+}
+.volver {
+  	position: relative;
+  	line-height: 28px;
+}
+.arrow-right-parent {
+  	display: flex;
+  	flex-direction: row;
+  	align-items: center;
+  	justify-content: flex-start;
+  	gap: 4px;
+  	z-index: 0;
+}
+.agenda-una-hora {
+  	position: relative;
+  	line-height: 110%;
+  	display: flex;
+  	align-items: center;
+  	width: 315px;
+}
+.text {
+  	display: flex;
+  	flex-direction: column;
+  	align-items: flex-start;
+  	justify-content: flex-start;
+}
+.porqu {
+  	position: relative;
+  	font-weight: 500;
+}
+.icons {
+  	position: relative;
+  	width: 24px;
+  	height: 24px;
+  	overflow: hidden;
+  	flex-shrink: 0;
+}
+.razn-parent {
+  	border-radius: 6px;
+  	background-color: #fff;
+  	border: 1px solid #6c757d;
+  	box-sizing: border-box;
+  	width: 500px;
+  	height: 49px;
+  	overflow: hidden;
+  	flex-shrink: 0;
+  	display: flex;
+  	flex-direction: row;
+  	padding: 16px 24px;
+  	align-items: center;
+  	justify-content: space-between;
+  	font-size: 14px;
+  	color: #272a2d;
+}
+.porqu-parent {
+  	display: flex;
+  	flex-direction: column;
+  	align-items: flex-start;
+  	justify-content: flex-start;
+  	gap: 14px;
+  	z-index: 2;
+}
+.octubre-2023 {
+  	position: absolute;
+  	top: 0px;
+  	left: 0px;
+  	display: flex;
+  	align-items: center;
+  	justify-content: center;
+  	width: 88.47px;
+}
+.previous-icon {
+  	position: relative;
+  	width: 4.01px;
+  	height: 6.98px;
+}
+.arrows {
+  	position: absolute;
+  	top: 4.72px;
+  	right: 0px;
+  	width: 20.58px;
+  	display: flex;
+  	flex-direction: row;
+  	align-items: center;
+  	justify-content: flex-start;
+  	gap: 8.38px;
+}
+.month-selector {
+  	align-self: stretch;
+  	position: relative;
+  	height: 15px;
+}
+.lu {
+  	position: absolute;
+  	top: 0px;
+  	left: 0px;
+  	font-weight: 500;
+}
+.ma {
+  	position: absolute;
+  	top: 0px;
+  	left: 32.68px;
+  	font-weight: 500;
+}
+.mi {
+  	position: absolute;
+  	top: 0px;
+  	left: 69.17px;
+  	font-weight: 500;
+}
+.ju {
+  	position: absolute;
+  	top: 0px;
+  	left: 104.84px;
+  	font-weight: 500;
+}
+.vi {
+  	position: absolute;
+  	top: 0px;
+  	left: 136.85px;
+  	font-weight: 500;
+}
+.sa {
+  	position: absolute;
+  	top: 0px;
+  	left: 166.2px;
+  	font-weight: 500;
+}
+.do {
+  	position: absolute;
+  	top: 0px;
+  	left: 198.68px;
+  	font-weight: 500;
+}
+.weekdays {
+  	position: absolute;
+  	top: 0px;
+  	left: 0.43px;
+  	width: 215.68px;
+  	height: 15px;
+  	color: #272a2d;
+}
+.div {
+  	position: absolute;
+  	top: 0px;
+  	left: -104.27px;
+  	font-weight: 500;
+  	color: #666;
+  	display: none;
+}
+.div1 {
+  	position: absolute;
+  	top: 0px;
+  	left: -70.21px;
+  	font-weight: 500;
+  	color: #666;
+  	display: none;
+}
+.div2 {
+  	position: absolute;
+  	top: 0px;
+  	left: -36.15px;
+  	font-weight: 500;
+  	color: #666;
+  	display: none;
+}
+.div4 {
+  	position: absolute;
+  	top: 0px;
+  	left: 30.91px;
+  	font-weight: 500;
+}
+.div5 {
+  	position: absolute;
+  	top: 0px;
+  	left: 61.31px;
+  	font-weight: 500;
+}
+.div6 {
+  	position: absolute;
+  	top: 0px;
+  	left: 93.79px;
+  	font-weight: 500;
+}
+.week-01 {
+  	position: absolute;
+  	top: 31.96px;
+  	left: 108.99px;
+  	width: 102.79px;
+  	height: 15px;
+}
+.div7 {
+  	position: absolute;
+  	top: 7.34px;
+  	left: 0px;
+  	font-weight: 500;
+  	color: #6c757d;
+}
+.div8 {
+  	position: absolute;
+  	top: 7.34px;
+  	left: 34.06px;
+  	font-weight: 500;
+  	color: #6c757d;
+}
+.div9 {
+  	position: absolute;
+  	top: 7.34px;
+  	left: 69.17px;
+  	font-weight: 500;
+  	color: #6c757d;
+}
+.current-day {
+  	position: absolute;
+  	top: 0px;
+  	left: 93.27px;
+  	border-radius: 50%;
+  	background-color: #272a2d;
+  	width: 29.34px;
+  	height: 29.34px;
+}
+.current-day1 {
+  	position: absolute;
+  	top: 0px;
+  	left: 188.27px;
+  	border-radius: 50%;
+  	background-color: #272a2d;
+  	width: 29.34px;
+  	height: 29.34px;
+}
+.week-02-child {
+  	position: absolute;
+  	top: 0.07px;
+  	left: 107.71px;
+  	background-color: #272a2d;
+  	width: 96px;
+  	height: 29px;
+}
+.div10 {
+  	position: absolute;
+  	top: 7.34px;
+  	left: 103.75px;
+  	font-weight: 500;
+}
+.div11 {
+  	position: absolute;
+  	top: 7.34px;
+  	left: 135.19px;
+  	font-weight: 500;
+}
+.div12 {
+  	position: absolute;
+  	top: 7.34px;
+  	left: 163.48px;
+  	font-weight: 500;
+}
+.div13 {
+  	position: absolute;
+  	top: 7.34px;
+  	left: 197.02px;
+  	font-weight: 500;
+}
+.week-02 {
+  	position: absolute;
+  	top: 56.59px;
+  	left: 4.19px;
+  	width: 217.61px;
+  	height: 29.34px;
+  	color: #fff;
+}
+.div15 {
+  	position: absolute;
+  	top: 0px;
+  	left: 34.58px;
+  	font-weight: 500;
+}
+.div16 {
+  	position: absolute;
+  	top: 0px;
+  	left: 68.64px;
+  	font-weight: 500;
+}
+.div17 {
+  	position: absolute;
+  	top: 0px;
+  	left: 104.27px;
+  	font-weight: 500;
+}
+.div18 {
+  	position: absolute;
+  	top: 0px;
+  	left: 135.71px;
+  	font-weight: 500;
+}
+.div19 {
+  	position: absolute;
+  	top: 0px;
+  	left: 166.63px;
+  	font-weight: 500;
+}
+.div20 {
+  	position: absolute;
+  	top: 0px;
+  	left: 199.11px;
+  	font-weight: 500;
+}
+.week-03 {
+  	position: absolute;
+  	top: 95.89px;
+  	left: 1.05px;
+  	width: 213.11px;
+  	height: 15px;
+}
+.div22 {
+  	position: absolute;
+  	top: 0px;
+  	left: 33.53px;
+  	font-weight: 500;
+}
+.div24 {
+  	position: absolute;
+  	top: 0px;
+  	left: 103.22px;
+  	font-weight: 500;
+}
+.div25 {
+  	position: absolute;
+  	top: 0px;
+  	left: 134.66px;
+  	font-weight: 500;
+}
+.div26 {
+  	position: absolute;
+  	top: 0px;
+  	left: 165.58px;
+  	font-weight: 500;
+}
+.div27 {
+  	position: absolute;
+  	top: 0px;
+  	left: 198.06px;
+  	font-weight: 500;
+}
+.week-04 {
+  	position: absolute;
+  	top: 127.85px;
+  	left: 1.05px;
+  	width: 214.06px;
+  	height: 15px;
+}
+.div29 {
+  	position: absolute;
+  	top: 0px;
+  	left: 35.11px;
+  	font-weight: 500;
+}
+.div30 {
+  	position: absolute;
+  	top: 0px;
+  	left: 69.16px;
+  	font-weight: 500;
+}
+.div33 {
+  	position: absolute;
+  	top: 0px;
+  	left: 168.72px;
+  	font-weight: 500;
+}
+.b {
+  	position: absolute;
+  	top: 0px;
+  	left: 199.11px;
+  	display: none;
+  	color: #666;
+}
+.week-05 {
+  	position: absolute;
+  	top: 159.81px;
+  	left: 0px;
+  	width: 183.72px;
+  	height: 15px;
+}
+.weekdays-weeks {
+  	position: relative;
+  	width: 221.8px;
+  	height: 174.81px;
+}
+.calendar-events {
+  	align-self: stretch;
+  	overflow: hidden;
+  	display: flex;
+  	flex-direction: column;
+  	align-items: center;
+  	justify-content: flex-start;
+  	color: #6c757d;
+}
+.calendar-collapsed-light {
+  	border-radius: 6.29px;
+  	background-color: #fff;
+  	box-shadow: 0px 2.095914602279663px 16.77px rgba(170, 170, 170, 0.03);
+  	border: 1px solid #6c757d;
+  	box-sizing: border-box;
+  	width: 261.99px;
+  	display: flex;
+  	flex-direction: column;
+  	padding: 24px 20px;
+  	align-items: center;
+  	justify-content: flex-start;
+  	gap: 29.34px;
+  	text-align: center;
+  	font-size: 12.58px;
+  	color: #272a2d;
+}
+.elige-la-fecha-parent {
+  	display: flex;
+  	flex-direction: column;
+  	align-items: flex-start;
+  	justify-content: flex-start;
+  	gap: 14px;
+  	z-index: 1;
+}
+.square-checkbox-solid-parent {
+  	display: flex;
+  	flex-direction: row;
+  	align-items: flex-start;
+  	justify-content: flex-start;
+  	gap: 14px;
+  	z-index: 0;
+}
+.inputs {
+  	display: flex;
+  	flex-direction: column;
+  	align-items: flex-start;
+  	justify-content: flex-start;
+  	gap: 32px;
+}
+.registrarte {
+  	position: relative;
+  	line-height: 120%;
+}
+.botn {
+  	align-self: stretch;
+  	border: 1px solid #272a2d;
+  	display: flex;
+  	flex-direction: row;
+  	padding: 16px;
+  	align-items: center;
+  	justify-content: center;
+  	font-size: 24px;
+  	color: #272a2d;
+  	font-family: 'Instrument Serif';
+}
+.form {
+  	display: flex;
+  	flex-direction: column;
+  	align-items: flex-start;
+  	justify-content: flex-start;
+  	gap: 64px;
+  	font-size: 16px;
+  	color: #6c757d;
+  	font-family: Inter;
+}
+.text-parent {
+  	align-self: stretch;
+  	display: flex;
+  	flex-direction: column;
+  	align-items: flex-start;
+  	justify-content: flex-start;
+  	gap: 64px;
+  	z-index: 1;
+  	text-align: left;
+  	font-size: 40px;
+  	color: #272a2d;
+  	font-family: 'Instrument Serif';
+}
+.briefcase {
+  	position: absolute;
+  	margin: 0 !important;
+  	top: 288.5px;
+  	left: 44px;
+  	width: 20px;
+  	height: 20px;
+  	overflow: hidden;
+  	flex-shrink: 0;
+  	z-index: 2;
+}
+.user-icon {
+  	position: absolute;
+  	margin: 0 !important;
+  	top: 152.5px;
+  	left: 44px;
+  	width: 20px;
+  	height: 20px;
+  	overflow: hidden;
+  	flex-shrink: 0;
+  	z-index: 3;
+}
+.frame-parent {
+  	align-self: stretch;
+  	flex: 1;
+  	display: flex;
+  	flex-direction: column;
+  	padding: 128px 0px;
+  	align-items: flex-start;
+  	justify-content: flex-start;
+  	position: relative;
+  	gap: 64px;
+}
+.europeana-mvr30qxn-mm-unsplash-icon {
+  	align-self: stretch;
+  	position: relative;
+  	max-height: 100%;
+  	width: 600.66px;
+  	object-fit: cover;
+}
+.container {
+  	align-self: stretch;
+  	flex: 1;
+  	display: flex;
+  	flex-direction: row;
+  	padding: 0px 0px 0px 64px;
+  	align-items: center;
+  	justify-content: space-between;
+  	z-index: 0;
+}
+.great-art-explained-container {
+  	position: absolute;
+  	top: 0%;
+  	left: calc(50% - 83px);
+  	line-height: 160%;
+}
+.great-art-explained {
+  	position: relative;
+  	width: 166px;
+  	height: 17px;
+}
+.menu1 {
+  	display: flex;
+  	flex-direction: row;
+  	align-items: flex-start;
+  	justify-content: flex-start;
+  	gap: 12px;
+}
+.vector-icon {
+  	position: relative;
+  	width: 12.67px;
+  	height: 1px;
+}
+.burger {
+  	overflow: hidden;
+  	display: flex;
+  	flex-direction: column;
+  	padding: 3.8888888359069824px 2.3333334922790527px;
+  	align-items: flex-start;
+  	justify-content: flex-start;
+  	gap: 3.11px;
+}
+.avatar-child {
+  	position: relative;
+  	border-radius: 50%;
+  	width: 24.41px;
+  	height: 24.41px;
+  	object-fit: cover;
+}
+.avatar {
+  	border-radius: 32px;
+  	border: 1px solid #272a2d;
+  	overflow: hidden;
+  	display: flex;
+  	flex-direction: row;
+  	padding: 4px 4px 4px 8px;
+  	align-items: center;
+  	justify-content: center;
+  	gap: 6px;
+}
+.menu {
+  	display: flex;
+  	flex-direction: row;
+  	align-items: center;
+  	justify-content: flex-start;
+  	gap: 24px;
+  	font-size: 18px;
+}
+.great-art-explained-parent {
+  	display: flex;
+  	flex-direction: row;
+  	align-items: center;
+  	justify-content: flex-start;
+  	gap: 786px;
+}
 
-  <% @tour.participants.each do |participant| %>
-    <%# <%= button_to 'send email', invite_tour_participant_path(participant) %> %>
-    <%= participant.user.email  %>
-  <% end %>
+
+</style>
+
+
+
+<div class="container-parent">
+    <div class="container">
+        <div class="frame-parent">
+            <div class="text-parent">
+                <div class="text">
+                    <div class="agenda-una-hora">
+                        Hay un Tour para conocer el mundo de <%= @tour.user.email  %>
+                    </div>
+                </div>
+                <div class="form">
+                    <div class="inputs">
+                        <div class="porqu-parent">
+                            <div class="porqu">¿Porqué?</div>
+                            <div class="razn-parent">
+                                <div class="porqu">Razón</div>
+                            </div>
+                        </div>
+                        <div class="elige-la-fecha-parent">
+                            <div class="porqu">Elige la fecha</div>
+                            <div id='my-calendar' ></div>
+                        </div>
+                        <div class="square-checkbox-solid-parent">
+                            <div class="porque">I agree to terms & conditions</div>
+                        </div>
+                    </div>
+                    <div class="botn">
+                        <%= link_to 'add calendar', tour_path(@tour, format: :ics), class: 'registrarte'  %>
+
+                    </div>
+                </div>
+            </div>
+            <div class="briefcase"></div>
+
+        </div>
+          <img class="europeana-mvr30qxn-mm-unsplash-icon" alt="" src="<%= cl_image_path(@tour.user.photo.key)%>" />
+    </div>
+</div>
+
+
+
+
+<script type="text/javascript">
+    // Get the element
+    var element = document.getElementById("my-calendar");
+    // Create the calendar
+    jsCalendar.new(element, "30/01/2017");
+</script>
