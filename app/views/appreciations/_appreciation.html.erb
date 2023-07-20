@@ -1,6 +1,4 @@
 <%= turbo_frame_tag dom_id(appreciation) do %>
-
-  <%# Comentario del Usuario %>
   <div class="bg-white w-100">
     <div class="border border-1 p-5">
       <div class="d-flex gap-3 mb-4">
@@ -21,11 +19,20 @@
 
         <%# Borrar %>
         <div class="d-flex gap-3">
-          <%= link_to 'Destroy', art_appreciation_path(@art, appreciation),  data: {turbo_method: :delete}, class: 'btn btn-outline-dark btn-sm' %>
-          <%= link_to 'Edit', [:edit, appreciation.art,appreciation], class: 'btn btn-dark btn-sm' %>
+          <% if user_signed_in? %>
+            <% if current_user == appreciation.user  %>
+                <%= link_to 'Destroy', art_appreciation_path(@art, appreciation),  data: {turbo_method: :delete}, class: 'btn btn-outline-dark btn-sm' %>
+                <%= link_to 'Edit', [:edit, appreciation.art,appreciation], class: 'btn btn-dark btn-sm' %>
+            <% end %>
+          <% end %>
         </div>
       </div>
     </div>
   </div>
+<% end %>
 
+<% if user_signed_in? %>
+  <% if current_user == appreciation.user  %>
+      <%= link_to 'Destroy', art_appreciation_path(@art, appreciation),  data: {turbo_method: :delete}, class: 'btn btn-outline-dark btn-sm' %>
+  <% end %>
 <% end %>

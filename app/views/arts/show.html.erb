@@ -114,7 +114,7 @@
       <p class="text-secondary">Se el primero en dejar tu comentario 🥇</p>
     <% end %>
   </div>
-
+  
 <% if current_user != @art.user %>
   <%= form_with(model: Donation.new, url: user_donations_path(@art.user)) do |form| %>
     <%= form.hidden_field :art_id, value: @art.id %>
@@ -154,6 +154,7 @@
     </div>
   <% end %>
 <% end %>
+
 
 
 <% if current_user %>
