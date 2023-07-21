@@ -673,10 +673,27 @@ comentarios = [
 
 
 puts('Creando comentarios')
+
 Art.all.each do |art|
-  User.all.each do |user|
-    if rand > 0.5
-      Appreciation.create(content: comentarios.sample , art: art, user:user)
-    end
+  users = User.order("RANDOM()").limit(2) # Selecciona dos usuarios al azar
+  users.each do |user|
+    Appreciation.create(content: 'Me fascina el uso de la luz y la sombra en esta obra. Los contrastes crean una sensación de profundidad y añaden drama a la escena. Es un excelente ejemplo de dominio técnico.', art: art, user: user)
+  end
+end
+
+
+amounts = [5, 10, 20, 50, 100, 200, 500] # Puedes ajustar las cantidades de donación aquí
+messages = ["¡Gran trabajo!", "Me encanta tu arte.", "Sigue creando.", "Espero que esto ayude.", "Admiro tu creatividad."] # Aquí puedes poner los mensajes que quieras.
+
+User.find_each do |donor|
+  # Selecciona un usuario al azar para ser el receptor, asegurándose de que no sea el donante.
+  recipient = User.where.not(id: donor.id).order("RANDOM()").first
+  if recipient.present?
+    Donation.create(
+      amount: amounts.sample, # Selecciona una cantidad al azar de la lista
+      message: messages.sample, # Selecciona un mensaje al azar de la lista
+      user_id: donor.id,
+      recipient_id: recipient.id
+    )
   end
 end

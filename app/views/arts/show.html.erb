@@ -1,5 +1,4 @@
 <%# Post %>
-
 <div class="artpost-container">
   <%# Policies %>
   <div class="w-100 mb-3 justify-content-center nav-item d-flex gap-3 align-items-center">
@@ -28,7 +27,6 @@
         </h5>
       </div>
     </div>
-
     <%# Likes and Comments %>
     <div class="w-100 justify-content-center">
       <%= render "shared/likes_comments" %>
@@ -114,7 +112,7 @@
       <p class="text-secondary">Se el primero en dejar tu comentario 🥇</p>
     <% end %>
   </div>
-  
+
 <% if current_user != @art.user %>
   <%= form_with(model: Donation.new, url: user_donations_path(@art.user)) do |form| %>
     <%= form.hidden_field :art_id, value: @art.id %>
@@ -146,7 +144,6 @@
           </div>
           <div class="modal-footer">
             <%= form.submit 'Confirm', class: "btn btn-primary" %>
-
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           </div>
         </div>
@@ -155,14 +152,10 @@
   <% end %>
 <% end %>
 
-
-
 <% if current_user %>
   <%= link_to "Donaciones Recibidas", received_user_donations_path(@user), class: "btn btn-primary" %>
   <%= link_to "Donaciones Realizadas", made_user_donations_path(current_user), class: "btn btn-secondary" %>
 <% end %>
-
-
 
 <script>
   $(document).ready(function() {
@@ -171,5 +164,3 @@
     });
   });
 </script>
-
-<!-- Añadir el SDK de Mercado Pago -->
