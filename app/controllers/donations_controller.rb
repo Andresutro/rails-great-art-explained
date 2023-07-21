@@ -55,7 +55,7 @@ class DonationsController < ApplicationController
     @donation.user = current_user
     @donation.amount = donation_params[:amount]
     @donation.message = donation_params[:message]
-    @donation.recipient_id = donation_params[:art_id]
+    @donation.recipient_id = Art.find(donation_params[:art_id]).user.id
     authorize @donation
     respond_to do |format|
       if @donation.save

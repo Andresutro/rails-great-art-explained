@@ -1,21 +1,3 @@
-
-<%#= simple_form_for(@donation) do |f| %>
-  <%#= f.error_notification %>
-  <%#= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-  <%#= form.hidden_field :user_id, value: current_user.id %>
-
-  <%# <div class="form-inputs"> %>
-    <%#= f.input :amount %>
-    <%#= f.input :message %>
-    <%#= f.association :user %>
-  <%# </div> %>
-
-  <%# <div class="form-actions"> %>
-    <%#= f.button :submit %>
-  <%# </div> %>
-<%# end %>
-
-
 <%= form_with(model: Donation.new, url: user_donations_path(@art.user)) do |form| %>
   <%= form.hidden_field :art_id, value: @art.id %>
 

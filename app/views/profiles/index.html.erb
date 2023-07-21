@@ -77,36 +77,29 @@
 
 
 </style>
-<hr>
-<hr>
-<hr>
-<hr>
-<hr>
-<hr>
 
-<div class="texto d-flex m-5" >
-  <img class="avatar-icon" alt="" src="<%= cl_image_path(@user.photo.key)%>" />
-  <div class="text ">
-    <div class="salvador-dal-wrapper">
-      <i class="salvador-dal"><%= @user.email %></i>
+<div class="bg-white artpost-container d-flex p-5" >
+  <div class="d-flex gap-5 align-items-center">
+    <img class="avatar-icon" alt="" src="<%= cl_image_path(@user.photo.key)%>" />
+    <h2><%= @user.email %></h2>
+  </div>
+
+  <div class="mt-5 tags d-flex">
+    <p class="explorar">1,234 seguidores</p>
+    <p class="explorar">1,234 siguiendo</p>
+  </div>
+  <div class="botn-parent d-flex">
+    <div class="button">
+      <div class="explorar">Seguir</div>
     </div>
-    <div class="tags d-flex">
-      <div class="explorar">1,234 seguidores</div>
-      <div class="explorar">1,234 siguiendo</div>
-    </div>
-    <div class="botn-parent d-flex">
-      <div class="botn">
-        <div class="explorar">Seguir</div>
-      </div>
-      <div class="botn1">
-        <div class="explorar">Donar</div>
-      </div>
+    <div class="button">
+      <div class="explorar">Donar</div>
     </div>
   </div>
 </div>
 
 
-<div class="artpost-container gap-5 mb-5">
+<div class="bg-white artpost-container gap-5 pb-5">
   <p style="color: green"><%= notice %></p>
   <div class="d-flex w-100 justify-content-between align-items-center">
     <h1 class="mb-5">Obras recientes</h1>
