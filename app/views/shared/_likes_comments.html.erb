@@ -1,6 +1,6 @@
 <%# Likes and Comments %>
 <div class="mt-2">
-  <div id='appreciations-and-such' class="w-100 justify-content-center d-flex gap-4 mb-2">
+  <div id='appreciations-and-such' class="w-100 justify-content-center d-flex align-items-center gap-4 mb-2">
     <%# Likes %>
     <div class="d-flex spacing-4 mb-2 align-items-center gap-2">
       <!-- Number of likes -->
@@ -22,19 +22,19 @@
 
       <p class="mt-3 text-secondary"><%= @art.likes.count %></p>
 
-  <script>
-      $(document).ready(function() {
-          $('#heart-icon').on('click', function() {
-              if ($('#like-button').length > 0) {
-                  $('#like-form').submit();
-              } else if ($('#liked-button').length > 0) {
-                  $('#unlike-form').submit();
-              }
+      <script>
+          $(document).ready(function() {
+              $('#heart-icon').on('click', function() {
+                  if ($('#like-button').length > 0) {
+                      $('#like-form').submit();
+                  } else if ($('#liked-button').length > 0) {
+                      $('#unlike-form').submit();
+                  }
+              });
           });
-      });
-  </script>
-
-
+      </script>
+    </div>
+    
     <%# Comments %>
     <div class="d-flex spacing-4 mb-2 align-items-center gap-2">
       <!-- Comment -->
@@ -57,18 +57,17 @@
         <% end %>
       <% end %>
 
-    <script>
-        $(document).ready(function() {
-            $('#comment-icon').on('click', function() {
-                if ($('#appreciate-button').length > 0) {
-                    $('#appreciate-form').submit();
-                } else if ($('#appreciated-button').length > 0) {
-                    $('#unappreciate-form').submit();
-                }
-            });
-        });
-    </script>
-
+      <script>
+          $(document).ready(function() {
+              $('#comment-icon').on('click', function() {
+                  if ($('#appreciate-button').length > 0) {
+                      $('#appreciate-form').submit();
+                  } else if ($('#appreciated-button').length > 0) {
+                      $('#unappreciate-form').submit();
+                  }
+              });
+          });
+      </script>
 
       <p class="mt-3 text-secondary"><%= @art.appreciations.count %></p>
     </div>
