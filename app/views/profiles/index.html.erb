@@ -38,7 +38,6 @@
   	justify-content: flex-start;
 }
 .botn1 {
-  	display: flex;
   	flex-direction: row;
   	padding: 12px 16px;
   	align-items: flex-start;
@@ -58,7 +57,7 @@
   	flex-direction: column;
   	align-items: flex-start;
   	justify-content: flex-start;
-  	gap: 48px;
+  	gap: 20px;
 }
 .texto {
   	width: 100%;
@@ -74,6 +73,28 @@
   	font-family: 'Instrument Serif';
 }
 
+div.description {
+  padding: 10px;
+  background-color: #f9f9f9; /* Fondo color gris claro */
+  border-radius: 5px; /* Bordes redondeados */
+  margin-bottom: 20px; /* Espacio debajo del div */
+  max-width: 700px; /* Ancho máximo del div */
+  text-align: justify; /* Texto justificado */
+  color: #333; /* Color del texto */
+  font-size: 16px; /* Tamaño del texto */
+  line-height: 1.6; /* Espacio entre líneas de texto */
+  overflow-wrap: break-word; /* Rompe la palabra si es demasiado larga */
+  word-wrap: break-word; /* Asegura que las palabras largas se rompan de forma adecuada */
+  -webkit-hyphens: auto; /* Agrega guiones automáticamente si es necesario (Chrome, Safari) */
+  -ms-hyphens: auto; /* Agrega guiones automáticamente si es necesario (IE) */
+  hyphens: auto; /* Agrega guiones automáticamente si es necesario (Firefox) */
+}
+
+h6 {
+  margin: 0; /* No hay margen alrededor del h6 */
+}
+
+
 
 
 </style>
@@ -81,34 +102,72 @@
 <hr>
 <hr>
 <hr>
-
-
-<div class="texto d-flex m-5" >
+<div class="texto d-flex ms-5 mt-5">
   <img class="avatar-icon" alt="" src="<%= cl_image_path(@user.photo.key)%>" />
   <div class="text ">
     <div class="salvador-dal-wrapper">
       <i class="salvador-dal"><%= @user.email.split("@").first.capitalize %></i>
     </div>
-    <div class="botn-parent d-flex">
-
-      <div class="botn1">
-      <% if user_signed_in? %>
-        <% if current_user == @user %>
-          <%= link_to "Edit profile art",  edit_user_registration_path(@user), class: 'button text-decoration-none' %>
-        <% end %>
-      <% end %>
+    <% unless @user.bio.nil? %>
+      <div class="description">
+        <h6>Born in Buenos Aires, Cecilia studied cinema at the Universidad del Cine in Buenos Aires, where she recently started teaching photography at the university. She is an independent documental photographer based in Argentina, interested in works that revolve around bonds and the intimate...</h6>
       </div>
+    <% end %>
+    <div class="botn-parent d-flex">
+      <div class="botn1">
+        <% if user_signed_in? %>
+          <% if current_user == @user %>
+            <%= link_to "Edit profile art", edit_user_registration_path(@user), class: 'button text-decoration-none' %>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="botn1">
+        <%= link_to "Ver vr", user_vr_index_path(@user.id), class: 'button text-decoration-none' %>
+      </div>
+
+      <% if current_user != @user %>
+          <%= form_with(model: Donation.new, url: user_donations_path(@user.id)) do |form| %>
+            <%= form.hidden_field :art_id, value: @user.arts.first.id %>
+            <button type="button" id="confirmButton" class=" button text-decoration-none bg-white" data-bs-toggle="modal" data-bs-target="#donateModal">
+              Haz tu donación
+            </button>
+            <div class="modal fade" id="donateModal" tabindex="-1" aria-labelledby="donateModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="donateModalLabel">Ingresa tu donación</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="d-flex flex-column align-items-start align-items-center">
+                      <div class="field mb-3">
+                        <h5><%= form.label :amount %></h5>
+                        <%= form.number_field :amount, class: 'form-control' %>
+                      </div>
+                      <div class="field">
+                        <h5><%= form.label :message %></h5>
+                        <%= form.text_area :message, class: 'form-control' %>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer justify-content-center">
+                    <%= form.submit 'Confirm', class: "button text-decoration-none" %>
+                    <button type="button" class="button text-decoration-none" data-bs-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+      <% end %>
     </div>
   </div>
 </div>
 
-
-<div class="bg-white artpost-container gap-5 pb-5">
+<div class="bg-white artpost-container mt-1 gap-5 pb-5">
   <p style="color: green"><%= notice %></p>
   <div class="d-flex w-100 justify-content-between align-items-center">
     <h1 class="mb-5">Obras recientes</h1>
-    <div>
-    </div>
+    <div></div>
   </div>
   <div id="arts" class="w-100 gap-5">
     <div class="justify-content-between row">

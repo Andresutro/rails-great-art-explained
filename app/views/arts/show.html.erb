@@ -26,10 +26,6 @@
     <%# Titulo %>
     <h2 class="w-100 font-italic mt-auto text-decoration-none text-center text-black"><%= @art.title %></h2>
 
-    <div class="w-100 mb-3">
-      <h6 class='btn btn-dark'><%= link_to 'Ver VR', user_vr_index_path(@art.user.id), class: 'text-decoration-none text-white' %></h6>
-    </div>
-
     <%# Avatar + Nombre %>
     <div class="w-100 justify-content-center artist-info">
       <% artista = User.find(@art.user_id) %>
@@ -40,7 +36,6 @@
         </h5>
       </div>
     </div>
-
     <%# Likes and Comments %>
     <div class="w-100 justify-content-center">
       <%= render "shared/likes_comments" %>
@@ -57,7 +52,6 @@
       <h6 class='button'><%= @art.category %></h6>
       <h6 class='button'><%= @art.year %></h6>
       <h6 class='button'><%= link_to 'Ver VR', user_vr_index_path(@art.user.id), class:'text-decoration-none text-black' %></h6>
-
     </div>
   </div>
 
@@ -85,61 +79,6 @@
         <%= f.input :description, placeholder: "Add a description here...", label: false, class: "w-100", input_html: { style: 'background-color: white; height: 10rem;' } %>
         <%= f.input :image, as: :file, required: true, label: false, placeholder: "Image", id: "upload_widget", class: "cloudinary-button", input_html: { style: 'background-color: white;' } %>
         <%= f.submit "Submit", class: "mt-4 btn btn-dark" %>
-      <% end %>
-    <% end %>
-  </div>
-
-  <div class="opacity-50 w-100" style="background-color: #272A2D; height: 1px;"></div>
-
-  <%# Donaciones %>
-  <div class="mt-5 w-100">
-    <% if current_user == @art.user %>
-      <h3 class="mb-4">Mira las donaciones de esta obra.</h3>
-      <div class="d-flex gap-3">
-        <%= link_to "Donaciones Recibidas", received_user_donations_path(@user), class: "btn btn-dark" %>
-        <%= link_to "Donaciones Realizadas", made_user_donations_path(current_user), class: "btn btn-outline-dark" %>
-      </div>
-    <% end %>
-
-    <% if current_user != @art.user %>
-      <%= form_with(model: Donation.new, url: user_donations_path(@art.user)) do |form| %>
-        <%= form.hidden_field :art_id, value: @art.id %>
-        <h3 class="mb-4">Haz tu donación!</h3>
-        <button type="button" id="confirmButton" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#donateModal">
-          Donar
-        </button>
-
-        <%# Modal %>
-        <div class="modal fade" id="donateModal" tabindex="-1" aria-labelledby="donateModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="donateModalLabel">Ingresa tu donación</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <div class="row">
-                  <div class="col">
-                    <div class="field">
-                      <%= form.label :amount %>
-                      <%= form.number_field :amount, class: 'form-control' %>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="field">
-                      <%= form.label :message %>
-                      <%= form.text_area :message, class: 'form-control' %>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <%= form.submit 'Confirm', class: "btn btn-primary" %>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              </div>
-            </div>
-          </div>
-        </div>
       <% end %>
     <% end %>
   </div>
@@ -174,7 +113,6 @@
         <div class="w-100">
           <%= render 'appreciations/appreciation', appreciation: appreciation %>
         </div>
-        <hr>
       <% end %>
     <% elsif @art.appreciations.empty? && current_user == @art.user %>
       <p class="text-secondary">Todavía no tienes comentarios 🥲</p>
@@ -184,6 +122,7 @@
   </div>
 
 <% if current_user != @art.user %>
+  <div class='mt-5'>
   <%= form_with(model: Donation.new, url: user_donations_path(@art.user)) do |form| %>
     <%= form.hidden_field :art_id, value: @art.id %>
     <button type="button" id="confirmButton" class="button text-decoration-none donate-button mb-5 " data-bs-toggle="modal" data-bs-target="#donateModal">
@@ -217,9 +156,8 @@
       </div>
     </div>
   <% end %>
+  </div>
 <% end %>
-
-
 
 <script>
   $(document).ready(function() {
@@ -228,4 +166,3 @@
     });
   });
 </script>
-

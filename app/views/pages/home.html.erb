@@ -41,25 +41,26 @@
 </div>
 
 <%# Artista destacado %>
+
+
 <div style="background-color: #E8EAEC;" >
   <div class="container">
-    <h2>Piérdete en el mundo de <%= artista.email.split("@").first.capitalize %></h2>
+    <h2>Piérdete en el mundo de <%= @artist.email.split("@").first.capitalize %></h2>
     <%# Left %>
     <div class="horizontal-container">
       <div class="button-container gap-2">
         <div class="text-container">
-          <h2><%= artista.email.split("@").first.capitalize %></h2>
+          <h2><%= @artist.email.split("@").first.capitalize %></h2>
           <h5 class="w-75">
             La artista argentina que muchos catalogan como el mejor artista del siglo 21.
           <h5>
         </div>
         <div>
-      <%= link_to 'Ver su trabajo', user_profiles_path(artista), class: 'text-decoration-none button' %>
+      <%= link_to 'Ver su trabajo', user_profiles_path(@artist), class: 'text-decoration-none button' %>
         </div>
       </div>
-
       <%# Right %>
-      <div class="big-avatar" style="background-image: url(<%= cl_image_path(artista.photo.key)%>); background-size: cover; background-position: center;">
+      <div class="big-avatar" style="background-image: url(<%= cl_image_path(@artist.photo.key)%>); background-size: cover; background-position: center;">
       </div>
     </div>
   </div>

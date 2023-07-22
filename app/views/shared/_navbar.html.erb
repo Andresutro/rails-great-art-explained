@@ -17,12 +17,12 @@
     <div class="d-flex gap-4">
     <%# First Div %>
       <div class="collapse navbar-collapse gap-3" id="navbarSupportedContent" style="list-style: none; margin-right: 3rem;">
-
-        <%# Main Navigation ✅ %>
-        <%= link_to "Explorar", allarts_arts_path, id: 'underline-scrolled', class: "nav-item nav-link h3" %>
-
-      <%# First Div End  %>
+        <%# <%= link_to "Explorar", allarts_arts_path, id: 'underline-scrolled', class: "nav-item nav-link h3" %>
+        <%= link_to "Explorar", allarts_arts_path, id: 'underline-scrolled', class: "#{current_page?(root_path) ? "nav-item nav-link h3 " : 'nav-item nav-link h3 text-black'}" %>
       </div>
+
+        <%= link_to 'Back', :back, class: "#{current_page?(root_path) ? "d-none" : 'nav-item nav-link h3 text-black align-self-center'}"  %>
+
 
       <%# Second Div %>
       <% if user_signed_in? %>

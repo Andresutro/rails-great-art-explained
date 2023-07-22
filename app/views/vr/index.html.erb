@@ -15,21 +15,6 @@
         let frameDepth = 0.1;
 
 
-        frame = document.createElement("a-circle");
-        frame.setAttribute("color", "white");
-        frame.setAttribute("radius", "1.1"); // Asegúrate de que el marco sea más grande que la foto del usuario
-        frame.setAttribute("position", "0 2 -5.1"); // Posiciónalo ligeramente delante de la foto del usuario
-        frame.setAttribute("side", "double"); // Hacer el marco visible desde ambos lados
-        container.appendChild(frame);
-
-        // Añadir foto del usuario
-        userPhoto = document.createElement("a-circle");
-        userPhoto.setAttribute("src", "<%= cl_image_path(@user.photo.key) %>");
-        userPhoto.setAttribute("radius", "1"); // Ajustar el tamaño según sea necesario
-        userPhoto.setAttribute("position", "0 2 -5"); // Ajustar la posición según sea necesario
-        userPhoto.setAttribute("side", "double");
-        container.appendChild(userPhoto);
-
         <% @user.arts.each_with_index do |art, i| %>
             theta = ((<%= i %> / count) * Math.PI * 2) + Math.PI;
             x = radius * Math.cos(theta);
@@ -50,14 +35,15 @@
     // Añadir título y descripción
             title = document.createElement("a-text");
             title.setAttribute("value", "<%= art.title %>");
-            title.setAttribute("position", `${x} ${y + scale / 2 + 0.1} ${z}`); // posicionarlo encima de la imagen
+            title.setAttribute("position", `${x} ${1+y + scale / 2 + 0.1} ${z}`); // posicionarlo encima de la imagen
             title.setAttribute("rotation", `0 ${rotation} 0`);
             title.setAttribute("align", "center");
             title.setAttribute("color", "black");
+            title.setAttribute("scale", "2 2 2"); // Hacer la letra el doble de grande
             container.appendChild(title);
 
             desc = document.createElement("a-text");
-            desc.setAttribute("value", "<%= art.user.email %>");
+            desc.setAttribute("value", "<%= art.user.email.split("@").first.capitalize %>");
             desc.setAttribute("position", `${x} ${y - scale / 2 - 0.1} ${z}`); // posicionarlo debajo de la imagen
             desc.setAttribute("rotation", `0 ${rotation} 0`);
             desc.setAttribute("align", "center");
