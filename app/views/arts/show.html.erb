@@ -158,10 +158,6 @@
   <% end %>
 <% end %>
 
-<% if current_user %>
-  <%= link_to "Donaciones Recibidas", received_user_donations_path(@user), class: "btn btn-primary" %>
-  <%= link_to "Donaciones Realizadas", made_user_donations_path(current_user), class: "btn btn-secondary" %>
-<% end %>
 
 <script>
   $(document).ready(function() {
