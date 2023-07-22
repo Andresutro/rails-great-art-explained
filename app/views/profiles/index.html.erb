@@ -90,8 +90,13 @@
       <i class="salvador-dal"><%= @user.email.split("@").first.capitalize %></i>
     </div>
     <div class="botn-parent d-flex">
+
       <div class="botn1">
-      <%= link_to "Edit profile art",  edit_user_registration_path(@user), class: 'button text-decoration-none' %>
+      <% if user_signed_in? %>
+        <% if current_user == @user %>
+          <%= link_to "Edit profile art",  edit_user_registration_path(@user), class: 'button text-decoration-none' %>
+        <% end %>
+      <% end %>
       </div>
     </div>
   </div>
