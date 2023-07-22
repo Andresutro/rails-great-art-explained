@@ -87,11 +87,11 @@
   <img class="avatar-icon" alt="" src="<%= cl_image_path(@user.photo.key)%>" />
   <div class="text ">
     <div class="salvador-dal-wrapper">
-      <i class="salvador-dal"><%= @user.email %></i>
+      <i class="salvador-dal"><%= @user.email.split("@").first.capitalize %></i>
     </div>
-
     <div class="botn-parent d-flex">
       <div class="botn1">
+      <%= link_to "Edit profile art",  edit_user_registration_path(@user), class: 'button text-decoration-none' %>
       </div>
     </div>
   </div>
@@ -103,7 +103,6 @@
   <div class="d-flex w-100 justify-content-between align-items-center">
     <h1 class="mb-5">Obras recientes</h1>
     <div>
-      <%= link_to "New art", new_art_path, class: 'button text-decoration-none' %>
     </div>
   </div>
   <div id="arts" class="w-100 gap-5">

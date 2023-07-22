@@ -23,7 +23,7 @@
       <div href="#" class="avatar" style="background-image: url(<%= cl_image_path(artista.photo.key)%>); background-size: cover; background-position: center;"></div>
       <div class="mt-2 artist-description">
         <h5 href="#" class="text-black" style="line-height: 0;">
-          <%= artista.email %>
+          <%= link_to artista.email.split("@").first.capitalize, user_profiles_path(artista), class:'text-decoration-none text-black' %>
         </h5>
       </div>
     </div>
@@ -42,7 +42,7 @@
     <div class="d-flex gap-2">
       <h6 class='button'><%= @art.category %></h6>
       <h6 class='button'><%= @art.year %></h6>
-      <h6 class='button'><%= link_to 'Ver VR', user_vr_index_path(@art.user.id), class: 'text-decoration-none' %></h6>
+      <h6 class='button'><%= link_to 'Ver VR', user_vr_index_path(@art.user.id), class:'text-decoration-none text-black' %></h6>
     </div>
   </div>
 
