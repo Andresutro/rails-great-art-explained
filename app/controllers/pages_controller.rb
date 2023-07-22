@@ -16,7 +16,7 @@ class PagesController < ApplicationController
       @artist = Art.find(7).user
     end
 
-
+    
   end
 
 
