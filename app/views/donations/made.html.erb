@@ -1,27 +1,71 @@
-<div class="container">
-  <div class="alert alert-success" role="alert">
-    <%= notice %>
-  </div>
-
-  <% @donations_made.each do |donation| %>
-    <div class="card text-bg-<%= donation.status == 'approved' ? 'success' : 'secondary' %> mb-3" style="max-width: 18rem;">
-      <div class="card-header">Tu donación para <%= donation.recipient.email %></div>
-      <div class="card-body">
-        <h5 class="card-title">Donación <%= donation.status == 'approved' ? 'Aprobada' : 'Pendiente' %></h5>
-        <p class="card-text">
-          <strong>Monto donado:</strong> <%= donation.amount %>
-        </p>
-        <p class="card-text">
-          <strong>Mensaje:</strong> <%= donation.message %>
-        </p>
-        <p class="card-text">
-          <strong>Estado:</strong> <%= donation.status.capitalize %>
-        </p>
-        <% if donation.status != 'approved' %>
-          <%= link_to "Ver donación", user_donation_path(current_user, donation), class: "btn btn-primary mt-2" %>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <!-- Contenido de la barra de navegación aquí -->
+</nav>
+<!-- Contenido principal -->
+<div class="container mt-6">
+  <div class="row">
+    <div class="col-md-7" style="width: 40%;">
+      <p style="color: green;"><%= notice %></p>
+      <!-- Acordeón de donaciones realizadas -->
+      <div class="accordion" id="accordionExample">
+        <% total_amount = 0 %>
+        <h2 class="text-center">Mis Donaciones 💵</h2>
+        <% @donations_made.each_with_index do |donation, index| %>
+          <% total_amount += donation.amount %>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="heading<%= index + 1 %>">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%= index + 1 %>" aria-expanded="false" aria-controls="collapse<%= index + 1 %>">
+                Donation #<%= index + 1 %>
+              </button>
+            </h2>
+            <div id="collapse<%= index + 1 %>" class="accordion-collapse collapse" aria-labelledby="heading<%= index + 1 %>" data-bs-parent="#accordionExample">
+              <div class="accordion-body justify-content-center">
+                <h5>
+                  <strong>Donatario:</strong>
+                  <%= donation.recipient.email %>
+                </h5>
+                <h5>
+                  <strong>Monto:</strong>
+                  <%= donation.amount %>
+                </h5>
+                <h5>
+                  <strong>Mensaje:</strong>
+                  <%= donation.message %>
+                </h5>
+              </div>
+            </div>
+          </div>
         <% end %>
+        <!-- Total de donaciones realizadas -->
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingTotal">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTotal" aria-expanded="false" aria-controls="collapseTotal">
+              Total Donations
+            </button>
+          </h2>
+          <div id="collapseTotal" class="accordion-collapse collapse" aria-labelledby="headingTotal" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <h5>
+                <strong>Total Amount:</strong>
+                <%= total_amount %>
+              </h5>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Volver al listado de obras -->
+      <div class="text-center mt-3">
+        <%= link_to "Volver", arts_path(@art), class: "button text-decoration-none" %>
       </div>
     </div>
+    <!-- Imagen -->
+    <div class="col-md-5 d-flex justify-content-end align-items-center" style="width: 50%; margin-top: 20px;">
+      <div class="transparent-bg">
+        <%= image_tag "imagen-de-donacion.png", class: "img-fluid transparent-image", alt: "Imagen" %>
+      </div>
+    </div>
+
   <% end %>
 
   <div class="mt-3">

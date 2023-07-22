@@ -1,5 +1,13 @@
-<%# Post %>
+<style>
+.donate-button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
 
+</style>
+<%# Post %>
 <div class="artpost-container">
   <%# Policies %>
   <div class="w-100 mb-3 justify-content-center nav-item d-flex gap-3 align-items-center">
@@ -28,11 +36,10 @@
       <div href="#" class="avatar" style="background-image: url(<%= cl_image_path(artista.photo.key)%>); background-size: cover; background-position: center;"></div>
       <div class="mt-2 artist-description">
         <h5 href="#" class="text-black" style="line-height: 0;">
-          <%= artista.email %>
+          <%= link_to artista.email.split("@").first.capitalize, user_profiles_path(artista), class:'text-decoration-none text-black' %>
         </h5>
       </div>
     </div>
-
 
     <%# Likes and Comments %>
     <div class="w-100 justify-content-center">
@@ -49,6 +56,8 @@
     <div class="d-flex gap-2">
       <h6 class='button'><%= @art.category %></h6>
       <h6 class='button'><%= @art.year %></h6>
+      <h6 class='button'><%= link_to 'Ver VR', user_vr_index_path(@art.user.id), class:'text-decoration-none text-black' %></h6>
+
     </div>
   </div>
 
@@ -173,7 +182,43 @@
       <p class="text-secondary">Se el primero en dejar tu comentario 🥇</p>
     <% end %>
   </div>
-</div>
+
+<% if current_user != @art.user %>
+  <%= form_with(model: Donation.new, url: user_donations_path(@art.user)) do |form| %>
+    <%= form.hidden_field :art_id, value: @art.id %>
+    <button type="button" id="confirmButton" class="button text-decoration-none donate-button mb-5 " data-bs-toggle="modal" data-bs-target="#donateModal">
+      Haz tu donación
+    </button>
+    <div class="modal fade" id="donateModal" tabindex="-1" aria-labelledby="donateModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="donateModalLabel">Ingresa tu donación</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="d-flex flex-column align-items-start align-items-center">
+              <div class="field mb-3">
+                <h5><%= form.label :amount %></h5>
+                <%= form.number_field :amount, class: 'form-control' %>
+              </div>
+
+              <div class="field">
+                <h5><%= form.label :message %></h5>
+                <%= form.text_area :message, class: 'form-control' %>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer justify-content-center">
+            <%= form.submit 'Confirm', class: "button text-decoration-none" %>
+            <button type="button" class="button text-decoration-none" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
 
 
 <script>

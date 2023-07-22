@@ -1,3 +1,5 @@
+require 'open-uri'
+
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -25,4 +27,13 @@ class User < ApplicationRecord
   end
   # validates :first_name,  length: { maximum: 30 }
   # validates :last_name,  length: { maximum: 30 }
+
+  after_initialize :set_default_photo, if: :new_record?
+
+  def set_default_photo
+    unless photo.attached?
+      a = URI.open('https://res.cloudinary.com/dygidrhdn/image/upload/v1689723319/default_photo_ax0gek.jpg')
+      photo.attach(io: a, filename: "default.jpg", content_type: "image/jpg")
+    end
+  end
 end

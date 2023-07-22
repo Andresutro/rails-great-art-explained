@@ -1,30 +1,30 @@
-<div class="opacity-50 w-100" style="background-color: #272A2D; height: 1px;"></div>
-  <div class="footer">
-    <div class="w-100 d-flex spacing-5" style="margin-top: 5rem;">
-      <div class="w-25 column">
-        <h5 class="text-decoration-underline"> Perfil </h5>
-          <h5 class="opacity-50 text-decoration-none text-secondary mt-0"><%= link_to "Perfil", user_profiles_path(current_user), class: "opacity-50 text-decoration-none text-secondary mt-0"  %></h5>
-
-          <h5 class="opacity-50 text-decoration-none text-secondary mt-0"><%= link_to "Mis artes", arts_path, class: "opacity-50 text-decoration-none text-secondary", style: "margin-top: 2rem;" %></h5>
-
-          <h5 class="opacity-50 text-decoration-none text-secondary mt-0"><%= link_to "Nuevo arte", new_art_path, class: "opacity-50 text-decoration-none text-secondary", style: "margin-top: 2rem;" %></h5>
-
-          <h5 class="opacity-50 text-decoration-none text-secondary mt-0"><%= link_to "Donaciones recibidas", received_user_donations_path(current_user), class: "opacity-50 text-decoration-none text-secondary", style: "line-height: 0%;" %></h5>
-
-          <h5 class="opacity-50 text-decoration-none text-secondary mt-0"><%= link_to "Mis donaciones", made_user_donations_path(current_user), class: "opacity-50 text-decoration-none text-secondary", style: "margin-top: 2rem;" %></h5>
-      </div>
-
-      <div class="w-25 column">
-        <h5 class="text-decoration-underline"> Hecho por </h5>
-        <h5 class="opacity-50 text-decoration-none text-secondary mt-0"><%= link_to 'RodrigoVon', 'https://github.com/RodrigoVon', class: 'opacity-50 text-decoration-none text-secondary mt-0' %> </h5>
-        <h5 class="opacity-50 text-decoration-none text-secondary mt-0"><%= link_to 'mindoficarus', 'https://github.com/mindoficarus', class: 'opacity-50 text-decoration-none text-secondary mt-0' %> </h5>
-        <h5 class="opacity-50 text-decoration-none text-secondary mt-0"><%= link_to 'Andresutro', 'https://github.com/Andresutro', class: 'opacity-50 text-decoration-none text-secondary mt-0' %> </h5>
-
-      </div>
-    </div>
+<div class="opacity-50" style="background-color: #272A2D; height: 1px; width: 100%;"></div>
+<div class="footer">
+<div class="columns justify-content-center" style="margin-top: 5rem;">
+  <%# <div class="column">
+    <h5 class="text-decoration-underline"> Nosotros </h5>
+    <h5 class="opacity-50"> Texto </h5>
+    <h5 class="opacity-50"> Texto </h5>
+    <h5 class="opacity-50"> Texto </h5>
+    <h5 class="opacity-50"> Texto </h5>
+  </div> %>
+  <div class="column ">
+    <h5 class="text-decoration-underline"> Made by </h5>
+    <h5 class="text-decoration-none text-white "><%= link_to 'RodrigoVon', 'https://github.com/RodrigoVon',class:'text-decoration-none text-black'  %> </h5>
+    <h5 class="text-decoration-none text-white"><%= link_to 'mindoficarus', 'https://github.com/mindoficarus',class:'text-decoration-none text-black'  %> </h5>
+    <h5 class="text-decoration-none text-white"><%= link_to 'Andresutro', 'https://github.com/Andresutro', class:'text-decoration-none text-black' %> </h5>
   </div>
-  <div class="opacity-50" style="background-color: #272A2D; height: 1px; width: 100%;"></div>
-  <div class="footer">
+  <%# <div class="column">
+    <h5 class="text-decoration-underline"> Nosotros </h5>
+    <h5 class="opacity-50"> Texto </h5>
+    <h5 class="opacity-50"> Texto </h5>
+    <h5 class="opacity-50"> Texto </h5>
+    <h5 class="opacity-50"> Texto </h5>
+  </div> %>
+</div>
+</div>
+<div class="opacity-50" style="background-color: #272A2D; height: 1px; width: 100%;"></div>
+<div class="footer">
   <div class="mt-5 columns">
     <div class="column">
       <svg width="167" height="24" viewBox="0 0 167 24" fill="black" xmlns="http://www.w3.org/2000/svg">

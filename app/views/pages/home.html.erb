@@ -10,7 +10,7 @@
       <div href="#" class="avatar" style="background-image: url(<%= cl_image_path(artista.photo.key)%>); background-size: cover; background-position: center;"></div>
       <div class="artist-description">
         <h5 href="#" class="text-white mt-2">
-          <%= link_to artista.email, user_profiles_path(artista), class:'text-decoration-none text-white' %>
+          <%= link_to artista.email.split("@").first.capitalize, user_profiles_path(artista), class:'text-decoration-none text-white' %>
         </h5>
       </div>
     </div>
@@ -43,14 +43,14 @@
 <%# Artista destacado %>
 <div style="background-color: #E8EAEC;" >
   <div class="container">
-    <h2>Piérdete en el mundo de <%= artista.email %></h2>
+    <h2>Piérdete en el mundo de <%= artista.email.split("@").first.capitalize %></h2>
     <%# Left %>
     <div class="horizontal-container">
       <div class="button-container gap-2">
         <div class="text-container">
-          <h2><%= artista.email %></h2>
+          <h2><%= artista.email.split("@").first.capitalize %></h2>
           <h5 class="w-75">
-            El artista español que muchos catalogan como el mejor artista del siglo 20.
+            La artista argentina que muchos catalogan como el mejor artista del siglo 21.
           <h5>
         </div>
         <div>

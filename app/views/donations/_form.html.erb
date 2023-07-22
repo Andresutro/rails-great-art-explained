@@ -1,6 +1,6 @@
-<%= form_with(model: Donation.new, url: user_donations_path(@art.user)) do |form| %>
-  <%= form.hidden_field :art_id, value: @art.id %>
-
+<%= form_with(model: Donation.new, url: user_donations_path(current_user)) do |form| %>
+  <%= form.hidden_field :art_id, value: Art.first.id %>
+  
   <div class="field">
     <%= form.label :amount %>
     <%= form.number_field :amount %>

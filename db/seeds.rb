@@ -646,3 +646,56 @@ a = URI.open('https://res.cloudinary.com/dygidrhdn/image/upload/v1689723319/defa
 andres.photo.attach(io: a, filename: "andres.jpg", content_type: "image/jpg")
 
 puts('andres')
+puts('Creando comentarios')
+
+comentarios = [
+  "¡Me encanta esta obra! La expresión en el rostro del personaje principal es simplemente cautivadora. El uso de luces y sombras crea una atmósfera misteriosa y fascinante.",
+  "Siempre logra capturar la belleza de la naturaleza en sus pinturas. Esta obra en particular transmite una sensación de paz y serenidad. Los colores suaves y las pinceladas sueltas dan vida a cada elemento.",
+  "Tiene una forma única de representar la realidad. Esta obra me hace reflexionar sobre la relación entre la humanidad y el entorno natural. La combinación de colores vibrantes y formas abstractas crea una composición intrigante.",
+  "Tiene una habilidad extraordinaria para crear paisajes surrealistas. Esta obra me transporta a un mundo de sueños y fantasía. Los detalles intrincados y las formas orgánicas evocan una sensación de asombro.",
+  "Es conocido por su enfoque innovador en la fotografía. Esta imagen en blanco y negro tiene una composición cautivadora. La iluminación dramática y el juego de sombras agregan profundidad y misterio a la escena.",
+  "Siempre despierta mi imaginación. Esta pintura surrealista está llena de simbolismo y significado oculto. Los relojes derretidos y las figuras distorsionadas crean un ambiente onírico y surreal.",
+  "Desafía los límites del arte con sus esculturas innovadoras. Esta obra en particular tiene una sensación de fluidez y movimiento. La combinación de materiales y texturas agrega una dimensión táctil a la pieza.",
+  "Es una artista icónica cuyas obras reflejan su vida y experiencias personales. Esta pintura autorretrato transmite una profunda introspección y emotividad. Los colores vibrantes y los detalles simbólicos revelan su fuerza y resiliencia.",
+  "Me cautiva. La forma en que retrata la realidad con tanta autenticidad es impactante. Los detalles minuciosos y las expresiones realistas en los rostros de los personajes hacen que esta pintura cobre vida.",
+  "Tiene el don de capturar la belleza de la naturaleza en sus lienzos. Esta pintura de un paisaje impresionista transmite una sensación de calma y serenidad. Los colores suaves y las pinceladas sutiles crean una atmósfera envolvente.",
+  "La creatividad en esta obra es impresionante. Los elementos visuales y la composición general son cautivadores. Me encanta la forma en que el artista juega con las formas y los colores.",
+  "Esta obra transmite una gran energía y vitalidad. Cada pincelada parece estar llena de movimiento y emoción. Es increíble cómo el artista logra capturar la esencia de su tema.",
+  "Me fascina el uso de la luz y la sombra en esta obra. Los contrastes crean una sensación de profundidad y añaden drama a la escena. Es un excelente ejemplo de dominio técnico.",
+  "Esta pieza es realmente provocativa. El artista desafía las normas y crea una narrativa visual intrigante. Cada vez que la miro, descubro nuevos detalles y significados ocultos.",
+  "La delicadeza y precisión en los detalles de esta obra son asombrosas. Cada elemento está meticulosamente representado, lo que demuestra la destreza y el talento del artista.",
+  "Me encanta la atmósfera nostálgica que transmite esta obra. La elección de colores suaves y la composición evocan una sensación de calma y tranquilidad. Es una verdadera obra de arte.",
+  "El uso audaz del color en esta pintura me deja sin aliento. Los tonos vibrantes y las combinaciones inesperadas crean una experiencia visual impactante. Es una verdadera explosión de creatividad.",
+  "Esta escultura tridimensional es realmente impresionante. La forma en que el artista juega con las texturas y las formas despierta mi curiosidad y me invita a explorar cada detalle.",
+  "La temática de esta obra es profundamente conmovedora. El artista logra transmitir una poderosa historia o mensaje a través de su arte. Es una expresión emocionalmente impactante.",
+  "La simplicidad en esta obra es su mayor fortaleza. El artista ha logrado destilar la esencia de su tema y presentarla de una manera minimalista pero evocadora. Es un verdadero ejemplo de menos es más."
+]
+
+
+puts('Creando comentarios')
+
+Art.all.each do |art|
+  users = User.order("RANDOM()").limit(2) # Selecciona dos usuarios al azar
+  users.each do |user|
+    Appreciation.create(content: 'Me fascina el uso de la luz y la sombra en esta obra. Los contrastes crean una sensación de profundidad y añaden drama a la escena. Es un excelente ejemplo de dominio técnico.', art: art, user: user)
+  end
+end
+
+
+amounts = [5, 10, 20, 50, 100, 200, 500] # Puedes ajustar las cantidades de donación aquí
+messages = ["¡Gran trabajo!", "Me encanta tu arte.", "Sigue creando.", "Espero que esto ayude.", "Admiro tu creatividad."] # Aquí puedes poner los mensajes que quieras.
+
+User.find_each do |donor|
+  # Selecciona un usuario al azar para ser el receptor, asegurándose de que no sea el donante.
+  recipient = User.where.not(id: donor.id).order("RANDOM()").first
+  if recipient.present?
+    Donation.create(
+      amount: amounts.sample, # Selecciona una cantidad al azar de la lista
+      message: messages.sample, # Selecciona un mensaje al azar de la lista
+      user_id: donor.id,
+      recipient_id: recipient.id
+    )
+  end
+end
+
+
