@@ -20,19 +20,19 @@
               </button>
             </h2>
             <div id="collapse<%= index + 1 %>" class="accordion-collapse collapse" aria-labelledby="heading<%= index + 1 %>" data-bs-parent="#accordionExample">
-              <div class="accordion-body">
-                <p>
+              <div class="accordion-body justify-content-center">
+                <h5>
                   <strong>Donatario:</strong>
                   <%= donation.recipient.email %>
-                </p>
-                <p>
+                </h5>
+                <h5>
                   <strong>Monto:</strong>
                   <%= donation.amount %>
-                </p>
-                <p>
+                </h5>
+                <h5>
                   <strong>Mensaje:</strong>
                   <%= donation.message %>
-                </p>
+                </h5>
               </div>
             </div>
           </div>
@@ -46,17 +46,17 @@
           </h2>
           <div id="collapseTotal" class="accordion-collapse collapse" aria-labelledby="headingTotal" data-bs-parent="#accordionExample">
             <div class="accordion-body">
-              <p>
+              <h5>
                 <strong>Total Amount:</strong>
                 <%= total_amount %>
-              </p>
+              </h5>
             </div>
           </div>
         </div>
       </div>
       <!-- Volver al listado de obras -->
       <div class="text-center mt-3">
-        <%= link_to "Volver", arts_path(@art), class: "btn btn-primary" %>
+        <%= link_to "Volver", arts_path(@art), class: "button text-decoration-none" %>
       </div>
     </div>
     <!-- Imagen -->

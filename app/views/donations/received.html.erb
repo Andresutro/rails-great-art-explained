@@ -41,17 +41,17 @@
             </button>
           </h2>
           <div id="collapseTotal" class="accordion-collapse collapse" aria-labelledby="headingTotal" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
+            <div class="accordion-body d-flex justify-content-center">
               <p>
-                <strong>Total:</strong>
-                <%= total_amount %>
+                <h5> <strong>Total:</strong> </h5>
+                <h5><%= total_amount %></h5>
               </p>
             </div>
           </div>
         </div>
       </div>
       <div class="text-center mt-3">
-        <%= link_to "Volver", arts_path(@art), class: "btn btn-primary" %>
+        <%= link_to "Volver", arts_path(@art), class: "button text-decoration-none" %>
       </div>
     </div>
     <div class="col-md-5 d-flex justify-content-end align-items-center" style="width: 50%; margin-top: 20px;">
