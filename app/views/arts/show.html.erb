@@ -1,3 +1,12 @@
+<style>
+.donate-button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+</style>
 <%# Post %>
 <div class="artpost-container">
   <%# Policies %>
@@ -116,7 +125,7 @@
 <% if current_user != @art.user %>
   <%= form_with(model: Donation.new, url: user_donations_path(@art.user)) do |form| %>
     <%= form.hidden_field :art_id, value: @art.id %>
-    <button type="button" id="confirmButton" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#donateModal">
+    <button type="button" id="confirmButton" class="button text-decoration-none donate-button mb-5 " data-bs-toggle="modal" data-bs-target="#donateModal">
       Haz tu donación
     </button>
     <div class="modal fade" id="donateModal" tabindex="-1" aria-labelledby="donateModalLabel" aria-hidden="true">
@@ -127,24 +136,21 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <div class="row">
-              <div class="col">
-                <div class="field">
-                  <%= form.label :amount %>
-                  <%= form.number_field :amount, class: 'form-control' %>
-                </div>
+            <div class="d-flex flex-column align-items-start align-items-center">
+              <div class="field mb-3">
+                <h5><%= form.label :amount %></h5>
+                <%= form.number_field :amount, class: 'form-control' %>
               </div>
-              <div class="col">
-                <div class="field">
-                  <%= form.label :message %>
-                  <%= form.text_area :message, class: 'form-control' %>
-                </div>
+
+              <div class="field">
+                <h5><%= form.label :message %></h5>
+                <%= form.text_area :message, class: 'form-control' %>
               </div>
             </div>
           </div>
-          <div class="modal-footer">
-            <%= form.submit 'Confirm', class: "btn btn-primary" %>
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <div class="modal-footer justify-content-center">
+            <%= form.submit 'Confirm', class: "button text-decoration-none" %>
+            <button type="button" class="button text-decoration-none" data-bs-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
