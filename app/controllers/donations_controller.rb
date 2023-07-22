@@ -38,7 +38,6 @@ class DonationsController < ApplicationController
     }
     preference_response = sdk.preference.create(preference_data)
     preference = preference_response[:response]
-
     @preference_id = preference['id']
 
     if params[:collection_status] == 'approved'
